@@ -30,6 +30,21 @@ namespace GBEmu
 		}
 
 		#endregion
+
+		[Export("open:")]
+		public void Open(NSObject sender)
+		{
+			NSOpenPanel panel = new NSOpenPanel ();
+			panel.AllowsMultipleSelection = false;
+			panel.AllowedFileTypes = new string[] { "gb" };
+			panel.RunModal ();
+
+			var url = panel.Url;
+
+			var data = NSData.FromUrl (url);
+
+
+		}
 	}
 }
 
