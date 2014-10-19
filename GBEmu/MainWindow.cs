@@ -42,8 +42,6 @@ namespace GBEmu
 			var url = panel.Url;
 
 			var data = NSData.FromUrl (url);
-
-
 		}
 	}
 }
