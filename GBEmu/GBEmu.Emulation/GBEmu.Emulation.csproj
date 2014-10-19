@@ -39,6 +39,9 @@
     <Compile Include="MemoryAccess.cs" />
     <Compile Include="ROM.cs" />
     <Compile Include="Speaker.cs" />
+    <Compile Include="ArrayExtensions.cs" />
+    <Compile Include="CartridgeType.cs" />
+    <Compile Include="MemorySize.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

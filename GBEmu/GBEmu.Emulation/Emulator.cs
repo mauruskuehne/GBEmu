@@ -31,7 +31,6 @@ namespace GBEmu.Emulation
 
 			ROM = new ROM (romData);
 			_memoryAccess.InitializeWithRom (ROM);
-
 		}
 	}
 }

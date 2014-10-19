@@ -4,14 +4,15 @@ namespace GBEmu.Emulation
 {
 	public class Display
 	{
+		MemoryAccess _memoryAccess;
+
 		public Display (MemoryAccess _memoryAccess)
 		{
-			throw new NotImplementedException ();
+			this._memoryAccess = _memoryAccess;
 		}
 
 		public void Reset ()
 		{
-			throw new NotImplementedException ();
 		}
 	}
 }
