@@ -4,8 +4,9 @@ namespace GBEmu.Emulation
 {
 	public class Input
 	{
-		public Input ()
+		public Input (MemoryAccess _memoryAccess)
 		{
+			throw new NotImplementedException ();
 		}
 	}
 }

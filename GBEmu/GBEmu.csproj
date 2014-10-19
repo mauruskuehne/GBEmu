@@ -88,4 +88,10 @@
     <None Include="Info.plist" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="GBEmu.Emulation\GBEmu.Emulation.csproj">
+      <Project>{1A79BE34-E2F1-4FA4-B68F-64BB7FEE4F2A}</Project>
+      <Name>GBEmu.Emulation</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

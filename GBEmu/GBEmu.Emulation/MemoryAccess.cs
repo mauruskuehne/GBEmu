@@ -7,6 +7,11 @@ namespace GBEmu.Emulation
 		public MemoryAccess ()
 		{
 		}
+
+		public void InitializeWithRom (ROM _rom)
+		{
+			throw new NotImplementedException ();
+		}
 	}
 }
 

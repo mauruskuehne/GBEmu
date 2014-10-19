@@ -4,8 +4,10 @@ namespace GBEmu.Emulation
 {
 	public class ROM
 	{
-		public ROM ()
+
+		public ROM (byte[] romData)
 		{
+			throw new NotImplementedException ();
 		}
 	}
 }
