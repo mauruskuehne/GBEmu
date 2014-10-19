@@ -53,6 +53,8 @@ namespace GBEmu
 			var graphic = _emulator.ROM.NintendoGraphic;
 
 			var romName = _emulator.ROM.Title;
+
+			_emulator.Start ();
 		}
 	}
 }

@@ -42,6 +42,7 @@
     <Compile Include="ArrayExtensions.cs" />
     <Compile Include="CartridgeType.cs" />
     <Compile Include="MemorySize.cs" />
+    <Compile Include="IntegerExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

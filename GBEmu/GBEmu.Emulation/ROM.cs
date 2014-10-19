@@ -167,7 +167,7 @@ namespace GBEmu.Emulation
 			get
 			{
 				if (_nintendoGraphic == null) {
-					_nintendoGraphic = _data.Read (0x0133, 0x0104);
+					_nintendoGraphic = _data.Read (0x0104, 0x0133);
 					
 				}
 
