@@ -2,6 +2,23 @@
 
 namespace GBEmu.Emulation
 {
+  public enum Register
+  {
+    A,
+    B,
+    C,
+    D,
+    E,
+    H,
+    L,
+    Flags,
+
+    AF,
+    BC,
+    DE,
+    HL
+  }
+
 	public class Registers
 	{
 		#region Registers and Flags
@@ -17,6 +34,102 @@ namespace GBEmu.Emulation
 		//6: Subtract Flag, This bit is set if a subtraction wa performed in the last math instruction
 		//7: Zero Flag, this bit is set when the result of a math operation is zero or two values match when using the cp instruction
 		public byte Flags;
+
+    public byte GetSingleRegister(Register register)
+    {
+      switch (register)
+      {
+        case Register.A:
+          return A;
+        case Register.B:
+          return B;
+        case Register.C:
+          return C;
+        case Register.D:
+          return D;
+        case Register.E:
+          return E;
+        case Register.H:
+          return H;
+        case Register.L:
+          return L;
+        case Register.Flags:
+          return Flags;
+        default:
+          throw new InvalidOperationException("use GetDoubleRegister");
+      }
+    }
+
+    public void SetSingleRegister(Register register, byte val)
+    {
+      switch (register)
+      {
+        case Register.A:
+          A = val;
+          break;
+        case Register.B:
+          B = val;
+          break;
+        case Register.C:
+          C = val;
+          break;
+        case Register.D:
+          D = val;
+          break;
+        case Register.E:
+          E = val;
+          break;
+        case Register.H:
+          H = val;
+          break;
+        case Register.L:
+          L = val;
+          break;
+        case Register.Flags:
+          Flags = val;
+          break;
+        default:
+          throw new InvalidOperationException("use SetDoubleRegister");
+      }
+    }
+
+    public UInt16 GetDoubleRegister(Register register)
+    {
+      switch (register)
+      {
+        case Register.AF:
+          return AF;
+        case Register.BC:
+          return BC;
+        case Register.DE:
+          return DE;
+        case Register.HL:
+          return HL;
+        default:
+          throw new InvalidOperationException("use GetSingleRegister");
+      }
+    }
+
+    public void SetDoubleRegister(Register register, UInt16 value)
+    {
+      switch (register)
+      {
+        case Register.AF:
+          AF = value;
+          break;
+        case Register.BC:
+          BC = value;
+          break;
+        case Register.DE:
+          DE = value;
+          break;
+        case Register.HL:
+          HL = value;
+          break;
+        default:
+          throw new InvalidOperationException("use SetSingleRegister");
+      }
+    }
 
 		public UInt16 GetPC()
 		{

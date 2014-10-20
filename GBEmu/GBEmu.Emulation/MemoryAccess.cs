@@ -6,19 +6,31 @@ namespace GBEmu.Emulation
 	{
 		ROM _rom;
 
+    byte[] _memory;
+
 		public MemoryAccess ()
 		{
+      _memory = new byte[0xFFFF];
 		}
 
 		public void InitializeWithRom (ROM rom)
 		{
 			_rom = rom; 
+
+      var bank0 = _rom.RawData.GetSubArray(0, 16 * 1024);
+
+      bank0.CopyTo(_memory, 0);
 		}
 
-		public byte ReadAtAddress(int address)
+		public byte ReadAtAddress(UInt16 address)
 		{
-			throw new NotImplementedException ();
+      return _memory[address];
 		}
+
+    public void WriteAtAddress(UInt16 address, byte value)
+    {
+      _memory[address] = value;
+    }
 
 		public byte[] ReadAtAddress(int address, int length)
 		{

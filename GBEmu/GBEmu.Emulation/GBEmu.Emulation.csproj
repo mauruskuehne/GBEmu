@@ -43,15 +43,7 @@
     <Compile Include="CartridgeType.cs" />
     <Compile Include="MemorySize.cs" />
     <Compile Include="IntegerExtensions.cs" />
-    <Compile Include="CPU.OpCodeList.cs">
-      <DependentUpon>CPU.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Instructions\Instruction.cs" />
-    <Compile Include="Instructions\LD.cs" />
     <Compile Include="Registers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Instructions\" />
-  </ItemGroup>
 </Project>
