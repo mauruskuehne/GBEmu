@@ -22,17 +22,28 @@ namespace GBEmu.Emulation
       bank0.CopyTo(_memory, 0);
 		}
 
-		public byte ReadAtAddress(UInt16 address)
+		public byte ReadByteAtAddress(UInt16 address)
 		{
       return _memory[address];
 		}
+
+    public UInt16 ReadUInt16AtAddress(UInt16 address, bool lsbFirst)
+    {
+      var b1 = _memory[address];
+      var b2 = _memory[address + 1];
+
+      if (lsbFirst)
+        return IntegerExtensions.UInt16FromBytes(b1, b2);
+      else
+        return IntegerExtensions.UInt16FromBytes(b2, b1);
+    }
 
     public void WriteAtAddress(UInt16 address, byte value)
     {
       _memory[address] = value;
     }
 
-		public byte[] ReadAtAddress(int address, int length)
+		public byte[] ReadByteAtAddress(int address, int length)
 		{
 			/*
 			 * FFFF - Interrupt Enable Register
@@ -51,7 +62,7 @@ namespace GBEmu.Emulation
 			 * read like this: ROM bank #0 goes from 0000 to 4000, switchable rom bank goes from 4000 to 8000, and so on...
 			*/
 
-			throw new NotImplementedException ();
+      return _memory.GetSubArray(address, length);
 		}
 	}
 }

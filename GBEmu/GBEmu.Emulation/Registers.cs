@@ -131,9 +131,11 @@ namespace GBEmu.Emulation
       }
     }
 
-		public UInt16 GetPC()
+    public UInt16 GetPC(UInt16 amount = 1)
 		{
-			return PC++;
+      var pc = PC;
+      PC += amount;
+			return pc;
 		}
 
 		public UInt16 AF {

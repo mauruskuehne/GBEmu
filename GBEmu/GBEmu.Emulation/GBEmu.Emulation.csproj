@@ -44,6 +44,12 @@
     <Compile Include="MemorySize.cs" />
     <Compile Include="IntegerExtensions.cs" />
     <Compile Include="Registers.cs" />
+    <Compile Include="Instructions\LD8.cs" />
+    <Compile Include="Instructions\InstructionParseResult.cs" />
+    <Compile Include="Instructions\LD16.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Instructions\" />
+  </ItemGroup>
 </Project>

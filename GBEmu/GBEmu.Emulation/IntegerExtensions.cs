@@ -13,6 +13,14 @@ namespace GBEmu.Emulation
 		{
 			return ((byte) (val & 0x0F));
 		}
-	}
+
+    public static UInt16 UInt16FromBytes(byte lsb, byte msb)
+    {
+      UInt16 val = ((UInt16) (msb << 8));
+      val = (UInt16)(val & lsb);
+      return val;
+    }
+
+   }
 }
 
