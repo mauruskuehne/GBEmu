@@ -43,7 +43,7 @@ namespace GBEmu.Emulation
 			if (instructionResult != null)
 				return;
 
-			instructionResult = ALU16.TryParse (opcodeByte, _registers, _memoryAccess);
+			instructionResult = ALU8.TryParse (opcodeByte, _registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
 		}

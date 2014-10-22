@@ -4,7 +4,8 @@ namespace GBEmu.Emulation
 {
 	public enum Operation
 	{
-		Addition
+		Addition,
+		Subtraction
 	}
 }
 

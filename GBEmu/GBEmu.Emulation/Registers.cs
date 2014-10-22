@@ -208,15 +208,39 @@ namespace GBEmu.Emulation
 				if (Convert.ToInt32 (val1) + Convert.ToInt32 (val2) == 0) {
 					newFlags |= Flags.Z;
 				}
-				if (Convert.ToInt32 (val2) < 0) {
-					newFlags |= Flags.N;
+				//if (Convert.ToInt32 (val2) < 0) {
+				//	newFlags |= Flags.N;
+				//}
+				break;
+			case Operation.Subtraction:
+				if (((((UInt32)val1) & 0x0F) - ((UInt32)val2) & 0x0F) < 0) {
+					newFlags |= Flags.H;
 				}
+				if (Convert.ToInt32 (val1) - Convert.ToInt32 (val2) < 0) {
+					newFlags |= Flags.C;
+				}
+				if (Convert.ToInt32 (val1) - Convert.ToInt32 (val2) == 0) {
+					newFlags |= Flags.Z;
+				}
+
+				newFlags |= Flags.N;
+
 				break;
 			default:
 				break;
 			}
 
 			this.F = (byte)newFlags;
+		}
+
+		/// <summary>
+		/// 1 wenn gesetzt, 0 wenn nicht
+		/// </summary>
+		/// <returns>The flag.</returns>
+		/// <param name="flag">Flag.</param>
+		public byte GetFlag(Flags flag)
+		{
+			return (byte)(((this.F & ((byte)flag)) > 0) ? 1 : 0);
 		}
 
 		public void ResetFlags (Flags flags)
