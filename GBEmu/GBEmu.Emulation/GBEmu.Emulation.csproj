@@ -49,6 +49,7 @@
     <Compile Include="Instructions\LD16.cs" />
     <Compile Include="Operation.cs" />
     <Compile Include="Flags.cs" />
+    <Compile Include="Instructions\ALU8.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

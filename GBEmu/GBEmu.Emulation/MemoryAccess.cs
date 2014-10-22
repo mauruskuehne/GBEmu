@@ -27,7 +27,7 @@ namespace GBEmu.Emulation
 			return _memory [address];
 		}
 
-		public UInt16 ReadUInt16AtAddress (UInt16 address, bool lsbFirst)
+		public UInt16 ReadUInt16AtAddress (UInt16 address, bool lsbFirst = false)
 		{
 
 			var b1 = _memory [address];
