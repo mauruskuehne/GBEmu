@@ -2,26 +2,27 @@
 
 namespace GBEmu.Emulation
 {
-  public enum Register
-  {
-    A,
-    B,
-    C,
-    D,
-    E,
-    H,
-    L,
-    Flags,
+	public enum Register
+	{
+		A,
+		B,
+		C,
+		D,
+		E,
+		H,
+		L,
+		Flags,
 
-    AF,
-    BC,
-    DE,
-    HL
-  }
+		AF,
+		BC,
+		DE,
+		HL
+	}
 
 	public class Registers
 	{
 		#region Registers and Flags
+
 		//Registers
 		public byte A, B, C, D, E, H, L;
 		//StackPointer / Program Counter
@@ -33,168 +34,195 @@ namespace GBEmu.Emulation
 		//5: Half Carry Flag, this bit is set if a carry occurred from the lower nibble in the last math operation
 		//6: Subtract Flag, This bit is set if a subtraction wa performed in the last math instruction
 		//7: Zero Flag, this bit is set when the result of a math operation is zero or two values match when using the cp instruction
-		public byte Flags;
+		public byte F;
 
-    public byte GetSingleRegister(Register register)
-    {
-      switch (register)
-      {
-        case Register.A:
-          return A;
-        case Register.B:
-          return B;
-        case Register.C:
-          return C;
-        case Register.D:
-          return D;
-        case Register.E:
-          return E;
-        case Register.H:
-          return H;
-        case Register.L:
-          return L;
-        case Register.Flags:
-          return Flags;
-        default:
-          throw new InvalidOperationException("use GetDoubleRegister");
-      }
-    }
-
-    public void SetSingleRegister(Register register, byte val)
-    {
-      switch (register)
-      {
-        case Register.A:
-          A = val;
-          break;
-        case Register.B:
-          B = val;
-          break;
-        case Register.C:
-          C = val;
-          break;
-        case Register.D:
-          D = val;
-          break;
-        case Register.E:
-          E = val;
-          break;
-        case Register.H:
-          H = val;
-          break;
-        case Register.L:
-          L = val;
-          break;
-        case Register.Flags:
-          Flags = val;
-          break;
-        default:
-          throw new InvalidOperationException("use SetDoubleRegister");
-      }
-    }
-
-    public UInt16 GetDoubleRegister(Register register)
-    {
-      switch (register)
-      {
-        case Register.AF:
-          return AF;
-        case Register.BC:
-          return BC;
-        case Register.DE:
-          return DE;
-        case Register.HL:
-          return HL;
-        default:
-          throw new InvalidOperationException("use GetSingleRegister");
-      }
-    }
-
-    public void SetDoubleRegister(Register register, UInt16 value)
-    {
-      switch (register)
-      {
-        case Register.AF:
-          AF = value;
-          break;
-        case Register.BC:
-          BC = value;
-          break;
-        case Register.DE:
-          DE = value;
-          break;
-        case Register.HL:
-          HL = value;
-          break;
-        default:
-          throw new InvalidOperationException("use SetSingleRegister");
-      }
-    }
-
-    public UInt16 GetPC(UInt16 amount = 1)
+		public byte GetSingleRegister (Register register)
 		{
-      var pc = PC;
-      PC += amount;
+			switch (register) {
+			case Register.A:
+				return A;
+			case Register.B:
+				return B;
+			case Register.C:
+				return C;
+			case Register.D:
+				return D;
+			case Register.E:
+				return E;
+			case Register.H:
+				return H;
+			case Register.L:
+				return L;
+			case Register.Flags:
+				return F;
+			default:
+				throw new InvalidOperationException ("use GetDoubleRegister");
+			}
+		}
+
+		public void SetSingleRegister (Register register, byte val)
+		{
+			switch (register) {
+			case Register.A:
+				A = val;
+				break;
+			case Register.B:
+				B = val;
+				break;
+			case Register.C:
+				C = val;
+				break;
+			case Register.D:
+				D = val;
+				break;
+			case Register.E:
+				E = val;
+				break;
+			case Register.H:
+				H = val;
+				break;
+			case Register.L:
+				L = val;
+				break;
+			case Register.Flags:
+				F = val;
+				break;
+			default:
+				throw new InvalidOperationException ("use SetDoubleRegister");
+			}
+		}
+
+		public UInt16 GetDoubleRegister (Register register)
+		{
+			switch (register) {
+			case Register.AF:
+				return AF;
+			case Register.BC:
+				return BC;
+			case Register.DE:
+				return DE;
+			case Register.HL:
+				return HL;
+			default:
+				throw new InvalidOperationException ("use GetSingleRegister");
+			}
+		}
+
+		public void SetDoubleRegister (Register register, UInt16 value)
+		{
+			switch (register) {
+			case Register.AF:
+				AF = value;
+				break;
+			case Register.BC:
+				BC = value;
+				break;
+			case Register.DE:
+				DE = value;
+				break;
+			case Register.HL:
+				HL = value;
+				break;
+			default:
+				throw new InvalidOperationException ("use SetSingleRegister");
+			}
+		}
+
+		public UInt16 GetPC (UInt16 amount = 1)
+		{
+			var pc = PC;
+			PC += amount;
 			return pc;
 		}
 
 		public UInt16 AF {
-			get
-			{
+			get {
 				var shiftedA = A << 8;
-				var finalVal = shiftedA + Flags;
+				var finalVal = shiftedA + F;
 				return (UInt16)finalVal;
 			}
-			set
-			{
+			set {
 				A = value.GetUpperByte ();
-				Flags = value.GetLowerByte ();
+				F = value.GetLowerByte ();
 			}
 		}
 
 		public UInt16 BC {
-			get
-			{
+			get {
 				var shiftedB = B << 8;
 				var finalVal = shiftedB + C;
 				return (UInt16)finalVal;
 			}
-			set
-			{
+			set {
 				B = value.GetUpperByte ();
 				C = value.GetLowerByte ();
 			}
 		}
 
 		public UInt16 DE {
-			get
-			{
+			get {
 				var shiftedD = D << 8;
 				var finalVal = shiftedD + E;
 				return (UInt16)finalVal;
 			}
-			set
-			{
+			set {
 				D = value.GetUpperByte ();
 				E = value.GetLowerByte ();
 			}
 		}
 
 		public UInt16 HL {
-			get
-			{
+			get {
 				var shiftedH = H << 8;
 				var finalVal = shiftedH + L;
 				return (UInt16)finalVal;
 			}
-			set
-			{
+			set {
 				H = value.GetUpperByte ();
 				L = value.GetLowerByte ();
 			}
 		}
 
 		#endregion
+
+		public void SetFlagForOperation (Operation addition, ValueType val1, ValueType val2)
+		{
+			//Flags (as bits)
+			//0-3: nothing(1,2,4)
+			//4: Carry Flag, this bit is set if a carry occurred from the last math operation if register A is the smaller value when executen the CP instruction
+			//5: Half Carry Flag, this bit is set if a carry occurred from the lower nibble in the last math operation
+			//6: Subtract Flag, This bit is set if a subtraction wa performed in the last math instruction
+			//7: Zero Flag, this bit is set when the result of a math operation is zero or two values match when using the cp instruction
+
+			Flags newFlags = 0;
+
+
+			switch (addition) {
+			case Operation.Addition:
+				if (((((UInt32)val1) & 0x0F) + ((UInt32)val2) & 0x0F) > 15) {
+					newFlags |= Flags.H;
+				}
+				if (Convert.ToInt32 (val1) + Convert.ToInt32 (val2) > UInt16.MaxValue) {
+					newFlags |= Flags.C;
+				}
+				if (Convert.ToInt32 (val1) + Convert.ToInt32 (val2) == 0) {
+					newFlags |= Flags.Z;
+				}
+				if (Convert.ToInt32 (val2) < 0) {
+					newFlags |= Flags.N;
+				}
+				break;
+			default:
+				break;
+			}
+
+			this.F = (byte)newFlags;
+		}
+
+		public void ResetFlags (Flags flags)
+		{
+			this.F &= (byte)~flags;
+		}
 	}
 }
 

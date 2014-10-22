@@ -6,44 +6,49 @@ namespace GBEmu.Emulation
 	{
 		ROM _rom;
 
-    byte[] _memory;
+		byte[] _memory;
 
 		public MemoryAccess ()
 		{
-      _memory = new byte[0xFFFF];
+			_memory = new byte[0xFFFF];
 		}
 
 		public void InitializeWithRom (ROM rom)
 		{
 			_rom = rom; 
 
-      var bank0 = _rom.RawData.GetSubArray(0, 16 * 1024);
+			var bank0 = _rom.RawData.GetSubArray (0, 16 * 1024);
 
-      bank0.CopyTo(_memory, 0);
+			bank0.CopyTo (_memory, 0);
 		}
 
-		public byte ReadByteAtAddress(UInt16 address)
+		public byte ReadByteAtAddress (UInt16 address)
 		{
-      return _memory[address];
+			return _memory [address];
 		}
 
-    public UInt16 ReadUInt16AtAddress(UInt16 address, bool lsbFirst)
-    {
-      var b1 = _memory[address];
-      var b2 = _memory[address + 1];
+		public UInt16 ReadUInt16AtAddress (UInt16 address, bool lsbFirst)
+		{
 
-      if (lsbFirst)
-        return IntegerExtensions.UInt16FromBytes(b1, b2);
-      else
-        return IntegerExtensions.UInt16FromBytes(b2, b1);
-    }
+			var b1 = _memory [address];
+			var b2 = _memory [address + 1];
 
-    public void WriteAtAddress(UInt16 address, byte value)
-    {
-      _memory[address] = value;
-    }
+			if (lsbFirst)
+				return IntegerExtensions.UInt16FromBytes (b1, b2);
+			else
+				return IntegerExtensions.UInt16FromBytes (b2, b1);
+		}
 
-		public byte[] ReadByteAtAddress(int address, int length)
+		public void WriteAtAddress(UInt16 address, ValueType value)
+		{
+			var bytes = BitConverter.GetBytes ((UInt64) value);
+
+			foreach (var item in bytes) {
+				_memory [address++] = item;
+			}
+		}
+
+		public byte[] ReadByteAtAddress (int address, int length)
 		{
 			/*
 			 * FFFF - Interrupt Enable Register
@@ -62,7 +67,7 @@ namespace GBEmu.Emulation
 			 * read like this: ROM bank #0 goes from 0000 to 4000, switchable rom bank goes from 4000 to 8000, and so on...
 			*/
 
-      return _memory.GetSubArray(address, length);
+			return _memory.GetSubArray (address, length);
 		}
 	}
 }
