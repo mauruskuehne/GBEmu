@@ -39,10 +39,20 @@ namespace GBEmu.Emulation
 				return IntegerExtensions.UInt16FromBytes (b2, b1);
 		}
 
-		public void WriteAtAddress(UInt16 address, ValueType value)
+		public void WriteAtAddress(UInt16 address, byte value)
 		{
-			var bytes = BitConverter.GetBytes ((UInt64) value);
+			var bytes = BitConverter.GetBytes (value);
+			WriteAtAddress (address, bytes);
+		}
 
+		public void WriteAtAddress(UInt16 address, UInt16 value)
+		{
+			var bytes = BitConverter.GetBytes (value);
+			WriteAtAddress (address, bytes);
+		}
+
+		public void WriteAtAddress(UInt16 address, byte[] bytes)
+		{
 			foreach (var item in bytes) {
 				_memory [address++] = item;
 			}

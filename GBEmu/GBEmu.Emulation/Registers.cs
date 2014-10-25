@@ -128,10 +128,11 @@ namespace GBEmu.Emulation
 			}
 		}
 
-		public UInt16 GetPC (UInt16 amount = 1)
+		public UInt16 GetPC (UInt16 amount = 1, bool peek = false)
 		{
 			var pc = PC;
-			PC += amount;
+			if(!peek)
+				PC += amount;
 			return pc;
 		}
 
@@ -185,7 +186,17 @@ namespace GBEmu.Emulation
 
 		#endregion
 
-		public void SetFlagForOperation (Operation addition, ValueType val1, ValueType val2)
+		public void SetFlagForUnsignedByteOperation (Operation addition, byte val1 = 0, byte val2 = 0)
+		{
+			this.SetFlagForUInt32Operation (addition, val1, (UInt32)val2, 0x0F);
+		}
+
+		public void SetFlagForSignedOperation (Operation addition, UInt32 val1, Int32 val2)
+		{
+			this.SetFlagForUInt32Operation (addition, val1, (UInt32)val2);
+		}
+
+		public void SetFlagForUInt32Operation (Operation addition, UInt32 val1, UInt32 val2, int halfCarryMask = 0x00FF)
 		{
 			//Flags (as bits)
 			//0-3: nothing(1,2,4)
@@ -196,10 +207,13 @@ namespace GBEmu.Emulation
 
 			Flags newFlags = 0;
 
+			var uVal1 = (UInt32)val1;
+			var uVal2 = (UInt32)val2;
 
 			switch (addition) {
 			case Operation.Addition:
-				if (((((UInt32)val1) & 0x0F) + ((UInt32)val2) & 0x0F) > 15) {
+				//called before exection
+				if (((uVal1 & halfCarryMask) + (uVal1 & halfCarryMask)) > halfCarryMask) {
 					newFlags |= Flags.H;
 				}
 				if (Convert.ToInt32 (val1) + Convert.ToInt32 (val2) > UInt16.MaxValue) {
@@ -212,8 +226,70 @@ namespace GBEmu.Emulation
 				//	newFlags |= Flags.N;
 				//}
 				break;
+
+			case Operation.RLCA:
+				//called after execution
+				if (val1 == 0)
+					newFlags |= Flags.Z;
+
+				if ((val1 & 1) == 1)
+					newFlags |= Flags.C;
+
+				break;
+
+			case Operation.RLA_OR_RRA:
+				//called after execution
+				if (val1 == 0)
+					newFlags |= Flags.Z;
+
+				if (val2 != 0)
+					newFlags |= Flags.C;
+
+				break;
+
+			case Operation.RRCA:
+				//called after execution
+				if (val1 == 0)
+					newFlags |= Flags.Z;
+
+				if ((val1 & 0xFF) == 1)
+					newFlags |= Flags.C;
+
+				break;
+
+			case Operation.ADDSP:
+				//called after execution
+				if (((uVal1 & halfCarryMask) + (uVal1 & halfCarryMask)) > halfCarryMask) {
+					newFlags |= Flags.H;
+				}
+
+				break;
+
+			case Operation.CPL:
+
+				newFlags = (Flags)(F & (byte)(Flags.Z | Flags.C));
+
+				newFlags |= Flags.N | Flags.H;
+
+				break;
+
+			case Operation.CCF:
+				newFlags = (Flags)(F & (byte)(Flags.Z));
+
+				newFlags |= (Flags) ~(F & (byte)Flags.C);
+
+				break;
+
+			case Operation.SCF:
+
+				newFlags |= Flags.C;
+
+				break;
+
 			case Operation.Subtraction:
-				if (((((UInt32)val1) & 0x0F) - ((UInt32)val2) & 0x0F) < 0) {
+				//called before execution
+				//subtract the upper two bytes, if this results in a value < 16, half carry is set
+				if (((uVal1 & ~halfCarryMask) - (uVal1 & ~halfCarryMask)) < 16) {
 					newFlags |= Flags.H;
 				}
 				if (Convert.ToInt32 (val1) - Convert.ToInt32 (val2) < 0) {
@@ -224,8 +300,35 @@ namespace GBEmu.Emulation
 				}
 
 				newFlags |= Flags.N;
+				break;
+
+			case Operation.AND:
+				//called before execution
+				if ((uVal1 & uVal2) == 0)
+					newFlags |= Flags.Z;
+
+				newFlags |= Flags.H;
 
 				break;
+
+			case Operation.OR:
+				//called before execution
+				if ((uVal1 | uVal2) == 0)
+					newFlags |= Flags.Z;
+				break;
+			case Operation.XOR:
+				//called before execution
+				if ((uVal1 ^ uVal2) == 0)
+					newFlags |= Flags.Z;
+				break;
+
+			case Operation.SWAP:
+				//called after execution
+				if (val1 == 0)
+					newFlags |= Flags.Z;
+
+				break;
+
 			default:
 				break;
 			}

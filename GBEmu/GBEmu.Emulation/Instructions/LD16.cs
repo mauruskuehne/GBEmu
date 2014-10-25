@@ -37,7 +37,7 @@ namespace GBEmu.Emulation
 
 				registers.HL = (UInt16)(registers.SP + val);
 
-				registers.SetFlagForOperation (Operation.Addition, registers.SP, val);
+				registers.SetFlagForSignedOperation (Operation.Addition, registers.SP, val);
 
 				registers.ResetFlags (Flags.N | Flags.Z);
 

@@ -50,6 +50,9 @@
     <Compile Include="Operation.cs" />
     <Compile Include="Flags.cs" />
     <Compile Include="Instructions\ALU8.cs" />
+    <Compile Include="Instructions\ALU16.cs" />
+    <Compile Include="Instructions\MISC.cs" />
+    <Compile Include="Instructions\RotateAndShift.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
