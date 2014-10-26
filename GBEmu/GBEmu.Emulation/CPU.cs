@@ -58,6 +58,10 @@ namespace GBEmu.Emulation
 			instructionResult = RotateAndShift.TryParse (opcodeByte, _registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
+
+			instructionResult = Bit.TryParse (opcodeByte, _registers, _memoryAccess);
+			if (instructionResult != null)
+				return;
 		}
 	}
 }
