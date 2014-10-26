@@ -227,6 +227,16 @@ namespace GBEmu.Emulation
 				//}
 				break;
 
+			case Operation.Shift:
+
+				if (val1 == 0)
+					newFlags |= Flags.Z;
+
+				if (val2 != 0)
+					newFlags |= Flags.C;
+
+				break;
+
 			case Operation.RLCA:
 				//called after execution
 				if (val1 == 0)
@@ -252,7 +262,7 @@ namespace GBEmu.Emulation
 				if (val1 == 0)
 					newFlags |= Flags.Z;
 
-				if ((val1 & 0xFF) == 1)
+				if ((val1 & 0xFF) > 1)
 					newFlags |= Flags.C;
 
 				break;

@@ -382,6 +382,125 @@ namespace GBEmu.Emulation
 					res.ClockCycles = 8;
 					break;
 
+					//SLA n
+
+				case 0x27:
+					oldVal = registers.A;
+					bit7Val =(byte)( oldVal & 0xFF);
+					newVal = (byte)(oldVal << 1);
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.A = newVal;
+					break;
+				case 0x20:
+					oldVal = registers.B;
+					bit7Val =  oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.B = newVal;
+					break;
+				case 0x21:
+					oldVal = registers.C;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.C = newVal;
+					break;
+				case 0x22:
+					oldVal = registers.D;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.D = newVal;
+					break;
+				case 0x23:
+					oldVal = registers.E;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.E = newVal;
+					break;
+				case 0x24:
+					oldVal = registers.H;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.H = newVal;
+					break;
+				case 0x25:
+					oldVal = registers.L;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.L = newVal;
+					break;
+				case 0x26:
+					oldVal = memoryAccess.ReadByteAtAddress (registers.HL);
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					memoryAccess.WriteAtAddress (registers.HL, newVal);
+					break;
+
+					//SRA n
+
+				case 0x2F:
+					oldVal = registers.A;
+					bit7Val = oldVal & 0xFF;
+					bit0Val = oldVal & 0x1;
+					newVal = (oldVal >> 1) | 0xFF;
+
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.A = newVal;
+					break;
+				case 0x28:
+					oldVal = registers.B;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.B = newVal;
+					break;
+				case 0x29:
+					oldVal = registers.C;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.C = newVal;
+					break;
+				case 0x2A:
+					oldVal = registers.D;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.D = newVal;
+					break;
+				case 0x2B:
+					oldVal = registers.E;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.E = newVal;
+					break;
+				case 0x2C:
+					oldVal = registers.H;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.H = newVal;
+					break;
+				case 0x2D:
+					oldVal = registers.L;
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					registers.L = newVal;
+					break;
+				case 0x2E:
+					oldVal = memoryAccess.ReadByteAtAddress (registers.HL);
+					bit7Val = oldVal & 0xFF;
+					newVal = oldVal << 1;
+					registers.SetFlagForUnsignedByteOperation (Operation.Shift, newVal, bit7Val);
+					memoryAccess.WriteAtAddress (registers.HL, newVal);
+					break;
 
 				default:
 					break;
