@@ -4,6 +4,8 @@ namespace GBEmu.Emulation
 {
 	public enum Operation
 	{
+    BIT,
+
 		Shift,
 
 		RRCA,

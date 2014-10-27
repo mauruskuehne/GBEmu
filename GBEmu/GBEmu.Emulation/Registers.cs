@@ -227,6 +227,17 @@ namespace GBEmu.Emulation
 				//}
 				break;
 
+        case Operation.BIT:
+
+          if ((val1 & val2) == 0)
+            newFlags |= Flags.Z;
+
+          newFlags |= Flags.H;
+
+          newFlags |= (Flags)(((byte)Flags.C) & this.F);
+
+          break;
+
 			case Operation.Shift:
 
 				if (val1 == 0)
