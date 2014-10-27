@@ -67,28 +67,28 @@ namespace GBEmu.Emulation
         case 0x20:
           var newPC = registers.PC + memoryAccess.ReadByteAtAddress(registers.GetPC());
           if(registers.GetFlag(Flags.Z) == 0)
-            registers.PC = val;
+            registers.PC = (UInt16)newPC;
           res.ClockCycles = 8;
           break;
 
         case 0x28:
           newPC = registers.PC + memoryAccess.ReadByteAtAddress(registers.GetPC());
           if(registers.GetFlag(Flags.Z) == 1)
-            registers.PC = val;
+            registers.PC = (UInt16)newPC;
           res.ClockCycles = 8;
           break;
 
         case 0x30:
           newPC = registers.PC + memoryAccess.ReadByteAtAddress(registers.GetPC());
           if(registers.GetFlag(Flags.C) == 0)
-            registers.PC = val;
+            registers.PC = (UInt16)newPC;
           res.ClockCycles = 8;
           break;
 
         case 0x38:
           newPC = registers.PC + memoryAccess.ReadByteAtAddress(registers.GetPC());
           if(registers.GetFlag(Flags.C) == 1)
-            registers.PC = val;
+            registers.PC = (UInt16)newPC;
           res.ClockCycles = 8;
           break;
 

@@ -338,7 +338,7 @@ namespace GBEmu.Emulation
           break;
         case 0xFA:
           //LD A,(nn)
-          address = IntegerExtensions.UInt16FromBytes(memoryAccess.ReadByteAtAddress(registers.GetPC()), memoryAccess.ReadByteAtAddress(registers.GetPC()));
+          address = memoryAccess.ReadUInt16AtAddress(registers.GetPC(2), true);
           registers.A = memoryAccess.ReadByteAtAddress(address);
           res.ClockCycles = 16;
           break;
@@ -394,7 +394,7 @@ namespace GBEmu.Emulation
           break;
         case 0xEA:
           // LD (nn), A
-          address = IntegerExtensions.UInt16FromBytes(memoryAccess.ReadByteAtAddress(registers.GetPC()), memoryAccess.ReadByteAtAddress(registers.GetPC()));
+          address = memoryAccess.ReadUInt16AtAddress(registers.GetPC(2), true);
           memoryAccess.WriteAtAddress(address, registers.A);
           res.ClockCycles = 16;
           break;
