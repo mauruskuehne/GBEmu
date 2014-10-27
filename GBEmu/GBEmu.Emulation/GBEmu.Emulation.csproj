@@ -54,6 +54,7 @@
     <Compile Include="Instructions\MISC.cs" />
     <Compile Include="Instructions\RotateAndShift.cs" />
     <Compile Include="Instructions\Bit.cs" />
+    <Compile Include="Instructions\Jumps.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -62,6 +62,10 @@ namespace GBEmu.Emulation
 			instructionResult = Bit.TryParse (opcodeByte, _registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
+
+      instructionResult = Jumps.TryParse (opcodeByte, _registers, _memoryAccess);
+      if (instructionResult != null)
+        return;
 		}
 	}
 }

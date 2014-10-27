@@ -179,7 +179,7 @@ namespace GBEmu.Emulation
       byte bitToSet = (byte)(1 << bitNrToSet);
 
       var oldVal = readAction();
-      var newVal = oldVal | bitToSet;
+      byte newVal = (byte)(oldVal | bitToSet);
 
       writeAction(newVal);
     }
@@ -190,10 +190,10 @@ namespace GBEmu.Emulation
     {
       //0 - 7
       var bitNrToSet = memory.ReadByteAtAddress(registers.GetPC());
-      byte bitToSet = ~(byte)(1 << bitNrToSet);
+      byte bitToSet = (byte)(~(1 << bitNrToSet));
 
       var oldVal = readAction();
-      var newVal = oldVal | bitToSet;
+      var newVal = (byte)(oldVal | bitToSet);
 
       writeAction(newVal);
     }
