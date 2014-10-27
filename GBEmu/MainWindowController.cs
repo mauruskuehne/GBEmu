@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
+using GBEmu.Emulation;
 
 namespace GBEmu
 {
 	public partial class MainWindowController : MonoMac.AppKit.NSWindowController
-	{
+  {
+    Emulator _emulator;
+
 		#region Constructors
 
 		// Called when created from unmanaged code
@@ -32,8 +35,25 @@ namespace GBEmu
 		
 		// Shared initialization code
 		void Initialize ()
-		{
+    {
+      _emulator = new Emulator ();
 		}
+
+    public void LoadRom(byte[] bytes)
+    {
+      _emulator.LoadRom (bytes);
+
+      var graphic = _emulator.ROM.NintendoGraphic;
+
+      var romName = _emulator.ROM.Title;
+
+      _emulator.Start(Mode.StepMode);
+    }
+
+    partial void ExecuteNextStep(NSObject sender)
+    {
+      _emulator.Cpu.NextStep();
+    }
 
 		#endregion
 

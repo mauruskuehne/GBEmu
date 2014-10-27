@@ -10,8 +10,6 @@ namespace GBEmu
 {
 	public partial class MainWindow : MonoMac.AppKit.NSWindow
 	{
-		Emulator _emulator;
-
 		#region Constructors
 
 		// Called when created from unmanaged code
@@ -29,8 +27,7 @@ namespace GBEmu
 		
 		// Shared initialization code
 		void Initialize ()
-		{
-			_emulator = new Emulator ();
+    {
 		}
 
 		#endregion
@@ -48,14 +45,17 @@ namespace GBEmu
 			var data = NSData.FromUrl (url);
 			var bytes = data.ToArray ();
 
-			_emulator.LoadRom (bytes);
+      Controller.LoadRom(bytes);
 
-			var graphic = _emulator.ROM.NintendoGraphic;
-
-			var romName = _emulator.ROM.Title;
-
-			_emulator.Start ();
 		}
+
+    public MainWindowController Controller
+    {
+      get
+      {
+        return (MainWindowController)WindowController;
+      }
+    }
 	}
 }
 

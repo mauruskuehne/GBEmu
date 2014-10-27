@@ -5,7 +5,6 @@ namespace GBEmu.Emulation
 	public class Emulator
 	{
 		MemoryAccess _memoryAccess;
-		CPU _cpu;
 		Display _display;
 		//Input _input;
 		//Speaker _speaker;
@@ -15,10 +14,16 @@ namespace GBEmu.Emulation
 			set;
 		}
 
+    public CPU Cpu
+    {
+      get;
+      private set;
+    }
+
 		public Emulator ()
 		{
 			_memoryAccess = new MemoryAccess ();
-			_cpu = new CPU (_memoryAccess);
+      Cpu = new CPU (_memoryAccess);
 			_display = new Display (_memoryAccess);
 			//_input = new Input (_memoryAccess);
 			//_speaker = new Speaker (_memoryAccess);
@@ -26,16 +31,17 @@ namespace GBEmu.Emulation
 
 		public void LoadRom(byte[] romData)
 		{
-			_cpu.Reset ();
+      Cpu.Reset ();
 			_display.Reset ();
 
 			ROM = new ROM (romData);
 			_memoryAccess.InitializeWithRom (ROM);
 		}
 
-		public void Start ()
+		public void Start (Mode mode)
 		{
-			_cpu.Start ();
+      if (mode == Mode.RunningMode)
+        Cpu.Start();
 		}
 	}
 }

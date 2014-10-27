@@ -58,6 +58,7 @@
     <Compile Include="Instructions\Calls.cs" />
     <Compile Include="Instructions\Restarts.cs" />
     <Compile Include="Instructions\Returns.cs" />
+    <Compile Include="Mode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

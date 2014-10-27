@@ -4,68 +4,86 @@ namespace GBEmu.Emulation
 {
 	public partial class CPU
 	{
-		Registers _registers;
+    public Registers Registers
+    {
+      get;
+      private set;
+    }
 
 		MemoryAccess _memoryAccess;
 
 		public CPU (MemoryAccess _memoryAccess)
 		{
-			_registers = new Registers ();
+      Registers = new Registers ();
 			this._memoryAccess = _memoryAccess;
-			this.FillOpCodeDictionary ();
+      Reset();
 		}
 
-		partial void FillOpCodeDictionary ();
 
 		public void Reset ()
 		{
-			_registers.SP = 0xFFFE;
-			_registers.PC = 0x100;
+      Registers.SP = 0xFFFE;
+      Registers.PC = 0x100;
 		}
 
 		public void Start ()
 		{
-			byte opcodeByte = _memoryAccess.ReadByteAtAddress (_registers.GetPC ());
-
-			ParseOpcode (opcodeByte);
-
-			//opcode.Execute (_memoryAccess, _registers);
-
+      NextStep();
 		}
+
+    public void NextStep()
+    {
+      byte opcodeByte = _memoryAccess.ReadByteAtAddress (Registers.GetPC ());
+
+      ParseOpcode (opcodeByte);
+    }
 
 		void ParseOpcode (byte opcodeByte)
 		{
-			var instructionResult = LD8.TryParse (opcodeByte, _registers, _memoryAccess);
+      var instructionResult = LD8.TryParse (opcodeByte, Registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
 
-			instructionResult = LD16.TryParse (opcodeByte, _registers, _memoryAccess);
+      instructionResult = LD16.TryParse (opcodeByte, Registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
 
-			instructionResult = ALU8.TryParse (opcodeByte, _registers, _memoryAccess);
+      instructionResult = ALU8.TryParse (opcodeByte, Registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
 
-			instructionResult = ALU16.TryParse (opcodeByte, _registers, _memoryAccess);
+      instructionResult = ALU16.TryParse (opcodeByte, Registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
 
-			instructionResult = MISC.TryParse (opcodeByte, _registers, _memoryAccess);
+      instructionResult = MISC.TryParse (opcodeByte, Registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
 
-			instructionResult = RotateAndShift.TryParse (opcodeByte, _registers, _memoryAccess);
+      instructionResult = RotateAndShift.TryParse (opcodeByte, Registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
 
-			instructionResult = Bit.TryParse (opcodeByte, _registers, _memoryAccess);
+      instructionResult = Bit.TryParse (opcodeByte, Registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
 
-      instructionResult = Jumps.TryParse (opcodeByte, _registers, _memoryAccess);
+      instructionResult = Jumps.TryParse (opcodeByte, Registers, _memoryAccess);
       if (instructionResult != null)
         return;
+
+      instructionResult = Restarts.TryParse (opcodeByte, Registers, _memoryAccess);
+      if (instructionResult != null)
+        return;
+
+      instructionResult = Returns.TryParse (opcodeByte, Registers, _memoryAccess);
+      if (instructionResult != null)
+        return;
+
+      instructionResult = Calls.TryParse (opcodeByte, Registers, _memoryAccess);
+      if (instructionResult != null)
+        return;
+
 		}
 	}
 }
