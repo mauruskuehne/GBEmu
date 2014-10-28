@@ -9,20 +9,26 @@ using System.CodeDom.Compiler;
 
 namespace GBEmu
 {
+	[Register ("MainWindow")]
+	partial class MainWindow
+	{
+		[Outlet]
+		MonoMac.AppKit.NSTableView RegisterTable { get; set; }
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (RegisterTable != null) {
+				RegisterTable.Dispose ();
+				RegisterTable = null;
+			}
+		}
+	}
+
 	[Register ("MainWindowController")]
 	partial class MainWindowController
 	{
 		[Action ("executeNextStep:")]
 		partial void ExecuteNextStep (MonoMac.Foundation.NSObject sender);
-		
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
-
-	[Register ("MainWindow")]
-	partial class MainWindow
-	{
 		
 		void ReleaseDesignerOutlets ()
 		{
