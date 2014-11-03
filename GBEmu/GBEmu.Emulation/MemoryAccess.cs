@@ -2,7 +2,7 @@
 
 namespace GBEmu.Emulation
 {
-	public class MemoryAccess
+	public class MemoryAccess : IMemoryAccess
 	{
 		ROM _rom;
 

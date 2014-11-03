@@ -410,6 +410,13 @@ namespace GBEmu.Emulation
           memoryAccess.WriteAtAddress(address, registers.A);
           res.ClockCycles = 8;
           break;
+
+
+
+				//TODO : !!!!! these are not in LD
+
+
+
         case 0x3A:
           // LDD A, (HL)
           registers.A = memoryAccess.ReadByteAtAddress(registers.HL--);

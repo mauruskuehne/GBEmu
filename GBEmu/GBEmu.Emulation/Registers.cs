@@ -19,7 +19,7 @@ namespace GBEmu.Emulation
 		HL
 	}
 
-	public class Registers
+	public class Registers : IRegisterAccess
 	{
 		#region Registers and Flags
 

@@ -59,9 +59,14 @@
     <Compile Include="Instructions\Restarts.cs" />
     <Compile Include="Instructions\Returns.cs" />
     <Compile Include="Mode.cs" />
+    <Compile Include="OpcodeProcessors\OpcodeProcessor.cs" />
+    <Compile Include="OpcodeProcessors\LD.cs" />
+    <Compile Include="IMemoryAccess.cs" />
+    <Compile Include="IRegisterAccess.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Instructions\" />
+    <Folder Include="OpcodeProcessors\" />
   </ItemGroup>
 </Project>

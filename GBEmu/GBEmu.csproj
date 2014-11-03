@@ -68,6 +68,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Emulation\" />
+    <Folder Include="Debugging\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.cs" />
@@ -80,6 +81,8 @@
     <Compile Include="AppDelegate.designer.cs">
       <DependentUpon>AppDelegate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Debugging\CpuRegisterTableViewDelegate.cs" />
+    <Compile Include="Debugging\CpuRegisterDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainWindow.xib" />
