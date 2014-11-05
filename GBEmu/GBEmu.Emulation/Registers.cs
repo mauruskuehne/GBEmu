@@ -16,7 +16,8 @@ namespace GBEmu.Emulation
 		AF,
 		BC,
 		DE,
-		HL
+		HL,
+    SP
 	}
 
 	public class Registers : IRegisterAccess
@@ -103,6 +104,8 @@ namespace GBEmu.Emulation
 				return DE;
 			case Register.HL:
 				return HL;
+      case Register.SP:
+        return SP;
 			default:
 				throw new InvalidOperationException ("use GetSingleRegister");
 			}
@@ -123,6 +126,9 @@ namespace GBEmu.Emulation
 			case Register.HL:
 				HL = value;
 				break;
+      case Register.SP:
+        HL = value;
+        break;
 			default:
 				throw new InvalidOperationException ("use SetSingleRegister");
 			}

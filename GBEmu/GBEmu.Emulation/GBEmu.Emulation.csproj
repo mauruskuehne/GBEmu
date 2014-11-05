@@ -44,9 +44,7 @@
     <Compile Include="MemorySize.cs" />
     <Compile Include="IntegerExtensions.cs" />
     <Compile Include="Registers.cs" />
-    <Compile Include="Instructions\LD8.cs" />
     <Compile Include="Instructions\InstructionParseResult.cs" />
-    <Compile Include="Instructions\LD16.cs" />
     <Compile Include="Operation.cs" />
     <Compile Include="Flags.cs" />
     <Compile Include="Instructions\ALU8.cs" />
@@ -60,9 +58,15 @@
     <Compile Include="Instructions\Returns.cs" />
     <Compile Include="Mode.cs" />
     <Compile Include="OpcodeProcessors\OpcodeProcessor.cs" />
-    <Compile Include="OpcodeProcessors\LD.cs" />
     <Compile Include="IMemoryAccess.cs" />
     <Compile Include="IRegisterAccess.cs" />
+    <Compile Include="OpcodeProcessors\OpcodeProcessorFactory.cs" />
+    <Compile Include="OpcodeProcessors\LD8.cs" />
+    <Compile Include="OpcodeProcessors\LD16.cs" />
+    <Compile Include="OpcodeProcessors\LDHL.cs" />
+    <Compile Include="OpcodeProcessors\PUSH.cs" />
+    <Compile Include="OpcodeProcessors\POP.cs" />
+    <Compile Include="OpcodeProcessors\ADD8.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -90,20 +90,14 @@ namespace GBEmu.Emulation
 		{
 			//get ze opcodeprocessors...
 
+
+
 			return null;
 		}
 
 		void ParseOpcode (byte opcodeByte)
 		{
-			var instructionResult = LD8.TryParse (opcodeByte, Registers, _memoryAccess);
-			if (instructionResult != null)
-				return;
-
-			instructionResult = LD16.TryParse (opcodeByte, Registers, _memoryAccess);
-			if (instructionResult != null)
-				return;
-
-			instructionResult = ALU8.TryParse (opcodeByte, Registers, _memoryAccess);
+      var instructionResult = ALU8.TryParse (opcodeByte, Registers, _memoryAccess);
 			if (instructionResult != null)
 				return;
 
