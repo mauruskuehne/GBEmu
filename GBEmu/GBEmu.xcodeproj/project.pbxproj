@@ -1,0 +1,420 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8D1A15316200472013 /* AppDelegate.swift */; };
+		7264AF901A15316200472013 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8F1A15316200472013 /* ViewController.swift */; };
+		7264AF921A15316200472013 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF911A15316200472013 /* Images.xcassets */; };
+		7264AF951A15316200472013 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF931A15316200472013 /* Main.storyboard */; };
+		7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AFA01A15316200472013 /* GBEmuTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7264AF9B1A15316200472013 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7264AF801A15316200472013 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7264AF871A15316200472013;
+			remoteInfo = GBEmu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7264AF881A15316200472013 /* GBEmu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBEmu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7264AF8C1A15316200472013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7264AF8D1A15316200472013 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7264AF8F1A15316200472013 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7264AF911A15316200472013 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7264AF941A15316200472013 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7264AF9A1A15316200472013 /* GBEmuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GBEmuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7264AF9F1A15316200472013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7264AFA01A15316200472013 /* GBEmuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBEmuTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7264AF851A15316200472013 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7264AF971A15316200472013 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7264AF7F1A15316200472013 = {
+			isa = PBXGroup;
+			children = (
+				7264AF8A1A15316200472013 /* GBEmu */,
+				7264AF9D1A15316200472013 /* GBEmuTests */,
+				7264AF891A15316200472013 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7264AF891A15316200472013 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7264AF881A15316200472013 /* GBEmu.app */,
+				7264AF9A1A15316200472013 /* GBEmuTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7264AF8A1A15316200472013 /* GBEmu */ = {
+			isa = PBXGroup;
+			children = (
+				7264AFAA1A1531B200472013 /* Emulation */,
+				7264AF8D1A15316200472013 /* AppDelegate.swift */,
+				7264AF8F1A15316200472013 /* ViewController.swift */,
+				7264AF911A15316200472013 /* Images.xcassets */,
+				7264AF931A15316200472013 /* Main.storyboard */,
+				7264AF8B1A15316200472013 /* Supporting Files */,
+			);
+			path = GBEmu;
+			sourceTree = "<group>";
+		};
+		7264AF8B1A15316200472013 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7264AF8C1A15316200472013 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7264AF9D1A15316200472013 /* GBEmuTests */ = {
+			isa = PBXGroup;
+			children = (
+				7264AFA01A15316200472013 /* GBEmuTests.swift */,
+				7264AF9E1A15316200472013 /* Supporting Files */,
+			);
+			path = GBEmuTests;
+			sourceTree = "<group>";
+		};
+		7264AF9E1A15316200472013 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7264AF9F1A15316200472013 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7264AFAA1A1531B200472013 /* Emulation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Emulation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7264AF871A15316200472013 /* GBEmu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7264AFA41A15316200472013 /* Build configuration list for PBXNativeTarget "GBEmu" */;
+			buildPhases = (
+				7264AF841A15316200472013 /* Sources */,
+				7264AF851A15316200472013 /* Frameworks */,
+				7264AF861A15316200472013 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GBEmu;
+			productName = GBEmu;
+			productReference = 7264AF881A15316200472013 /* GBEmu.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7264AF991A15316200472013 /* GBEmuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7264AFA71A15316200472013 /* Build configuration list for PBXNativeTarget "GBEmuTests" */;
+			buildPhases = (
+				7264AF961A15316200472013 /* Sources */,
+				7264AF971A15316200472013 /* Frameworks */,
+				7264AF981A15316200472013 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7264AF9C1A15316200472013 /* PBXTargetDependency */,
+			);
+			name = GBEmuTests;
+			productName = GBEmuTests;
+			productReference = 7264AF9A1A15316200472013 /* GBEmuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7264AF801A15316200472013 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Maurus Kühne";
+				TargetAttributes = {
+					7264AF871A15316200472013 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					7264AF991A15316200472013 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 7264AF871A15316200472013;
+					};
+				};
+			};
+			buildConfigurationList = 7264AF831A15316200472013 /* Build configuration list for PBXProject "GBEmu" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7264AF7F1A15316200472013;
+			productRefGroup = 7264AF891A15316200472013 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7264AF871A15316200472013 /* GBEmu */,
+				7264AF991A15316200472013 /* GBEmuTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7264AF861A15316200472013 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7264AF921A15316200472013 /* Images.xcassets in Resources */,
+				7264AF951A15316200472013 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7264AF981A15316200472013 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7264AF841A15316200472013 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7264AF901A15316200472013 /* ViewController.swift in Sources */,
+				7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7264AF961A15316200472013 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7264AF9C1A15316200472013 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7264AF871A15316200472013 /* GBEmu */;
+			targetProxy = 7264AF9B1A15316200472013 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7264AF931A15316200472013 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7264AF941A15316200472013 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7264AFA21A15316200472013 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7264AFA31A15316200472013 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7264AFA51A15316200472013 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GBEmu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7264AFA61A15316200472013 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GBEmu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7264AFA81A15316200472013 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GBEmuTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GBEmu.app/Contents/MacOS/GBEmu";
+			};
+			name = Debug;
+		};
+		7264AFA91A15316200472013 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GBEmuTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GBEmu.app/Contents/MacOS/GBEmu";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7264AF831A15316200472013 /* Build configuration list for PBXProject "GBEmu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7264AFA21A15316200472013 /* Debug */,
+				7264AFA31A15316200472013 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7264AFA41A15316200472013 /* Build configuration list for PBXNativeTarget "GBEmu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7264AFA51A15316200472013 /* Debug */,
+				7264AFA61A15316200472013 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7264AFA71A15316200472013 /* Build configuration list for PBXNativeTarget "GBEmuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7264AFA81A15316200472013 /* Debug */,
+				7264AFA91A15316200472013 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7264AF801A15316200472013 /* Project object */;
+}
