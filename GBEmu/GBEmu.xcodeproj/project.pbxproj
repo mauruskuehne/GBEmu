@@ -12,6 +12,9 @@
 		7264AF921A15316200472013 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF911A15316200472013 /* Images.xcassets */; };
 		7264AF951A15316200472013 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF931A15316200472013 /* Main.storyboard */; };
 		7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AFA01A15316200472013 /* GBEmuTests.swift */; };
+		7264AFAC1A1531D300472013 /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AFAB1A1531D300472013 /* Registers.swift */; };
+		7264AFAF1A15351800472013 /* UInt16Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AFAE1A15351800472013 /* UInt16Extensions.swift */; };
+		7264AFB11A15359B00472013 /* UInt16ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AFB01A15359B00472013 /* UInt16ExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,9 @@
 		7264AF9A1A15316200472013 /* GBEmuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GBEmuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7264AF9F1A15316200472013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7264AFA01A15316200472013 /* GBEmuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBEmuTests.swift; sourceTree = "<group>"; };
+		7264AFAB1A1531D300472013 /* Registers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registers.swift; sourceTree = "<group>"; };
+		7264AFAE1A15351800472013 /* UInt16Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UInt16Extensions.swift; sourceTree = "<group>"; };
+		7264AFB01A15359B00472013 /* UInt16ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UInt16ExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +81,7 @@
 		7264AF8A1A15316200472013 /* GBEmu */ = {
 			isa = PBXGroup;
 			children = (
+				7264AFAD1A1534FB00472013 /* General */,
 				7264AFAA1A1531B200472013 /* Emulation */,
 				7264AF8D1A15316200472013 /* AppDelegate.swift */,
 				7264AF8F1A15316200472013 /* ViewController.swift */,
@@ -97,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				7264AFA01A15316200472013 /* GBEmuTests.swift */,
+				7264AFB01A15359B00472013 /* UInt16ExtensionsTests.swift */,
 				7264AF9E1A15316200472013 /* Supporting Files */,
 			);
 			path = GBEmuTests;
@@ -113,8 +121,17 @@
 		7264AFAA1A1531B200472013 /* Emulation */ = {
 			isa = PBXGroup;
 			children = (
+				7264AFAB1A1531D300472013 /* Registers.swift */,
 			);
 			name = Emulation;
+			sourceTree = "<group>";
+		};
+		7264AFAD1A1534FB00472013 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				7264AFAE1A15351800472013 /* UInt16Extensions.swift */,
+			);
+			name = General;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,7 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7264AFAF1A15351800472013 /* UInt16Extensions.swift in Sources */,
 				7264AF901A15316200472013 /* ViewController.swift in Sources */,
+				7264AFAC1A1531D300472013 /* Registers.swift in Sources */,
 				7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7264AFB11A15359B00472013 /* UInt16ExtensionsTests.swift in Sources */,
 				7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
