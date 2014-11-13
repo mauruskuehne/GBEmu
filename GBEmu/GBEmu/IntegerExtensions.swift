@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension UInt16 {
+extension UInt16 {
   
   static func fromUpperByte(byte : Byte, lowerByte : Byte) -> UInt16 {
     return (UInt16(byte) << 8) + UInt16(lowerByte);
@@ -22,4 +22,18 @@ public extension UInt16 {
     return (upper,lower)
   }
   
+}
+
+extension Byte {
+  mutating func setFlag(flag : Flags) {
+    self = self | flag.rawValue
+  }
+  
+  mutating func resetFlag(flag : Flags) {
+    self = self & ~flag.rawValue
+  }
+  
+  func isFlagSet(flag : Flags) -> BooleanType{
+    return (self & flag.rawValue) > 0
+  }
 }

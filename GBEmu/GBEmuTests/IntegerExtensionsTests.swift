@@ -10,7 +10,7 @@ import Cocoa
 import XCTest
 import GBEmu
 
-class UInt16ExtensionsTests: XCTestCase {
+class IntegerExtensionsTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
@@ -44,11 +44,12 @@ class UInt16ExtensionsTests: XCTestCase {
     XCTAssertEqual(bytes.upper, {0xFF}(), "could not extract upper byte from UInt16")
   }
   
-  func testPerformanceExample() {
-    // This is an example of a performance test case.
-    self.measureBlock() {
-      // Put the code you want to measure the time of here.
-    }
+  func testFlags() {
+    var flags : Byte = 0
+    
+    flags.setFlag(Flags.Zero)
+    XCTAssert(flags.isFlagSet(Flags.Zero), "Could not set Flag Zero")
+    flags.resetFlag(Flags.Zero)
+    XCTAssertFalse(flags.isFlagSet(Flags.Zero), "Could not reset Flag Zero")
   }
-  
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Registers {
+public class Registers {
   var A : Byte
   var B : Byte
   var C : Byte
@@ -65,9 +65,6 @@ class Registers {
     }
   }
   
-  
-  
-  
   init() {
     A = 0
     B = 0
@@ -78,7 +75,7 @@ class Registers {
     L = 0
     Flags = 0
     SP = 0
-    PC = 0
+    PC = 0x100
   }
   
 }
