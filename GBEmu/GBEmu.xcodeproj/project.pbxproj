@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		724097951A17A1AD0034D1FB /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097941A17A1AD0034D1FB /* Instruction.swift */; };
+		724097981A17A5480034D1FB /* LD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097971A17A5480034D1FB /* LD.swift */; };
+		724097991A17AB010034D1FB /* LD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097971A17A5480034D1FB /* LD.swift */; };
+		7240979A1A17AB300034D1FB /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097941A17A1AD0034D1FB /* Instruction.swift */; };
+		7240979D1A17B7D20034D1FB /* DataLocationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240979C1A17B7D20034D1FB /* DataLocationBase.swift */; };
+		7240979E1A17B7F90034D1FB /* DataLocationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240979C1A17B7D20034D1FB /* DataLocationBase.swift */; };
+		724097A01A17B81A0034D1FB /* RegisterDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */; };
+		724097A21A17B9A70034D1FB /* EmulationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A11A17B9A70034D1FB /* EmulationContext.swift */; };
+		724097A41A17BD230034D1FB /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A31A17BD230034D1FB /* Register.swift */; };
+		724097A51A17BD2C0034D1FB /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A31A17BD230034D1FB /* Register.swift */; };
+		724097A61A17C0030034D1FB /* EmulationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A11A17B9A70034D1FB /* EmulationContext.swift */; };
 		7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8D1A15316200472013 /* AppDelegate.swift */; };
 		7264AF901A15316200472013 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8F1A15316200472013 /* ViewController.swift */; };
 		7264AF921A15316200472013 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF911A15316200472013 /* Images.xcassets */; };
@@ -33,6 +44,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		724097941A17A1AD0034D1FB /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
+		724097971A17A5480034D1FB /* LD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LD.swift; sourceTree = "<group>"; };
+		7240979C1A17B7D20034D1FB /* DataLocationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLocationBase.swift; sourceTree = "<group>"; };
+		7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterDataLocation.swift; sourceTree = "<group>"; };
+		724097A11A17B9A70034D1FB /* EmulationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmulationContext.swift; sourceTree = "<group>"; };
+		724097A31A17BD230034D1FB /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		7264AF881A15316200472013 /* GBEmu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBEmu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7264AF8C1A15316200472013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7264AF8D1A15316200472013 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +84,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		724097961A17A52D0034D1FB /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				724097971A17A5480034D1FB /* LD.swift */,
+			);
+			name = Instructions;
+			sourceTree = "<group>";
+		};
+		7240979B1A17B7BF0034D1FB /* DataLocations */ = {
+			isa = PBXGroup;
+			children = (
+				7240979C1A17B7D20034D1FB /* DataLocationBase.swift */,
+				7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */,
+			);
+			name = DataLocations;
+			sourceTree = "<group>";
+		};
 		7264AF7F1A15316200472013 = {
 			isa = PBXGroup;
 			children = (
@@ -128,8 +162,13 @@
 		7264AFAA1A1531B200472013 /* Emulation */ = {
 			isa = PBXGroup;
 			children = (
+				7240979B1A17B7BF0034D1FB /* DataLocations */,
+				724097961A17A52D0034D1FB /* Instructions */,
 				7264AFAB1A1531D300472013 /* Registers.swift */,
 				7264AFB41A15448200472013 /* Flags.swift */,
+				724097941A17A1AD0034D1FB /* Instruction.swift */,
+				724097A11A17B9A70034D1FB /* EmulationContext.swift */,
+				724097A31A17BD230034D1FB /* Register.swift */,
 			);
 			name = Emulation;
 			sourceTree = "<group>";
@@ -258,11 +297,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				724097A21A17B9A70034D1FB /* EmulationContext.swift in Sources */,
+				724097A41A17BD230034D1FB /* Register.swift in Sources */,
 				7264AFAF1A15351800472013 /* IntegerExtensions.swift in Sources */,
 				7264AF901A15316200472013 /* ViewController.swift in Sources */,
 				7264AFB51A15448200472013 /* Flags.swift in Sources */,
+				724097A01A17B81A0034D1FB /* RegisterDataLocation.swift in Sources */,
+				724097951A17A1AD0034D1FB /* Instruction.swift in Sources */,
 				7264AFAC1A1531D300472013 /* Registers.swift in Sources */,
 				7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */,
+				724097981A17A5480034D1FB /* LD.swift in Sources */,
+				7240979D1A17B7D20034D1FB /* DataLocationBase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,10 +317,15 @@
 			files = (
 				7264AFB61A1545FC00472013 /* IntegerExtensions.swift in Sources */,
 				7264AFB71A15461C00472013 /* Registers.swift in Sources */,
+				724097A61A17C0030034D1FB /* EmulationContext.swift in Sources */,
 				7264AFB11A15359B00472013 /* IntegerExtensionsTests.swift in Sources */,
 				7264AFB81A15461E00472013 /* Flags.swift in Sources */,
+				724097A51A17BD2C0034D1FB /* Register.swift in Sources */,
 				7264AFB31A15404800472013 /* RegistersTest.swift in Sources */,
 				7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */,
+				7240979A1A17AB300034D1FB /* Instruction.swift in Sources */,
+				7240979E1A17B7F90034D1FB /* DataLocationBase.swift in Sources */,
+				724097991A17AB010034D1FB /* LD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

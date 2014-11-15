@@ -38,33 +38,33 @@ class RegistersTest: XCTestCase {
     registers.B = 0xFF
     registers.C = 0x00
       
-    XCTAssertEqual(registers.BC, { 0xFF00 }(), "Register AF does not correspond to Registers A and F")
+    XCTAssertEqual(registers.BC, { 0xFF00 }(), "Register BC does not correspond to Registers B and C")
       
     registers.BC = 0x00FF
       
-    XCTAssertEqual(registers.B, { 0x00 }(), "Register AF does not correspond to Registers A and F")
-    XCTAssertEqual(registers.C, { 0xFF }(), "Register AF does not correspond to Registers A and F")
+    XCTAssertEqual(registers.B, { 0x00 }(), "Register BC does not correspond to Registers B and C")
+    XCTAssertEqual(registers.C, { 0xFF }(), "Register BC does not correspond to Registers B and C")
     
     registers.D = 0xFF
     registers.E = 0x00
     
-    XCTAssertEqual(registers.DE, { 0xFF00 }(), "Register AF does not correspond to Registers A and F")
+    XCTAssertEqual(registers.DE, { 0xFF00 }(), "Register DE does not correspond to Registers D and E")
     
     registers.DE = 0x00FF
-      
-    XCTAssertEqual(registers.D, { 0x00 }(), "Register AF does not correspond to Registers A and F")
-    XCTAssertEqual(registers.E, { 0xFF }(), "Register AF does not correspond to Registers A and F")
+    
+    XCTAssertEqual(registers.D, { 0x00 }(), "Register DE does not correspond to Registers D and E")
+    XCTAssertEqual(registers.E, { 0xFF }(), "Register DE does not correspond to Registers D and E")
     
     
     registers.H = 0xFF
     registers.L = 0x00
     
-    XCTAssertEqual(registers.HL, { 0xFF00 }(), "Register AF does not correspond to Registers A and F")
+    XCTAssertEqual(registers.HL, { 0xFF00 }(), "Register HL does not correspond to Registers H and L")
     
     registers.HL = 0x00FF
     
-    XCTAssertEqual(registers.H, { 0x00 }(), "Register AF does not correspond to Registers A and F")
-    XCTAssertEqual(registers.L, { 0xFF }(), "Register AF does not correspond to Registers A and F")
+    XCTAssertEqual(registers.H, { 0x00 }(), "Register HL does not correspond to Registers H and L")
+    XCTAssertEqual(registers.L, { 0xFF }(), "Register HL does not correspond to Registers H and L")
   }
   
 }

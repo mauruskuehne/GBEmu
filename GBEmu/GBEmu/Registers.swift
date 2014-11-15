@@ -8,8 +8,9 @@
 
 import Foundation
 
+
 public class Registers {
-  var A : Byte
+  var A : UInt8
   var B : Byte
   var C : Byte
   var D : Byte
@@ -78,4 +79,41 @@ public class Registers {
     PC = 0x100
   }
   
+  subscript(register : Register) -> DataLocationSupported {
+    get {
+      switch(register) {
+      case .A:
+        return self.A
+      case .B:
+        return self.B
+      case .C:
+        return self.C
+      case .D:
+        return self.D
+      case .E:
+        return self.E
+      case .H:
+        return self.H
+      case .L:
+        return self.L
+      case .Flags:
+        return self.Flags
+      case .SP:
+        return self.SP
+      case .PC:
+        return self.PC
+      case .AF:
+        return self.AF
+      case .BC:
+        return self.BC
+      case .DE:
+        return self.DE
+      case .HL:
+        return self.HL
+      }
+    }
+    set(newValue) {
+      
+    }
+  }
 }
