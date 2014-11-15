@@ -18,7 +18,7 @@ class Instruction : Printable{
   }
   
   
-  func execute(context : EmulationContext) {
+  func execute(context : ExecutionContext) {
     
   }
   

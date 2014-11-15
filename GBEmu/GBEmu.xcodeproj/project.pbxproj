@@ -14,10 +14,11 @@
 		7240979D1A17B7D20034D1FB /* DataLocationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240979C1A17B7D20034D1FB /* DataLocationBase.swift */; };
 		7240979E1A17B7F90034D1FB /* DataLocationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240979C1A17B7D20034D1FB /* DataLocationBase.swift */; };
 		724097A01A17B81A0034D1FB /* RegisterDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */; };
-		724097A21A17B9A70034D1FB /* EmulationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A11A17B9A70034D1FB /* EmulationContext.swift */; };
+		724097A21A17B9A70034D1FB /* ExecutionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A11A17B9A70034D1FB /* ExecutionContext.swift */; };
 		724097A41A17BD230034D1FB /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A31A17BD230034D1FB /* Register.swift */; };
 		724097A51A17BD2C0034D1FB /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A31A17BD230034D1FB /* Register.swift */; };
-		724097A61A17C0030034D1FB /* EmulationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A11A17B9A70034D1FB /* EmulationContext.swift */; };
+		724097A61A17C0030034D1FB /* ExecutionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A11A17B9A70034D1FB /* ExecutionContext.swift */; };
+		724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A91A17D8260034D1FB /* EmulationEngine.swift */; };
 		7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8D1A15316200472013 /* AppDelegate.swift */; };
 		7264AF901A15316200472013 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8F1A15316200472013 /* ViewController.swift */; };
 		7264AF921A15316200472013 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF911A15316200472013 /* Images.xcassets */; };
@@ -48,8 +49,9 @@
 		724097971A17A5480034D1FB /* LD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LD.swift; sourceTree = "<group>"; };
 		7240979C1A17B7D20034D1FB /* DataLocationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLocationBase.swift; sourceTree = "<group>"; };
 		7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterDataLocation.swift; sourceTree = "<group>"; };
-		724097A11A17B9A70034D1FB /* EmulationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmulationContext.swift; sourceTree = "<group>"; };
+		724097A11A17B9A70034D1FB /* ExecutionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionContext.swift; sourceTree = "<group>"; };
 		724097A31A17BD230034D1FB /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		724097A91A17D8260034D1FB /* EmulationEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmulationEngine.swift; sourceTree = "<group>"; };
 		7264AF881A15316200472013 /* GBEmu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBEmu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7264AF8C1A15316200472013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7264AF8D1A15316200472013 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		724097961A17A52D0034D1FB /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
+				724097941A17A1AD0034D1FB /* Instruction.swift */,
 				724097971A17A5480034D1FB /* LD.swift */,
 			);
 			name = Instructions;
@@ -166,9 +169,9 @@
 				724097961A17A52D0034D1FB /* Instructions */,
 				7264AFAB1A1531D300472013 /* Registers.swift */,
 				7264AFB41A15448200472013 /* Flags.swift */,
-				724097941A17A1AD0034D1FB /* Instruction.swift */,
-				724097A11A17B9A70034D1FB /* EmulationContext.swift */,
+				724097A11A17B9A70034D1FB /* ExecutionContext.swift */,
 				724097A31A17BD230034D1FB /* Register.swift */,
+				724097A91A17D8260034D1FB /* EmulationEngine.swift */,
 			);
 			name = Emulation;
 			sourceTree = "<group>";
@@ -297,7 +300,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				724097A21A17B9A70034D1FB /* EmulationContext.swift in Sources */,
+				724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */,
+				724097A21A17B9A70034D1FB /* ExecutionContext.swift in Sources */,
 				724097A41A17BD230034D1FB /* Register.swift in Sources */,
 				7264AFAF1A15351800472013 /* IntegerExtensions.swift in Sources */,
 				7264AF901A15316200472013 /* ViewController.swift in Sources */,
@@ -317,7 +321,7 @@
 			files = (
 				7264AFB61A1545FC00472013 /* IntegerExtensions.swift in Sources */,
 				7264AFB71A15461C00472013 /* Registers.swift in Sources */,
-				724097A61A17C0030034D1FB /* EmulationContext.swift in Sources */,
+				724097A61A17C0030034D1FB /* ExecutionContext.swift in Sources */,
 				7264AFB11A15359B00472013 /* IntegerExtensionsTests.swift in Sources */,
 				7264AFB81A15461E00472013 /* Flags.swift in Sources */,
 				724097A51A17BD2C0034D1FB /* Register.swift in Sources */,

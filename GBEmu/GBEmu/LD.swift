@@ -25,12 +25,10 @@ class LD : Instruction {
     
   }
   
-  override func execute(context : EmulationContext) {
+  override func execute(context : ExecutionContext) {
     
     let val = readLocation.read(context)
     
     writeLocation.write(val, context: context)
   }
 }
-
-

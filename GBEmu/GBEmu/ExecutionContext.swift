@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EmulationContext  {
+class ExecutionContext  {
   let registers : Registers
   
   init(registers : Registers) {

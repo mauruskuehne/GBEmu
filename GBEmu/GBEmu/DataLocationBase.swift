@@ -17,9 +17,9 @@ protocol DataLocationBase : Printable{
 }
 
 protocol WriteableDataLocation : DataLocationBase {
-  func write(value : DataLocationSupported, context : EmulationContext)
+  func write(value : DataLocationSupported, context : ExecutionContext)
 }
 
 protocol ReadableDataLocation : DataLocationBase {
-  func read(context : EmulationContext) -> DataLocationSupported
+  func read(context : ExecutionContext) -> DataLocationSupported
 }

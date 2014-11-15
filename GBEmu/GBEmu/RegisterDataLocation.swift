@@ -16,11 +16,11 @@ class RegisterDataLocation : ReadableDataLocation, WriteableDataLocation {
     self.register = register
   }
   
-  func read(context : EmulationContext) -> DataLocationSupported {
+  func read(context : ExecutionContext) -> DataLocationSupported {
     return context.registers[register]
   }
   
-  func write(value : DataLocationSupported, context : EmulationContext) {
+  func write(value : DataLocationSupported, context : ExecutionContext) {
     context.registers[register] = value as UInt16
   }
   
