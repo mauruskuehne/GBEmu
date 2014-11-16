@@ -25,6 +25,8 @@
 		7245BDFA1A18FE3C00AF205B /* NOP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDF81A18FE3C00AF205B /* NOP.swift */; };
 		7245BDFC1A19094200AF205B /* ConstantDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDFB1A19094200AF205B /* ConstantDataLocation.swift */; };
 		7245BDFD1A19094200AF205B /* ConstantDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDFB1A19094200AF205B /* ConstantDataLocation.swift */; };
+		7245BDFF1A190E0B00AF205B /* MemoryDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDFE1A190E0B00AF205B /* MemoryDataLocation.swift */; };
+		7245BE001A190E0B00AF205B /* MemoryDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDFE1A190E0B00AF205B /* MemoryDataLocation.swift */; };
 		7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8D1A15316200472013 /* AppDelegate.swift */; };
 		7264AF901A15316200472013 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8F1A15316200472013 /* ViewController.swift */; };
 		7264AF921A15316200472013 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF911A15316200472013 /* Images.xcassets */; };
@@ -61,6 +63,7 @@
 		7245BDF51A18EC1000AF205B /* MemoryAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryAccessor.swift; sourceTree = "<group>"; };
 		7245BDF81A18FE3C00AF205B /* NOP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NOP.swift; sourceTree = "<group>"; };
 		7245BDFB1A19094200AF205B /* ConstantDataLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantDataLocation.swift; sourceTree = "<group>"; };
+		7245BDFE1A190E0B00AF205B /* MemoryDataLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryDataLocation.swift; sourceTree = "<group>"; };
 		7264AF881A15316200472013 /* GBEmu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBEmu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7264AF8C1A15316200472013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7264AF8D1A15316200472013 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 				7240979C1A17B7D20034D1FB /* DataLocationBase.swift */,
 				7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */,
 				7245BDFB1A19094200AF205B /* ConstantDataLocation.swift */,
+				7245BDFE1A190E0B00AF205B /* MemoryDataLocation.swift */,
 			);
 			name = DataLocations;
 			sourceTree = "<group>";
@@ -327,6 +331,7 @@
 				724097981A17A5480034D1FB /* LD.swift in Sources */,
 				7240979D1A17B7D20034D1FB /* DataLocationBase.swift in Sources */,
 				7245BDF91A18FE3C00AF205B /* NOP.swift in Sources */,
+				7245BDFF1A190E0B00AF205B /* MemoryDataLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +346,7 @@
 				7264AFB81A15461E00472013 /* Flags.swift in Sources */,
 				724097A51A17BD2C0034D1FB /* Register.swift in Sources */,
 				7264AFB31A15404800472013 /* RegistersTest.swift in Sources */,
+				7245BE001A190E0B00AF205B /* MemoryDataLocation.swift in Sources */,
 				7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */,
 				7240979A1A17AB300034D1FB /* Instruction.swift in Sources */,
 				7245BDFA1A18FE3C00AF205B /* NOP.swift in Sources */,

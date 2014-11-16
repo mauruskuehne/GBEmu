@@ -10,18 +10,32 @@ import Foundation
 
 class RegisterDataLocation : ReadableDataLocation, WriteableDataLocation {
   let register : Register
+  let dereferenceFirst : Bool
   
-  
-  init(register : Register) {
+  init(register : Register, dereferenceFirst : Bool = true) {
     self.register = register
+    self.dereferenceFirst = dereferenceFirst
   }
   
   func read(context : ExecutionContext) -> DataLocationSupported {
-    return context.registers[register]
+    
+    if dereferenceFirst {
+      return context.memoryAccess.readUInt16(context.registers[register] as UInt16)
+    }
+    else {
+      return context.registers[register]
+    }
   }
   
   func write(value : DataLocationSupported, context : ExecutionContext) {
-    context.registers[register] = value as UInt16
+    if dereferenceFirst {
+      let addr = context.registers[register]
+      //context.memoryAccess.
+      
+    }
+    else {
+      context.registers[register] = value as UInt16
+    }
   }
   
   var description: String {

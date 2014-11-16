@@ -96,7 +96,48 @@ class EmulationEngine {
           //ADD HL, rp[p]
         }
       case 2 :
-        assertionFailure("unknown value for z in opcode!")
+        
+        var readAddr : DataLocationBase
+        var writeAddr : DataLocationBase
+        
+        if q == 0 {
+          if p == 0 {
+            readAddr = r[7]!
+            
+          } else if p == 1 {
+            readAddr = r[7]!
+            writeAddr = rp[1]!
+            
+          } else if p == 2 {
+            let address = memoryAccess.readUInt16(workingAddress)
+            workingAddress += 2
+            writeAddr = MemoryDataLocation(address: address, size: .UInt16)
+            readAddr = rp[2]!
+            
+          } else if p == 3 {
+            let address = memoryAccess.readUInt16(workingAddress)
+            workingAddress += 2
+            writeAddr = MemoryDataLocation(address: address, size: .UInt16)
+            readAddr = r[7]!
+            
+          }
+        }
+        else { //q == 1
+          if p == 0 {
+            writeddr = r[7]!
+            
+            
+          } else if p == 1 {
+            writeddr = r[7]!
+            
+          } else if p == 2 {
+            writeAddr = rp[2]!
+            
+          } else if p == 3 {
+            writeddr = r[7]!
+            
+          }
+        }
       case 3 :
         assertionFailure("unknown value for z in opcode!")
       case 4 :
