@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   override init() {
     
-    engine = EmulationEndgine()
+    engine = EmulationEngine()
     
     super.init()
     

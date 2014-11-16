@@ -19,6 +19,12 @@
 		724097A51A17BD2C0034D1FB /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A31A17BD230034D1FB /* Register.swift */; };
 		724097A61A17C0030034D1FB /* ExecutionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A11A17B9A70034D1FB /* ExecutionContext.swift */; };
 		724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A91A17D8260034D1FB /* EmulationEngine.swift */; };
+		7245BDF61A18EC1000AF205B /* MemoryAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDF51A18EC1000AF205B /* MemoryAccessor.swift */; };
+		7245BDF71A18EC1000AF205B /* MemoryAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDF51A18EC1000AF205B /* MemoryAccessor.swift */; };
+		7245BDF91A18FE3C00AF205B /* NOP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDF81A18FE3C00AF205B /* NOP.swift */; };
+		7245BDFA1A18FE3C00AF205B /* NOP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDF81A18FE3C00AF205B /* NOP.swift */; };
+		7245BDFC1A19094200AF205B /* ConstantDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDFB1A19094200AF205B /* ConstantDataLocation.swift */; };
+		7245BDFD1A19094200AF205B /* ConstantDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDFB1A19094200AF205B /* ConstantDataLocation.swift */; };
 		7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8D1A15316200472013 /* AppDelegate.swift */; };
 		7264AF901A15316200472013 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8F1A15316200472013 /* ViewController.swift */; };
 		7264AF921A15316200472013 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF911A15316200472013 /* Images.xcassets */; };
@@ -52,6 +58,9 @@
 		724097A11A17B9A70034D1FB /* ExecutionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionContext.swift; sourceTree = "<group>"; };
 		724097A31A17BD230034D1FB /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		724097A91A17D8260034D1FB /* EmulationEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmulationEngine.swift; sourceTree = "<group>"; };
+		7245BDF51A18EC1000AF205B /* MemoryAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryAccessor.swift; sourceTree = "<group>"; };
+		7245BDF81A18FE3C00AF205B /* NOP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NOP.swift; sourceTree = "<group>"; };
+		7245BDFB1A19094200AF205B /* ConstantDataLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantDataLocation.swift; sourceTree = "<group>"; };
 		7264AF881A15316200472013 /* GBEmu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBEmu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7264AF8C1A15316200472013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7264AF8D1A15316200472013 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +100,7 @@
 			children = (
 				724097941A17A1AD0034D1FB /* Instruction.swift */,
 				724097971A17A5480034D1FB /* LD.swift */,
+				7245BDF81A18FE3C00AF205B /* NOP.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -100,6 +110,7 @@
 			children = (
 				7240979C1A17B7D20034D1FB /* DataLocationBase.swift */,
 				7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */,
+				7245BDFB1A19094200AF205B /* ConstantDataLocation.swift */,
 			);
 			name = DataLocations;
 			sourceTree = "<group>";
@@ -172,6 +183,7 @@
 				724097A11A17B9A70034D1FB /* ExecutionContext.swift */,
 				724097A31A17BD230034D1FB /* Register.swift */,
 				724097A91A17D8260034D1FB /* EmulationEngine.swift */,
+				7245BDF51A18EC1000AF205B /* MemoryAccessor.swift */,
 			);
 			name = Emulation;
 			sourceTree = "<group>";
@@ -301,6 +313,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */,
+				7245BDF61A18EC1000AF205B /* MemoryAccessor.swift in Sources */,
+				7245BDFC1A19094200AF205B /* ConstantDataLocation.swift in Sources */,
 				724097A21A17B9A70034D1FB /* ExecutionContext.swift in Sources */,
 				724097A41A17BD230034D1FB /* Register.swift in Sources */,
 				7264AFAF1A15351800472013 /* IntegerExtensions.swift in Sources */,
@@ -312,6 +326,7 @@
 				7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */,
 				724097981A17A5480034D1FB /* LD.swift in Sources */,
 				7240979D1A17B7D20034D1FB /* DataLocationBase.swift in Sources */,
+				7245BDF91A18FE3C00AF205B /* NOP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,8 +343,11 @@
 				7264AFB31A15404800472013 /* RegistersTest.swift in Sources */,
 				7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */,
 				7240979A1A17AB300034D1FB /* Instruction.swift in Sources */,
+				7245BDFA1A18FE3C00AF205B /* NOP.swift in Sources */,
+				7245BDFD1A19094200AF205B /* ConstantDataLocation.swift in Sources */,
 				7240979E1A17B7F90034D1FB /* DataLocationBase.swift in Sources */,
 				724097991A17AB010034D1FB /* LD.swift in Sources */,
+				7245BDF71A18EC1000AF205B /* MemoryAccessor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

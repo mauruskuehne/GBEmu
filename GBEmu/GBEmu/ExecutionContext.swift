@@ -10,8 +10,10 @@ import Foundation
 
 class ExecutionContext  {
   let registers : Registers
+  let memoryAccess : MemoryAccessor
   
-  init(registers : Registers) {
+  init(registers : Registers, memoryAccess : MemoryAccessor) {
     self.registers = registers;
+    self.memoryAccess = memoryAccess
   }
 }
