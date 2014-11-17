@@ -13,6 +13,10 @@
 		721ED1951A1A7A2A00745D13 /* INC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED1931A1A777D00745D13 /* INC.swift */; };
 		721ED1971A1A7A7E00745D13 /* DEC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED1961A1A7A7E00745D13 /* DEC.swift */; };
 		721ED1981A1A7B9F00745D13 /* DEC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED1961A1A7A7E00745D13 /* DEC.swift */; };
+		721ED19A1A1A810600745D13 /* HALT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED1991A1A810600745D13 /* HALT.swift */; };
+		721ED19B1A1A817E00745D13 /* HALT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED1991A1A810600745D13 /* HALT.swift */; };
+		721ED19D1A1A8A3800745D13 /* ADD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED19C1A1A8A3800745D13 /* ADD.swift */; };
+		721ED19E1A1A8A5A00745D13 /* ADD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED19C1A1A8A3800745D13 /* ADD.swift */; };
 		724097951A17A1AD0034D1FB /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097941A17A1AD0034D1FB /* Instruction.swift */; };
 		724097981A17A5480034D1FB /* LD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097971A17A5480034D1FB /* LD.swift */; };
 		724097991A17AB010034D1FB /* LD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097971A17A5480034D1FB /* LD.swift */; };
@@ -61,6 +65,8 @@
 /* Begin PBXFileReference section */
 		721ED1931A1A777D00745D13 /* INC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INC.swift; sourceTree = "<group>"; };
 		721ED1961A1A7A7E00745D13 /* DEC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DEC.swift; sourceTree = "<group>"; };
+		721ED1991A1A810600745D13 /* HALT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HALT.swift; sourceTree = "<group>"; };
+		721ED19C1A1A8A3800745D13 /* ADD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADD.swift; sourceTree = "<group>"; };
 		724097941A17A1AD0034D1FB /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
 		724097971A17A5480034D1FB /* LD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LD.swift; sourceTree = "<group>"; };
 		7240979C1A17B7D20034D1FB /* DataLocationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLocationBase.swift; sourceTree = "<group>"; };
@@ -114,6 +120,8 @@
 				7245BDF81A18FE3C00AF205B /* NOP.swift */,
 				721ED1931A1A777D00745D13 /* INC.swift */,
 				721ED1961A1A7A7E00745D13 /* DEC.swift */,
+				721ED1991A1A810600745D13 /* HALT.swift */,
+				721ED19C1A1A8A3800745D13 /* ADD.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -328,12 +336,14 @@
 			files = (
 				724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */,
 				7245BDF61A18EC1000AF205B /* MemoryAccessor.swift in Sources */,
+				721ED19A1A1A810600745D13 /* HALT.swift in Sources */,
 				7245BDFC1A19094200AF205B /* ConstantDataLocation.swift in Sources */,
 				724097A21A17B9A70034D1FB /* ExecutionContext.swift in Sources */,
 				724097A41A17BD230034D1FB /* Register.swift in Sources */,
 				7264AFAF1A15351800472013 /* IntegerExtensions.swift in Sources */,
 				7264AF901A15316200472013 /* ViewController.swift in Sources */,
 				7264AFB51A15448200472013 /* Flags.swift in Sources */,
+				721ED19D1A1A8A3800745D13 /* ADD.swift in Sources */,
 				724097A01A17B81A0034D1FB /* RegisterDataLocation.swift in Sources */,
 				724097951A17A1AD0034D1FB /* Instruction.swift in Sources */,
 				7264AFAC1A1531D300472013 /* Registers.swift in Sources */,
@@ -357,9 +367,11 @@
 				7264AFB11A15359B00472013 /* IntegerExtensionsTests.swift in Sources */,
 				721ED1951A1A7A2A00745D13 /* INC.swift in Sources */,
 				721ED1911A1A555100745D13 /* EmulationEngine.swift in Sources */,
+				721ED19B1A1A817E00745D13 /* HALT.swift in Sources */,
 				7264AFB81A15461E00472013 /* Flags.swift in Sources */,
 				724097A51A17BD2C0034D1FB /* Register.swift in Sources */,
 				7264AFB31A15404800472013 /* RegistersTest.swift in Sources */,
+				721ED19E1A1A8A5A00745D13 /* ADD.swift in Sources */,
 				7245BE001A190E0B00AF205B /* MemoryDataLocation.swift in Sources */,
 				7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */,
 				7240979A1A17AB300034D1FB /* Instruction.swift in Sources */,

@@ -34,6 +34,10 @@ class EmulationEngine {
     let instruction = parseInstruction()
   }
   
+  private func getDataLocationFor(idx : Int) -> DataLocationBase {
+    
+  }
+  
   private func parseInstruction() -> Instruction {
     
     let r = [0 : Register.B,
@@ -42,7 +46,7 @@ class EmulationEngine {
              3 : Register.E,
              4 : Register.H,
              5 : Register.L,
-             6 : Register.C,
+             6 : Register.C, // FEHLER : Hier müsste (HL) sein!!!
              7 : Register.A]
     
     let rp = [0 : Register.BC,
@@ -75,12 +79,24 @@ class EmulationEngine {
         case 0 :
           parsedInstruction = NOP()
         case 1 :
+          
+          //MISSING OPCODE
+          
           assertionFailure("unknown value for y in opcode!")
         case 2 :
+          
+          //MISSING OPCODE
+          
           assertionFailure("unknown value for y in opcode!")
         case 3 :
+          
+          //MISSING OPCODE
+          
           assertionFailure("unknown value for y in opcode!")
         default :
+          
+          //MISSING OPCODE
+          
           assertionFailure("unknown value for y in opcode!")
         }
       case 1 : //x = 0, z = 1
@@ -158,22 +174,42 @@ class EmulationEngine {
         } else { // 16Bit DEC
           parsedInstruction = DEC(register: reg)
         }
+        
       case 4 : // 8Bit INC
-        let reg = r[Int(p)]!
+        let reg = r[Int(p)]! //Abhandlung für HL!!
         parsedInstruction = INC(register: reg)
+        
       case 5 :
-        assertionFailure("unknown value for z in opcode!")
-      case 6 :
-        assertionFailure("unknown value for z in opcode!")
+        let reg = r[Int(p)]! //Abhandlung für HL!!
+        parsedInstruction = DEC(register: reg)
+        
+      case 6 : // LD r[y], n
+        let reg = r[Int(p)]! //Abhandlung für HL!!
+        let val = memoryAccess.readUInt8(workingAddress)
+        workingAddress += 1
+        let writeAddr = RegisterDataLocation(register: reg)
+        let readAddr = ConstantDataLocation(value: val)
+        
       case 7 :
+        
+        //MISSING OPCODES
         assertionFailure("unknown value for z in opcode!")
       default :
         assertionFailure("unknown value for z in opcode!")
       }
     case 1 :
-      assertionFailure("unknown value for x in opcode!")
+      if z == 6 {
+        parsedInstruction = HALT()
+      }
+      else {
+        let regRead = RegisterDataLocation(register: r[Int(z)]!) //Abhandlung für HL!!
+        let regWrite = RegisterDataLocation(register: r[Int(y)]!) //Abhandlung für HL!!
+        
+        parsedInstruction = LD(readLocation: regRead, writeLocation: regWrite)
+        
+      }
     case 2 :
-      assertionFailure("unknown value for x in opcode!")
+      //ALU[y] r[z]
     default :
       assertionFailure("unknown value for x in opcode!")
     }
