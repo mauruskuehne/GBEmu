@@ -36,24 +36,24 @@ class EmulationEngine {
   
   private func parseInstruction() -> Instruction {
     
-    let r = [0 : RegisterDataLocation(register: Register.B),
-             1 : RegisterDataLocation(register: Register.C),
-             2 : RegisterDataLocation(register: Register.D),
-             3 : RegisterDataLocation(register: Register.E),
-             4 : RegisterDataLocation(register: Register.H),
-             5 : RegisterDataLocation(register: Register.L),
-             6 : RegisterDataLocation(register: Register.C),
-             7 : RegisterDataLocation(register: Register.A)]
+    let r = [0 : Register.B,
+             1 : Register.C,
+             2 : Register.D,
+             3 : Register.E,
+             4 : Register.H,
+             5 : Register.L,
+             6 : Register.C,
+             7 : Register.A]
     
     let rp = [0 : Register.BC,
               1 : Register.DE,
               2 : Register.HL,
               3 : Register.SP]
     
-    let rp2 = [0 : RegisterDataLocation(register: Register.BC),
-              1 : RegisterDataLocation(register: Register.DE),
-              2 : RegisterDataLocation(register: Register.HL),
-              3 : RegisterDataLocation(register: Register.AF)]
+    let rp2 = [0 : Register.BC,
+               1 : Register.DE,
+               2 : Register.HL,
+               3 : Register.AF]
     
     var parsedInstruction : Instruction!
     
@@ -103,11 +103,11 @@ class EmulationEngine {
         
         if q == 0 {
           if p == 0 {
-            readAddr = r[7]!
+            readAddr = RegisterDataLocation(register: r[7]!)
             writeAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true, size: DataSize.UInt16)
             
           } else if p == 1 {
-            readAddr = r[7]!
+            readAddr = RegisterDataLocation(register: r[7]!)
             writeAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true, size: DataSize.UInt16)
             
           } else if p == 2 {
@@ -126,11 +126,11 @@ class EmulationEngine {
         }
         else { //q == 1
           if p == 0 {
-            writeAddr = r[7]!
+            writeAddr = RegisterDataLocation(register: r[7]!)
             readAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true, size: DataSize.UInt8)
             
           } else if p == 1 {
-            writeAddr = r[7]!
+            writeAddr = RegisterDataLocation(register: r[7]!)
             readAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true, size: DataSize.UInt8)
             
           } else if p == 2 {
@@ -139,9 +139,8 @@ class EmulationEngine {
             workingAddress += 2
             readAddr = MemoryDataLocation(address: address, size: .UInt16)
             
-            
           } else if p == 3 {
-            writeAddr = r[7]!
+            writeAddr = RegisterDataLocation(register: r[7]!)
             let address = memoryAccess.readUInt16(workingAddress)
             workingAddress += 2
             readAddr = MemoryDataLocation(address: address, size: .UInt16)
@@ -152,15 +151,16 @@ class EmulationEngine {
         parsedInstruction = LD(readLocation: readAddr, writeLocation: writeAddr)
         
       case 3 :
+        let reg = rp[Int(p)]!
         if q == 0 { // 16Bit INC
-          let reg = rp[Int(p)]!
           parsedInstruction = INC(register: reg)
           
         } else { // 16Bit DEC
-          
+          parsedInstruction = DEC(register: reg)
         }
-      case 4 :
-        assertionFailure("unknown value for z in opcode!")
+      case 4 : // 8Bit INC
+        let reg = r[Int(p)]!
+        parsedInstruction = INC(register: reg)
       case 5 :
         assertionFailure("unknown value for z in opcode!")
       case 6 :
