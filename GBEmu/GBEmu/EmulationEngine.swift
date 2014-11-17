@@ -45,10 +45,10 @@ class EmulationEngine {
              6 : RegisterDataLocation(register: Register.C),
              7 : RegisterDataLocation(register: Register.A)]
     
-    let rp = [0 : RegisterDataLocation(register: Register.BC),
-              1 : RegisterDataLocation(register: Register.DE),
-              2 : RegisterDataLocation(register: Register.HL),
-              3 : RegisterDataLocation(register: Register.SP)]
+    let rp = [0 : Register.BC,
+              1 : Register.DE,
+              2 : Register.HL,
+              3 : Register.SP]
     
     let rp2 = [0 : RegisterDataLocation(register: Register.BC),
               1 : RegisterDataLocation(register: Register.DE),
@@ -83,10 +83,11 @@ class EmulationEngine {
         default :
           assertionFailure("unknown value for y in opcode!")
         }
-      case 1 :
+      case 1 : //x = 0, z = 1
         if q == 0 {
           //LD RP[p], nn
-          let writeAddr = rp[Int(p)]!
+          let reg = rp[Int(p)]!
+          let writeAddr = RegisterDataLocation(register: reg)
           let valueToLoad = memoryAccess.readUInt16(workingAddress)
           workingAddress += 2
           let constRead = ConstantDataLocation(value: valueToLoad)
@@ -95,51 +96,69 @@ class EmulationEngine {
         else {
           //ADD HL, rp[p]
         }
-      case 2 :
+      case 2 : // z = 2
         
-        var readAddr : DataLocationBase
-        var writeAddr : DataLocationBase
+        var readAddr : ReadableDataLocation!
+        var writeAddr : WriteableDataLocation!
         
         if q == 0 {
           if p == 0 {
             readAddr = r[7]!
+            writeAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true, size: DataSize.UInt16)
             
           } else if p == 1 {
             readAddr = r[7]!
-            writeAddr = rp[1]!
+            writeAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true, size: DataSize.UInt16)
             
           } else if p == 2 {
             let address = memoryAccess.readUInt16(workingAddress)
             workingAddress += 2
             writeAddr = MemoryDataLocation(address: address, size: .UInt16)
-            readAddr = rp[2]!
+            readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true, size: DataSize.UInt16)
             
           } else if p == 3 {
             let address = memoryAccess.readUInt16(workingAddress)
             workingAddress += 2
             writeAddr = MemoryDataLocation(address: address, size: .UInt16)
-            readAddr = r[7]!
+            readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true, size: DataSize.UInt8)
             
           }
         }
         else { //q == 1
           if p == 0 {
-            writeddr = r[7]!
-            
+            writeAddr = r[7]!
+            readAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true, size: DataSize.UInt8)
             
           } else if p == 1 {
-            writeddr = r[7]!
+            writeAddr = r[7]!
+            readAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true, size: DataSize.UInt8)
             
           } else if p == 2 {
-            writeAddr = rp[2]!
+            writeAddr = RegisterDataLocation(register: rp[2]!)
+            let address = memoryAccess.readUInt16(workingAddress)
+            workingAddress += 2
+            readAddr = MemoryDataLocation(address: address, size: .UInt16)
+            
             
           } else if p == 3 {
-            writeddr = r[7]!
+            writeAddr = r[7]!
+            let address = memoryAccess.readUInt16(workingAddress)
+            workingAddress += 2
+            readAddr = MemoryDataLocation(address: address, size: .UInt16)
             
           }
         }
+        
+        parsedInstruction = LD(readLocation: readAddr, writeLocation: writeAddr)
+        
       case 3 :
-        assertionFailure("unknown value for z in opcode!")
+        if q == 0 { // 16Bit INC
+          let reg = rp[Int(p)]!
+          parsedInstruction = INC(register: reg)
+          
+        } else { // 16Bit DEC
+          
+        }
       case 4 :
         assertionFailure("unknown value for z in opcode!")
       case 5 :

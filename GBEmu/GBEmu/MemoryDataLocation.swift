@@ -33,13 +33,12 @@ class MemoryDataLocation : ReadableDataLocation, WriteableDataLocation {
   
   func write(value : DataLocationSupported, context : ExecutionContext) {
     if size == .UInt16 {
-      let val = UInt16(value)
+      let val = value as UInt16
       let bytes = val.toBytes()
-      context.memoryAccess[address] = bytes.lowerByte
-      context.memoryAccess[address] = bytes.upperByte
+      context.memoryAccess.write(self.address, value: value)
       
     } else {
-      context.memoryAccess.memory[address] = value
+      context.memoryAccess.memory[Int(address)] = value as UInt8
     }
   }
   

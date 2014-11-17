@@ -31,5 +31,15 @@ class MemoryAccessor {
   }
   
   func write(address : UInt16, value : DataLocationSupported) {
+    
+    if(value is UInt16)
+    {
+      let bytes = (value as UInt16).toBytes()
+      memory[Int(address)] = bytes.lower
+      memory[Int(address) + 1] = bytes.upper
+    }
+    else {
+      memory[Int(address)] = value as UInt8
+    }
   }
 }
