@@ -73,7 +73,7 @@ class RegistersTest: XCTestCase {
     
     let smallValue : UInt8 = 255
     let overflowValue : UInt16 = 257
-    let bigValue : UInt16 = 12345
+    let bigValue : UInt16 = 256
     
     register[Register.A] = smallValue
     XCTAssertEqual(register.A, smallValue, "could not set \(smallValue) to register A!")
@@ -88,9 +88,11 @@ class RegistersTest: XCTestCase {
     register[Register.HL] = overflowValue
     XCTAssertEqual(register.HL, overflowValue, "could not set \(overflowValue) to register HL!")
     
-    
     register[Register.A] = bigValue
-    XCTAssertEqual(String(register.A), String(bigValue % UInt8.max), "could not set value to register A!")
+    let regVal = UInt16(register.A)
+    let correctVal = (bigValue % UInt16(UInt8.max)) - 1
+    
+    XCTAssertEqual(regVal, correctVal, "could not set value to register A!")
     
     register[Register.HL] = bigValue
     XCTAssertEqual(register.HL, bigValue, "could not set \(bigValue) to register HL!")

@@ -9,6 +9,7 @@
 import Foundation
 
 protocol DataLocationSupported {
+  
   func getAsUInt8() -> UInt8
   func getAsUInt16() -> UInt16
 }

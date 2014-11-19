@@ -15,7 +15,7 @@ class LD : Instruction {
   
   override var description : String {
     get {
-      return "LD \(writeLocation), \(readLocation)"
+      return "LD \(writeLocation.description), \(readLocation.description)"
     }
   }
   

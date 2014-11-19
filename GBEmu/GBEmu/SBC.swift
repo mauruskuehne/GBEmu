@@ -8,20 +8,20 @@
 
 import Foundation
 
-class ADD : Instruction {
+class SBC : Instruction {
   
   let registerToStore : ReadWriteDataLocation
-  let registerToAdd : ReadableDataLocation
+  let registerToSubtract : ReadableDataLocation
   
   override var description : String {
     get {
-      return "ADD \(registerToStore), \(registerToAdd)"
+      return "SBC \(registerToStore), \(registerToSubtract)"
     }
   }
   
-  init(registerToStore : ReadWriteDataLocation, registerToAdd : ReadableDataLocation) {
+  init(registerToStore : ReadWriteDataLocation, registerToSubtract : ReadableDataLocation) {
     self.registerToStore = registerToStore
-    self.registerToAdd = registerToAdd
+    self.registerToSubtract = registerToSubtract
   }
   
   override func execute(context : ExecutionContext) {

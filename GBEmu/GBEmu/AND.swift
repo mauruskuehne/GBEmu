@@ -8,20 +8,18 @@
 
 import Foundation
 
-class ADD : Instruction {
+class AND : Instruction {
   
-  let registerToStore : ReadWriteDataLocation
-  let registerToAdd : ReadableDataLocation
+  let register : ReadableDataLocation
   
   override var description : String {
     get {
-      return "ADD \(registerToStore), \(registerToAdd)"
+      return "AND \(register)"
     }
   }
   
-  init(registerToStore : ReadWriteDataLocation, registerToAdd : ReadableDataLocation) {
-    self.registerToStore = registerToStore
-    self.registerToAdd = registerToAdd
+  init(register : ReadableDataLocation) {
+    self.register = register
   }
   
   override func execute(context : ExecutionContext) {

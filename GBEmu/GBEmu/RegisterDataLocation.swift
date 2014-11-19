@@ -13,10 +13,21 @@ class RegisterDataLocation : ReadWriteDataLocation {
   let dereferenceFirst : Bool
   let size : DataSize
   
-  init(register : Register, dereferenceFirst : Bool = true, size : DataSize = DataSize.UInt8) {
+  init(register : Register, dereferenceFirst : Bool = false) {
     self.register = register
     self.dereferenceFirst = dereferenceFirst
-    self.size = size
+    
+    
+    let bigRegisters = [ Register.HL ]
+    
+    //if(self.register)
+    
+    if contains(bigRegisters, self.register) {
+      size = .UInt16
+    } else {
+      size = .UInt8
+    }
+    
   }
   
   func read(context : ExecutionContext) -> DataLocationSupported {
@@ -37,26 +48,24 @@ class RegisterDataLocation : ReadWriteDataLocation {
   }
   
   func write(value : DataLocationSupported, context : ExecutionContext) {
-    assertionFailure("not yet implemented")
     
     if dereferenceFirst {
-      let addr = context.registers[register] as UInt16
+      let addr = context.registers[register].getAsUInt16()
       context.memoryAccess.write(addr, value: value)
     }
     else {
-      let val = value as UInt16
-      if self.size == .UInt16 {
-        context.registers[register] = value as UInt16
-      } else {
-        
-      }
-      
+      context.registers[register] = value
     }
   }
   
   var description: String {
     get {
-      return "\(register)"
+      if dereferenceFirst {
+        return "(\(register.description))"
+      }
+      else {
+        return "\(register.description)"
+      }
     }
   }
 }

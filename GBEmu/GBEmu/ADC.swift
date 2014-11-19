@@ -8,14 +8,14 @@
 
 import Foundation
 
-class ADD : Instruction {
+class ADC : Instruction {
   
   let registerToStore : ReadWriteDataLocation
   let registerToAdd : ReadableDataLocation
   
   override var description : String {
     get {
-      return "ADD \(registerToStore), \(registerToAdd)"
+      return "ADC \(registerToStore), \(registerToAdd)"
     }
   }
   
@@ -26,7 +26,9 @@ class ADD : Instruction {
   
   override func execute(context : ExecutionContext) {
     
+    
     assertionFailure("not yet implemented")
+    
     
   }
 }

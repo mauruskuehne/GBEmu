@@ -118,6 +118,9 @@ class EmulationEngine {
           parsedInstruction = LD(readLocation: constRead, writeLocation: writeAddr)
         }
         else {
+          
+          
+          
           //ADD HL, rp[p]
         }
       case 2 : // z = 2
@@ -128,34 +131,34 @@ class EmulationEngine {
         if q == 0 {
           if p == 0 {
             readAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            writeAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true, size: DataSize.UInt16)
+            writeAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true)
             
           } else if p == 1 {
             readAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            writeAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true, size: DataSize.UInt16)
+            writeAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true)
             
           } else if p == 2 {
             let address = memoryAccess.readUInt16(workingAddress)
             workingAddress += 2
             writeAddr = MemoryDataLocation(address: address, size: .UInt16)
-            readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true, size: DataSize.UInt16)
+            readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             
           } else if p == 3 {
             let address = memoryAccess.readUInt16(workingAddress)
             workingAddress += 2
             writeAddr = MemoryDataLocation(address: address, size: .UInt16)
-            readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true, size: DataSize.UInt8)
+            readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             
           }
         }
         else { //q == 1
           if p == 0 {
             writeAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            readAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true, size: DataSize.UInt8)
+            readAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true)
             
           } else if p == 1 {
             writeAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            readAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true, size: DataSize.UInt8)
+            readAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true)
             
           } else if p == 2 {
             writeAddr = RegisterDataLocation(register: rp[2]!)
@@ -177,10 +180,10 @@ class EmulationEngine {
       case 3 :
         let reg = rp[Int(p)]!
         if q == 0 { // 16Bit INC
-          parsedInstruction = INC(register: reg, size: .UInt16)
+          parsedInstruction = INC(register: reg)
           
         } else { // 16Bit DEC
-          parsedInstruction = DEC(register: reg, size: .UInt16)
+          parsedInstruction = DEC(register: reg)
         }
         
       case 4 : // 8Bit INC

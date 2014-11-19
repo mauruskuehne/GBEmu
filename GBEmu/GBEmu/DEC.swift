@@ -23,8 +23,8 @@ class DEC : Instruction {
     self.location = locToIncrease
   }
   
-  convenience init(register : Register, size : DataSize) {
-    self.init(locToIncrease: RegisterDataLocation(register: register, dereferenceFirst: false, size: size))
+  convenience init(register : Register) {
+    self.init(locToIncrease: RegisterDataLocation(register: register, dereferenceFirst: false))
   }
   
   override func execute(context : ExecutionContext) {
