@@ -67,4 +67,32 @@ class RegistersTest: XCTestCase {
     XCTAssertEqual(registers.L, { 0xFF }(), "Register HL does not correspond to Registers H and L")
   }
   
+  func testSubscript() {
+    
+    let register = Registers()
+    
+    let smallValue : UInt8 = 255
+    let overflowValue : UInt16 = 257
+    let bigValue : UInt16 = 12345
+    
+    register[Register.A] = smallValue
+    XCTAssertEqual(register.A, smallValue, "could not set \(smallValue) to register A!")
+    
+    register[Register.HL] = smallValue
+    XCTAssertEqual(String(register.HL), String(smallValue), "could not set \(smallValue) to register HL!")
+    
+    
+    register[Register.A] = overflowValue
+    XCTAssertEqual(register.A, { 1 }(), "could not set \(overflowValue) to register A!")
+    
+    register[Register.HL] = overflowValue
+    XCTAssertEqual(register.HL, overflowValue, "could not set \(overflowValue) to register HL!")
+    
+    
+    register[Register.A] = bigValue
+    XCTAssertEqual(String(register.A), String(bigValue % UInt8.max), "could not set value to register A!")
+    
+    register[Register.HL] = bigValue
+    XCTAssertEqual(register.HL, bigValue, "could not set \(bigValue) to register HL!")
+  }
 }

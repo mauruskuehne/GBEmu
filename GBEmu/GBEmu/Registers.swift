@@ -113,7 +113,36 @@ public class Registers {
       }
     }
     set(newValue) {
-      
+      switch(register) {
+      case .A:
+        self.A = newValue.getAsUInt8()
+      case .B:
+        self.B = newValue.getAsUInt8()
+      case .C:
+        self.C = newValue.getAsUInt8()
+      case .D:
+        self.D = newValue.getAsUInt8()
+      case .E:
+        self.E = newValue.getAsUInt8()
+      case .H:
+        self.H = newValue.getAsUInt8()
+      case .L:
+        self.L = newValue.getAsUInt8()
+      case .Flags:
+        self.Flags = newValue.getAsUInt8()
+      case .SP:
+        self.SP = newValue.getAsUInt16()
+      case .PC:
+        self.PC = newValue.getAsUInt16()
+      case .AF:
+        self.AF = newValue.getAsUInt16()
+      case .BC:
+        self.BC = newValue.getAsUInt16()
+      case .DE:
+        self.DE = newValue.getAsUInt16()
+      case .HL:
+        self.HL = newValue.getAsUInt16()
+      }
     }
   }
 }

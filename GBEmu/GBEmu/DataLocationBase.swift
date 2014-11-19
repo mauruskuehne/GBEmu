@@ -8,10 +8,33 @@
 
 import Foundation
 
-protocol DataLocationSupported { }
+protocol DataLocationSupported {
+  func getAsUInt8() -> UInt8
+  func getAsUInt16() -> UInt16
+}
 
-extension UInt8 : DataLocationSupported {}
-extension UInt16 : DataLocationSupported {}
+extension UInt8 : DataLocationSupported {
+  
+  func getAsUInt8() -> UInt8 {
+    return self
+  }
+  
+  func getAsUInt16() -> UInt16 {
+    return UInt16(self)
+  }
+
+}
+
+extension UInt16 : DataLocationSupported {
+  func getAsUInt8() -> UInt8 {
+    return self.toBytes().lower
+  }
+  
+  func getAsUInt16() -> UInt16 {
+    return self
+
+  }
+}
 
 protocol DataLocationBase : Printable{
 }
@@ -22,4 +45,8 @@ protocol WriteableDataLocation : DataLocationBase {
 
 protocol ReadableDataLocation : DataLocationBase {
   func read(context : ExecutionContext) -> DataLocationSupported
+}
+
+protocol ReadWriteDataLocation : DataLocationBase, WriteableDataLocation, ReadableDataLocation {
+  
 }

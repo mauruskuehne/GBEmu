@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RegisterDataLocation : ReadableDataLocation, WriteableDataLocation {
+class RegisterDataLocation : ReadWriteDataLocation {
   let register : Register
   let dereferenceFirst : Bool
   let size : DataSize
@@ -40,12 +40,17 @@ class RegisterDataLocation : ReadableDataLocation, WriteableDataLocation {
     assertionFailure("not yet implemented")
     
     if dereferenceFirst {
-      let addr = context.registers[register]
-      //context.memoryAccess.
-      
+      let addr = context.registers[register] as UInt16
+      context.memoryAccess.write(addr, value: value)
     }
     else {
-      context.registers[register] = value as UInt16
+      let val = value as UInt16
+      if self.size == .UInt16 {
+        context.registers[register] = value as UInt16
+      } else {
+        
+      }
+      
     }
   }
   

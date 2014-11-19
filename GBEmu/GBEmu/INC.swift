@@ -10,23 +10,27 @@ import Foundation
 
 class INC : Instruction {
   
-  let register : Register
+  let location : ReadWriteDataLocation
   
   override var description : String {
     get {
-      return "INC \(register)"
+      return "INC \(location)"
     }
   }
   
-  init(register : Register) {
-    self.register = register
+  init(locToIncrease : ReadWriteDataLocation) {
+    self.location = locToIncrease
+  }
+  
+  convenience init(register : Register, size : DataSize) {
+    self.init(locToIncrease: RegisterDataLocation(register: register, dereferenceFirst: false, size: size))
   }
   
   override func execute(context : ExecutionContext) {
     
-    let newVal = (context.registers[register] as UInt16) + 1
+    let newVal = location.read(context) as UInt16 + 1
     
-    context.registers[register] = newVal
+    location.write(newVal, context: context)
     
   }
 }

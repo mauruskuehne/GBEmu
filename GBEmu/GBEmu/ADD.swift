@@ -16,7 +16,9 @@ class ADD : Instruction {
     }
   }
   
-  init(registerToAdd : RegisterDataLocation)
+  init(registerToAdd : RegisterDataLocation) {
+    
+  }
   
   override func execute(context : ExecutionContext) {
     
