@@ -24,7 +24,6 @@ class MemoryAccessor {
   }
   
   func readUInt16(address : UInt16) -> UInt16 {
-    
     let b1 = readUInt8(address)
     let b2 = readUInt8(address + 1)
     return UInt16.fromUpperByte(b1, lowerByte: b2)
@@ -32,8 +31,7 @@ class MemoryAccessor {
   
   func write(address : UInt16, value : DataLocationSupported) {
     
-    if(value is UInt16)
-    {
+    if(value is UInt16) {
       let bytes = (value as UInt16).toBytes()
       memory[Int(address)] = bytes.lower
       memory[Int(address) + 1] = bytes.upper
