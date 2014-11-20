@@ -19,19 +19,23 @@ class DEC : Instruction {
   }
   
   
-  init(locToIncrease : ReadWriteDataLocation) {
-    self.location = locToIncrease
+  init(locToDecrease : ReadWriteDataLocation) {
+    self.location = locToDecrease
   }
   
   convenience init(register : Register) {
-    self.init(locToIncrease: RegisterDataLocation(register: register, dereferenceFirst: false))
+    self.init(locToDecrease: RegisterDataLocation(register: register, dereferenceFirst: false))
   }
   
   override func execute(context : ExecutionContext) {
     
-    let newVal = location.read(context) as UInt16 - 1
+    let oldVal = location.read(context)
     
-    location.write(newVal, context: context)
+    if oldVal is UInt16 {
+      location.write(oldVal.getAsUInt16() - 1, context: context)
+    } else {
+      location.write(oldVal.getAsUInt8() - 1, context: context)
+    }
     
   }
 }

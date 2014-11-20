@@ -192,7 +192,7 @@ class EmulationEngine {
         
       case 5 :
         let reg = getDataLocationFor(Int(p))
-        parsedInstruction = DEC(locToIncrease: reg)
+        parsedInstruction = DEC(locToDecrease: reg)
         
       case 6 : // LD r[y], n
         let reg = getDataLocationFor(Int(p))
