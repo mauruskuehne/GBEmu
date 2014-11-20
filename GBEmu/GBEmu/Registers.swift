@@ -11,13 +11,13 @@ import Foundation
 
 public class Registers {
   var A : UInt8
-  var B : Byte
-  var C : Byte
-  var D : Byte
-  var E : Byte
-  var H : Byte
-  var L : Byte
-  var Flags : Byte
+  var B : UInt8
+  var C : UInt8
+  var D : UInt8
+  var E : UInt8
+  var H : UInt8
+  var L : UInt8
+  var Flags : UInt8
   
   var SP : UInt16
   var PC : UInt16

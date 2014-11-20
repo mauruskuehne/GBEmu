@@ -21,10 +21,9 @@ extension UInt16 {
     
     return (upper,lower)
   }
-  
 }
 
-extension Byte {
+extension UInt8 {
   mutating func setFlag(flag : Flags) {
     self = self | flag.rawValue
   }

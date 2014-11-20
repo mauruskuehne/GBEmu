@@ -18,7 +18,7 @@ class RegisterDataLocation : ReadWriteDataLocation {
     self.dereferenceFirst = dereferenceFirst
     
     
-    let bigRegisters = [ Register.HL ]
+    let bigRegisters = [ Register.HL, Register.AF, Register.BC, Register.DE, Register.PC, Register.SP ]
     
     //if(self.register)
     
@@ -34,10 +34,10 @@ class RegisterDataLocation : ReadWriteDataLocation {
     
     if dereferenceFirst {
       if size == DataSize.UInt16 {
-        return context.memoryAccess.readUInt16(context.registers[register] as UInt16)
+        return context.memoryAccess.readUInt16(context.registers[register].getAsUInt16())
       }
       else {
-        return context.memoryAccess.readUInt8(context.registers[register] as UInt16)
+        return context.memoryAccess.readUInt8(context.registers[register].getAsUInt16())
       }
     }
     else {

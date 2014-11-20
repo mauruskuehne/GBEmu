@@ -57,6 +57,7 @@
 		728AB4651A1D2B8D00715CAF /* AND.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4641A1D2B8D00715CAF /* AND.swift */; };
 		728AB4671A1D2BB900715CAF /* SBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4661A1D2BB900715CAF /* SBC.swift */; };
 		728AB46A1A1D2D0B00715CAF /* LDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4691A1D2D0B00715CAF /* LDTests.swift */; };
+		72B8FAEF1A1E90D500C2F27F /* ADDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B8FAEE1A1E90D500C2F27F /* ADDTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		728AB4641A1D2B8D00715CAF /* AND.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AND.swift; sourceTree = "<group>"; };
 		728AB4661A1D2BB900715CAF /* SBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBC.swift; sourceTree = "<group>"; };
 		728AB4691A1D2D0B00715CAF /* LDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LDTests.swift; sourceTree = "<group>"; };
+		72B8FAEE1A1E90D500C2F27F /* ADDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADDTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 				728AB4691A1D2D0B00715CAF /* LDTests.swift */,
 				724C058B1A1E7D6C003D3AF6 /* INCTests.swift */,
 				724C058D1A1E82BF003D3AF6 /* DECTests.swift */,
+				72B8FAEE1A1E90D500C2F27F /* ADDTests.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				721ED19B1A1A817E00745D13 /* HALT.swift in Sources */,
 				7264AFB81A15461E00472013 /* Flags.swift in Sources */,
 				724097A51A17BD2C0034D1FB /* Register.swift in Sources */,
+				72B8FAEF1A1E90D500C2F27F /* ADDTests.swift in Sources */,
 				728AB46A1A1D2D0B00715CAF /* LDTests.swift in Sources */,
 				7264AFB31A15404800472013 /* RegistersTest.swift in Sources */,
 				721ED19E1A1A8A5A00745D13 /* ADD.swift in Sources */,
