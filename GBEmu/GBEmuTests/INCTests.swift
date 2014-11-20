@@ -65,7 +65,15 @@ class INCTests: XCTestCase {
   }
   
   func test16BitIncrease() {
+    ctx.registers.HL = 0x200
     
+    let register = RegisterDataLocation(register: Register.HL)
+    
+    let instruction = INC(locToIncrease: register)
+    
+    instruction.execute(ctx)
+    
+    XCTAssertEqual(ctx.registers.HL, UInt16(0x201), "could not increase register value")
   }
   
   
