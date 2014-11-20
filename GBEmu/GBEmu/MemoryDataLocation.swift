@@ -12,7 +12,7 @@ enum DataSize {
   case UInt16, UInt8
 }
 
-class MemoryDataLocation : ReadableDataLocation, WriteableDataLocation {
+class MemoryDataLocation : ReadWriteDataLocation {
   
   let address : UInt16
   let size : DataSize
@@ -33,12 +33,12 @@ class MemoryDataLocation : ReadableDataLocation, WriteableDataLocation {
   
   func write(value : DataLocationSupported, context : ExecutionContext) {
     if size == .UInt16 {
-      let val = value as UInt16
+      let val = value.getAsUInt16()
       let bytes = val.toBytes()
       context.memoryAccess.write(self.address, value: value)
       
     } else {
-      context.memoryAccess.memory[Int(address)] = value as UInt8
+      context.memoryAccess.memory[Int(address)] = value.getAsUInt8()
     }
   }
   

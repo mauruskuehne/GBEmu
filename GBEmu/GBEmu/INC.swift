@@ -28,7 +28,9 @@ class INC : Instruction {
   
   override func execute(context : ExecutionContext) {
     
-    let newVal = location.read(context) as UInt16 + 1
+    let oldVal = location.read(context).getAsUInt16()
+    
+    let newVal = oldVal + 1
     
     location.write(newVal, context: context)
     
