@@ -31,6 +31,8 @@
 		724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A91A17D8260034D1FB /* EmulationEngine.swift */; };
 		724484A21A1FB8BF00E780E0 /* SUBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724484A11A1FB8BF00E780E0 /* SUBTests.swift */; };
 		724484A31A1FBC4800E780E0 /* SUB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4601A1D2B5D00715CAF /* SUB.swift */; };
+		724484A41A1FCC6000E780E0 /* ADC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4621A1D2B7400715CAF /* ADC.swift */; };
+		724484A81A1FCDFF00E780E0 /* ADCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724484A71A1FCDFF00E780E0 /* ADCTests.swift */; };
 		7245BDF61A18EC1000AF205B /* MemoryAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDF51A18EC1000AF205B /* MemoryAccessor.swift */; };
 		7245BDF71A18EC1000AF205B /* MemoryAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDF51A18EC1000AF205B /* MemoryAccessor.swift */; };
 		7245BDF91A18FE3C00AF205B /* NOP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7245BDF81A18FE3C00AF205B /* NOP.swift */; };
@@ -85,6 +87,7 @@
 		724097A31A17BD230034D1FB /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		724097A91A17D8260034D1FB /* EmulationEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmulationEngine.swift; sourceTree = "<group>"; };
 		724484A11A1FB8BF00E780E0 /* SUBTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SUBTests.swift; sourceTree = "<group>"; };
+		724484A71A1FCDFF00E780E0 /* ADCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADCTests.swift; sourceTree = "<group>"; };
 		7245BDF51A18EC1000AF205B /* MemoryAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryAccessor.swift; sourceTree = "<group>"; };
 		7245BDF81A18FE3C00AF205B /* NOP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NOP.swift; sourceTree = "<group>"; };
 		7245BDFB1A19094200AF205B /* ConstantDataLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantDataLocation.swift; sourceTree = "<group>"; };
@@ -266,6 +269,7 @@
 				724C058B1A1E7D6C003D3AF6 /* INCTests.swift */,
 				724C058D1A1E82BF003D3AF6 /* DECTests.swift */,
 				72B8FAEE1A1E90D500C2F27F /* ADDTests.swift */,
+				724484A71A1FCDFF00E780E0 /* ADCTests.swift */,
 				724484A11A1FB8BF00E780E0 /* SUBTests.swift */,
 			);
 			name = Instructions;
@@ -413,6 +417,7 @@
 				721ED1911A1A555100745D13 /* EmulationEngine.swift in Sources */,
 				721ED19B1A1A817E00745D13 /* HALT.swift in Sources */,
 				7264AFB81A15461E00472013 /* Flags.swift in Sources */,
+				724484A41A1FCC6000E780E0 /* ADC.swift in Sources */,
 				724097A51A17BD2C0034D1FB /* Register.swift in Sources */,
 				72B8FAEF1A1E90D500C2F27F /* ADDTests.swift in Sources */,
 				728AB46A1A1D2D0B00715CAF /* LDTests.swift in Sources */,
@@ -427,6 +432,7 @@
 				7240979E1A17B7F90034D1FB /* DataLocationBase.swift in Sources */,
 				724097991A17AB010034D1FB /* LD.swift in Sources */,
 				7245BDF71A18EC1000AF205B /* MemoryAccessor.swift in Sources */,
+				724484A81A1FCDFF00E780E0 /* ADCTests.swift in Sources */,
 				721ED1921A1A555D00745D13 /* RegisterDataLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
