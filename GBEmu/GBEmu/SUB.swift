@@ -26,9 +26,45 @@ class SUB : Instruction {
   
   override func execute(context : ExecutionContext) {
     
+    let oldValue = registerToStore.read(context)
+    let valToSub = registerToSubtract.read(context)
     
-    assertionFailure("not yet implemented")
+    let oldValueTyped = oldValue.getAsUInt16()
+    let valToSubTyped = valToSub.getAsUInt16()
     
+    
+    //Execute SUB
+    let newValue = oldValueTyped &- valToSubTyped
+    registerToStore.write(newValue, context: context)
+    
+    //Calculate Flags
+    
+    // Subtract Flag
+    context.registers.Flags.setFlag(Flags.Subtract)
+    
+    // Zero Flag
+    if newValue == 0 {
+      context.registers.Flags.setFlag(Flags.Zero)
+    } else {
+      context.registers.Flags.resetFlag(Flags.Zero)
+    }
+    
+    //Carry Flag
+    if oldValueTyped < valToSubTyped {
+      context.registers.Flags.setFlag(Flags.Carry)
+    } else {
+      context.registers.Flags.resetFlag(Flags.Carry)
+    }
+    
+    //HalfCarry Flag
+    let halfCarryPosition : UInt16 = 0x10
+    let halfCarryMask : UInt16 = 0x0F
+    
+    if (oldValueTyped & halfCarryMask) < (valToSubTyped & halfCarryMask) {
+      context.registers.Flags.setFlag(Flags.HalfCarry)
+    } else {
+      context.registers.Flags.resetFlag(Flags.HalfCarry)
+    }
     
   }
 }

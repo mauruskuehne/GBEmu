@@ -50,17 +50,23 @@ class ADD : Instruction {
     // Carry Flag
     if (UInt32(oldValueTyped) + UInt32(valToAddTyped)) > carryThreshold {
       context.registers.Flags.setFlag(Flags.Carry)
+    } else {
+      context.registers.Flags.resetFlag(Flags.Carry)
     }
     
     //HalfCarry
-    let isHalfCarrySet = (oldValueTyped & halfCarryMask) + (valToAddTyped & halfCarryMask) & halfCarryPosition > 0
+    let isHalfCarrySet = (oldValueTyped & halfCarryMask) + (valToAddTyped & halfCarryMask) >= halfCarryPosition
     if isHalfCarrySet {
       context.registers.Flags.setFlag(Flags.HalfCarry)
+    } else {
+      context.registers.Flags.resetFlag(Flags.HalfCarry)
     }
     
     //Zero
     if newValue == 0 && is8BitArithmetic {
       context.registers.Flags.setFlag(Flags.Zero)
+    } else if is8BitArithmetic {
+      context.registers.Flags.resetFlag(Flags.Zero)
     }
     
     context.registers.Flags.resetFlag(Flags.Subtract)
