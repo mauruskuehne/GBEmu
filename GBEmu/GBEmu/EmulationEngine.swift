@@ -73,7 +73,7 @@ class EmulationEngine {
     let firstOpcodeByte =  memoryAccess.readUInt8(workingAddress++)
     
     
-    let x = firstOpcodeByte & 0b11000000
+    let x = firstOpcodeByte & 0b1100_0000
     let y = firstOpcodeByte & 0b00111000
     let z = firstOpcodeByte & 0b00000111
     let p = firstOpcodeByte & 0b00110000
@@ -89,22 +89,25 @@ class EmulationEngine {
         case 1 :
           
           //MISSING OPCODE
+          // LD (nn), SP
           
           assertionFailure("unknown value for y in opcode!")
         case 2 :
           
           //MISSING OPCODE
+          // STOP (nn)
           
           assertionFailure("unknown value for y in opcode!")
         case 3 :
           
           //MISSING OPCODE
+          //JR d
           
           assertionFailure("unknown value for y in opcode!")
         default :
           
           //MISSING OPCODE
-          
+          //JR cc[y-4],d
           assertionFailure("unknown value for y in opcode!")
         }
       case 1 : //x = 0, z = 1
@@ -221,6 +224,9 @@ class EmulationEngine {
       }
     case 2 :
       //ALU[y] r[z]
+      
+      //MISSING OPCODES
+      
       assertionFailure("unknown value for x in opcode!")
     default :
       assertionFailure("unknown value for x in opcode!")

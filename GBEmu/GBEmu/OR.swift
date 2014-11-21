@@ -8,13 +8,13 @@
 
 import Foundation
 
-class AND : Instruction {
+class OR : Instruction {
   
   let register : ReadableDataLocation
   
   override var description : String {
     get {
-      return "AND \(register)"
+      return "OR \(register)"
     }
   }
   
@@ -24,7 +24,7 @@ class AND : Instruction {
   
   override func execute(context : ExecutionContext) {
     
-    context.registers.A = context.registers.A & register.read(context).getAsUInt8()
+    context.registers.A = context.registers.A | register.read(context).getAsUInt8()
     
     if context.registers.A == 0 {
       context.registers.Flags.setFlag(Flags.Zero)
@@ -33,7 +33,7 @@ class AND : Instruction {
     }
     
     context.registers.Flags.resetFlag(Flags.Subtract)
-    context.registers.Flags.setFlag(Flags.HalfCarry)
+    context.registers.Flags.resetFlag(Flags.HalfCarry)
     context.registers.Flags.resetFlag(Flags.Carry)
   }
 }
