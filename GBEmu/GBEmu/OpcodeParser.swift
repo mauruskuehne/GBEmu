@@ -1,50 +1,27 @@
 //
-//  EmulationEngine.swift
+//  OpcodeParser.swift
 //  GBEmu
 //
-//  Created by Maurus Kühne on 15.11.14.
+//  Created by Maurus Kühne on 24.11.14.
 //  Copyright (c) 2014 Maurus Kühne. All rights reserved.
 //
 
 import Foundation
 
-class EmulationEngine {
+class OpcodeParser {
   
-  var romData : NSData!
-  var registers : Registers!
-  var executionContext : ExecutionContext!
-  var memoryAccess : MemoryAccessor!
   
-  init() {
-    
-  }
-  
-  func loadRom(romData : NSData) {
-    self.romData = romData
-  }
-  
-  func setupExecution() {
-    self.registers = Registers()
-    self.memoryAccess = MemoryAccessor(rom: self.romData)
-    self.executionContext = ExecutionContext(registers: registers, memoryAccess : memoryAccess)
-  }
-  
-  func executeNextStep() {
-    
-    let instruction = parseInstruction()
-  }
-  
-  private func parseInstruction() -> Instruction {
+  func parseInstruction(firstOpcodeByte : UInt8, fetchNextBytePredicate : () -> UInt8) -> Instruction {
     
     let registerIndexDict =
     [0 : Register.B,
-     1 : Register.C,
-     2 : Register.D,
-     3 : Register.E,
-     4 : Register.H,
-     5 : Register.L,
-     6 : Register.HL,
-     7 : Register.A]
+      1 : Register.C,
+      2 : Register.D,
+      3 : Register.E,
+      4 : Register.H,
+      5 : Register.L,
+      6 : Register.HL,
+      7 : Register.A]
     
     
     func getDataLocationFor(idx : Int) -> ReadWriteDataLocation {
@@ -58,26 +35,24 @@ class EmulationEngine {
     }
     
     let rp = [0 : Register.BC,
-              1 : Register.DE,
-              2 : Register.HL,
-              3 : Register.SP]
+      1 : Register.DE,
+      2 : Register.HL,
+      3 : Register.SP]
     
     let rp2 = [0 : Register.BC,
-               1 : Register.DE,
-               2 : Register.HL,
-               3 : Register.AF]
+      1 : Register.DE,
+      2 : Register.HL,
+      3 : Register.AF]
     
     var parsedInstruction : Instruction!
     
-    var workingAddress = self.registers.PC
-    let firstOpcodeByte =  memoryAccess.readUInt8(workingAddress++)
     
     
-    let x = firstOpcodeByte & 0b1100_0000
-    let y = firstOpcodeByte & 0b00111000
-    let z = firstOpcodeByte & 0b00000111
-    let p = firstOpcodeByte & 0b00110000
-    let q = firstOpcodeByte & 0b00001000
+    let x = (firstOpcodeByte & 0b1100_0000) >> 6
+    let y = (firstOpcodeByte & 0b0011_1000) >> 3
+    let z = (firstOpcodeByte & 0b0000_0111)
+    let p = (firstOpcodeByte & 0b0011_0000) >> 4
+    let q = (firstOpcodeByte & 0b0000_1000) >> 3
     
     switch(x) {
     case 0 :
@@ -88,10 +63,15 @@ class EmulationEngine {
           parsedInstruction = NOP()
         case 1 :
           
-          //MISSING OPCODE
-          // LD (nn), SP
+          let read = RegisterDataLocation(register: Register.SP, dereferenceFirst: false)
           
-          assertionFailure("unknown value for y in opcode!")
+          let b1 = fetchNextBytePredicate()
+          let b2 = fetchNextBytePredicate()
+          let writeAddr = UInt16.fromUpperByte(b1, lowerByte: b2)
+          
+          let write = MemoryDataLocation(address: writeAddr, size: .UInt16)
+          
+          parsedInstruction = LD(readLocation: read, writeLocation: write)
         case 2 :
           
           //MISSING OPCODE
@@ -115,8 +95,10 @@ class EmulationEngine {
           //LD RP[p], nn
           let reg = rp[Int(p)]!
           let writeAddr = RegisterDataLocation(register: reg)
-          let valueToLoad = memoryAccess.readUInt16(workingAddress)
-          workingAddress += 2
+          
+          let b1 = fetchNextBytePredicate()
+          let b2 = fetchNextBytePredicate()
+          let valueToLoad = UInt16.fromUpperByte(b1, lowerByte: b2)
           let constRead = ConstantDataLocation(value: valueToLoad)
           parsedInstruction = LD(readLocation: constRead, writeLocation: writeAddr)
         }
@@ -141,14 +123,18 @@ class EmulationEngine {
             writeAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true)
             
           } else if p == 2 {
-            let address = memoryAccess.readUInt16(workingAddress)
-            workingAddress += 2
+            
+            let b1 = fetchNextBytePredicate()
+            let b2 = fetchNextBytePredicate()
+            let address = UInt16.fromUpperByte(b1, lowerByte: b2)
             writeAddr = MemoryDataLocation(address: address, size: .UInt16)
             readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             
           } else if p == 3 {
-            let address = memoryAccess.readUInt16(workingAddress)
-            workingAddress += 2
+            let b1 = fetchNextBytePredicate()
+            let b2 = fetchNextBytePredicate()
+            let address = UInt16.fromUpperByte(b1, lowerByte: b2)
+            
             writeAddr = MemoryDataLocation(address: address, size: .UInt16)
             readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             
@@ -165,14 +151,16 @@ class EmulationEngine {
             
           } else if p == 2 {
             writeAddr = RegisterDataLocation(register: rp[2]!)
-            let address = memoryAccess.readUInt16(workingAddress)
-            workingAddress += 2
+            let b1 = fetchNextBytePredicate()
+            let b2 = fetchNextBytePredicate()
+            let address = UInt16.fromUpperByte(b1, lowerByte: b2)
             readAddr = MemoryDataLocation(address: address, size: .UInt16)
             
           } else if p == 3 {
             writeAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            let address = memoryAccess.readUInt16(workingAddress)
-            workingAddress += 2
+            let b1 = fetchNextBytePredicate()
+            let b2 = fetchNextBytePredicate()
+            let address = UInt16.fromUpperByte(b1, lowerByte: b2)
             readAddr = MemoryDataLocation(address: address, size: .UInt16)
             
           }
@@ -199,10 +187,12 @@ class EmulationEngine {
         
       case 6 : // LD r[y], n
         let reg = getDataLocationFor(Int(p))
-        let val = memoryAccess.readUInt8(workingAddress)
-        workingAddress += 1
+        let val = fetchNextBytePredicate()
+        
         let writeAddr = reg
         let readAddr = ConstantDataLocation(value: val)
+        
+        parsedInstruction = LD(readLocation: readAddr, writeLocation: writeAddr)
         
       case 7 :
         
@@ -212,7 +202,7 @@ class EmulationEngine {
         assertionFailure("unknown value for z in opcode!")
       }
     case 1 :
-      if z == 6 {
+      if z == 6 && y == 6 {
         parsedInstruction = HALT()
       }
       else {
@@ -228,6 +218,16 @@ class EmulationEngine {
       //MISSING OPCODES
       
       assertionFailure("unknown value for x in opcode!")
+      
+    case 3 :
+      
+      switch(z) {
+      case 4 :
+        assertionFailure("not yet implemented")
+      default :
+        assertionFailure("not yet implemented")
+      }
+      
     default :
       assertionFailure("unknown value for x in opcode!")
     }
@@ -238,5 +238,4 @@ class EmulationEngine {
     
     return parsedInstruction
   }
-  
 }
