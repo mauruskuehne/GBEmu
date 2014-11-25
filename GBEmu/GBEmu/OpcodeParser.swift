@@ -63,6 +63,12 @@ class OpcodeParser {
   
   func parseInstruction(firstOpcodeByte : UInt8, fetchNextBytePredicate : () -> UInt8) -> Instruction {
     
+    func fetchUInt16() -> UInt16 {
+      let b1 = fetchNextBytePredicate()
+      let b2 = fetchNextBytePredicate()
+      return UInt16.fromUpperByte(b1, lowerByte: b2)
+    }
+    
     var parsedInstruction : Instruction!
     
     let x = (firstOpcodeByte & 0b1100_0000) >> 6
@@ -81,11 +87,7 @@ class OpcodeParser {
         case 1 :
           
           let read = RegisterDataLocation(register: Register.SP, dereferenceFirst: false)
-          
-          let b1 = fetchNextBytePredicate()
-          let b2 = fetchNextBytePredicate()
-          let writeAddr = UInt16.fromUpperByte(b1, lowerByte: b2)
-          
+          let writeAddr = fetchUInt16()
           let write = MemoryDataLocation(address: writeAddr, size: .UInt16)
           
           parsedInstruction = LD(readLocation: read, writeLocation: write)
@@ -113,9 +115,7 @@ class OpcodeParser {
           let reg = rp[Int(p)]!
           let writeAddr = RegisterDataLocation(register: reg)
           
-          let b1 = fetchNextBytePredicate()
-          let b2 = fetchNextBytePredicate()
-          let valueToLoad = UInt16.fromUpperByte(b1, lowerByte: b2)
+          let valueToLoad = fetchUInt16()
           let constRead = ConstantDataLocation(value: valueToLoad)
           parsedInstruction = LD(readLocation: constRead, writeLocation: writeAddr)
         }
@@ -141,16 +141,12 @@ class OpcodeParser {
             
           } else if p == 2 {
             
-            let b1 = fetchNextBytePredicate()
-            let b2 = fetchNextBytePredicate()
-            let address = UInt16.fromUpperByte(b1, lowerByte: b2)
+            let address = fetchUInt16()
             writeAddr = MemoryDataLocation(address: address, size: .UInt16)
             readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             
           } else if p == 3 {
-            let b1 = fetchNextBytePredicate()
-            let b2 = fetchNextBytePredicate()
-            let address = UInt16.fromUpperByte(b1, lowerByte: b2)
+            let address = fetchUInt16()
             
             writeAddr = MemoryDataLocation(address: address, size: .UInt16)
             readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
@@ -168,16 +164,12 @@ class OpcodeParser {
             
           } else if p == 2 {
             writeAddr = RegisterDataLocation(register: rp[2]!)
-            let b1 = fetchNextBytePredicate()
-            let b2 = fetchNextBytePredicate()
-            let address = UInt16.fromUpperByte(b1, lowerByte: b2)
+            let address = fetchUInt16()
             readAddr = MemoryDataLocation(address: address, size: .UInt16)
             
           } else if p == 3 {
             writeAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            let b1 = fetchNextBytePredicate()
-            let b2 = fetchNextBytePredicate()
-            let address = UInt16.fromUpperByte(b1, lowerByte: b2)
+            let address = fetchUInt16()
             readAddr = MemoryDataLocation(address: address, size: .UInt16)
             
           }

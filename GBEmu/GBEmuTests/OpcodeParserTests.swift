@@ -100,4 +100,103 @@ class OpcodeParserTests: XCTestCase {
     }
   }
   
+  func testSubParsing() {
+    
+    let opcodes : [UInt8] = [0x90, 0x91, 0x92, 0x93, 0x94, 0x95, 0x96, 0x97, 0xd6]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is SUB, "Opcode \(opcode) should be a SUB instruction")
+    }
+  }
+  
+  func testAndParsing() {
+    
+    let opcodes : [UInt8] = [0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xe6]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is AND, "Opcode \(opcode) should be an AND instruction")
+    }
+  }
+  
+  func testOrParsing() {
+    
+    let opcodes : [UInt8] = [0xb0, 0xb1, 0xb2, 0xb3, 0xb4, 0xb5, 0xb6, 0xb7, 0xf6]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is OR, "Opcode \(opcode) should be an OR instruction")
+    }
+  }
+  
+  func testADCParsing() {
+    
+    let opcodes : [UInt8] = [0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0xce]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is ADC, "Opcode \(opcode) should be an ADC instruction")
+    }
+  }
+  
+  func testSBCParsing() {
+    
+    let opcodes : [UInt8] = [0x98, 0x99, 0x9a, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f, 0xde]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is SBC, "Opcode \(opcode) should be a SBC instruction")
+    }
+  }
+  
+  func testXORParsing() {
+    
+    let opcodes : [UInt8] = [0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xee]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is XOR, "Opcode \(opcode) should be a XOR instruction")
+    }
+  }
+  
+  func testCPParsing() {
+    
+    let opcodes : [UInt8] = [0xb8, 0xb9, 0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf, 0xfe]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is CP, "Opcode \(opcode) should be a CP instruction")
+    }
+  }
 }
