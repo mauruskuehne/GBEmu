@@ -12,11 +12,12 @@ class RegisterDataLocation : ReadWriteDataLocation {
   let register : Register
   let dereferenceFirst : Bool
   let size : DataSize
+  let offset : Int32?
   
-  init(register : Register, dereferenceFirst : Bool = false) {
+  init(register : Register, dereferenceFirst : Bool = false, offset : Int32? = nil) {
     self.register = register
     self.dereferenceFirst = dereferenceFirst
-    
+    self.offset = offset
     
     let bigRegisters = [ Register.HL, Register.AF, Register.BC, Register.DE, Register.PC, Register.SP ]
     
@@ -54,7 +55,15 @@ class RegisterDataLocation : ReadWriteDataLocation {
       context.memoryAccess.write(addr, value: value)
     }
     else {
-      context.registers[register] = value
+      
+      if let memOffset = offset {
+        
+        let addr = UInt16(memOffset + Int32(context.registers[register].getAsUInt16()))
+        
+        context.memoryAccess.write(addr, value: value)
+      } else {
+        context.registers[register] = value
+      }
     }
   }
   

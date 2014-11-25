@@ -83,6 +83,24 @@ class ADDTests: XCTestCase {
     XCTAssertFalse(ctx.registers.Flags.isFlagSet(Flags.HalfCarry), "HalfCarry Flag is not reset after normal add")
   }
   
+  func testSignedAdd() {
+    
+    ctx.registers.SP = 100
+    
+    ctx.registers.Flags.setFlag(Flags.Subtract)
+    
+    let regToWrite = RegisterDataLocation(register: Register.SP)
+    var regToAdd = ConstantDataLocation(value: sint8(-10))
+    
+    var instruction = ADD(registerToStore: regToWrite, registerToAdd: regToAdd)
+    
+    instruction.execute(ctx)
+    
+    XCTAssertEqual(ctx.registers.SP, UInt16(90), "could not signed add two registers")
+    XCTAssertFalse(ctx.registers.Flags.isFlagSet(Flags.Subtract), "Subtract Flag was not reset after ADD")
+    
+  }
+  
   func test16BitAdd() {
     
     ctx.registers.BC = 0x01F4

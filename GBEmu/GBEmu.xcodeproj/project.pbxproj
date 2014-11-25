@@ -17,6 +17,10 @@
 		721ED19B1A1A817E00745D13 /* HALT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED1991A1A810600745D13 /* HALT.swift */; };
 		721ED19D1A1A8A3800745D13 /* ADD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED19C1A1A8A3800745D13 /* ADD.swift */; };
 		721ED19E1A1A8A5A00745D13 /* ADD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED19C1A1A8A3800745D13 /* ADD.swift */; };
+		723E6AB41A24EDB7000E2088 /* XOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E6AB31A24EDB7000E2088 /* XOR.swift */; };
+		723E6AB51A24EDB7000E2088 /* XOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E6AB31A24EDB7000E2088 /* XOR.swift */; };
+		723E6AB71A24F2F3000E2088 /* CP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E6AB61A24F2F3000E2088 /* CP.swift */; };
+		723E6AB81A24F2F3000E2088 /* CP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E6AB61A24F2F3000E2088 /* CP.swift */; };
 		724097951A17A1AD0034D1FB /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097941A17A1AD0034D1FB /* Instruction.swift */; };
 		724097981A17A5480034D1FB /* LD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097971A17A5480034D1FB /* LD.swift */; };
 		724097991A17AB010034D1FB /* LD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097971A17A5480034D1FB /* LD.swift */; };
@@ -87,6 +91,8 @@
 		721ED1961A1A7A7E00745D13 /* DEC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DEC.swift; sourceTree = "<group>"; };
 		721ED1991A1A810600745D13 /* HALT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HALT.swift; sourceTree = "<group>"; };
 		721ED19C1A1A8A3800745D13 /* ADD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADD.swift; sourceTree = "<group>"; };
+		723E6AB31A24EDB7000E2088 /* XOR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XOR.swift; sourceTree = "<group>"; };
+		723E6AB61A24F2F3000E2088 /* CP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CP.swift; sourceTree = "<group>"; };
 		724097941A17A1AD0034D1FB /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
 		724097971A17A5480034D1FB /* LD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LD.swift; sourceTree = "<group>"; };
 		7240979C1A17B7D20034D1FB /* DataLocationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLocationBase.swift; sourceTree = "<group>"; };
@@ -161,6 +167,8 @@
 				728AB4661A1D2BB900715CAF /* SBC.swift */,
 				728AB4641A1D2B8D00715CAF /* AND.swift */,
 				72EEFE5E1A1FE6D2005A17FD /* OR.swift */,
+				723E6AB31A24EDB7000E2088 /* XOR.swift */,
+				723E6AB61A24F2F3000E2088 /* CP.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -397,8 +405,10 @@
 				7245BDFC1A19094200AF205B /* ConstantDataLocation.swift in Sources */,
 				724097A21A17B9A70034D1FB /* ExecutionContext.swift in Sources */,
 				724097A41A17BD230034D1FB /* Register.swift in Sources */,
+				723E6AB41A24EDB7000E2088 /* XOR.swift in Sources */,
 				728AB4671A1D2BB900715CAF /* SBC.swift in Sources */,
 				7264AFAF1A15351800472013 /* IntegerExtensions.swift in Sources */,
+				723E6AB71A24F2F3000E2088 /* CP.swift in Sources */,
 				7264AF901A15316200472013 /* ViewController.swift in Sources */,
 				7264AFB51A15448200472013 /* Flags.swift in Sources */,
 				721ED19D1A1A8A3800745D13 /* ADD.swift in Sources */,
@@ -425,6 +435,7 @@
 			files = (
 				724484A21A1FB8BF00E780E0 /* SUBTests.swift in Sources */,
 				724C058E1A1E82BF003D3AF6 /* DECTests.swift in Sources */,
+				723E6AB81A24F2F3000E2088 /* CP.swift in Sources */,
 				7264AFB61A1545FC00472013 /* IntegerExtensions.swift in Sources */,
 				724C058C1A1E7D6C003D3AF6 /* INCTests.swift in Sources */,
 				72EEFE611A1FE6D6005A17FD /* AND.swift in Sources */,
@@ -448,6 +459,7 @@
 				72EEFE5C1A1FD2B0005A17FD /* SBCTests.swift in Sources */,
 				7245BE001A190E0B00AF205B /* MemoryDataLocation.swift in Sources */,
 				7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */,
+				723E6AB51A24EDB7000E2088 /* XOR.swift in Sources */,
 				7240979A1A17AB300034D1FB /* Instruction.swift in Sources */,
 				7245BDFA1A18FE3C00AF205B /* NOP.swift in Sources */,
 				721ED1981A1A7B9F00745D13 /* DEC.swift in Sources */,

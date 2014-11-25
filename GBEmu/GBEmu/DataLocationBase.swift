@@ -11,30 +11,10 @@ import Foundation
 protocol DataLocationSupported {
   
   func getAsUInt8() -> UInt8
+  func getAsSInt8() -> sint8
   func getAsUInt16() -> UInt16
-}
-
-extension UInt8 : DataLocationSupported {
   
-  func getAsUInt8() -> UInt8 {
-    return self
-  }
-  
-  func getAsUInt16() -> UInt16 {
-    return UInt16(self)
-  }
-
-}
-
-extension UInt16 : DataLocationSupported {
-  func getAsUInt8() -> UInt8 {
-    return self.toBytes().lower
-  }
-  
-  func getAsUInt16() -> UInt16 {
-    return self
-
-  }
+  var isSigned : Bool { get }
 }
 
 protocol DataLocationBase : Printable{
