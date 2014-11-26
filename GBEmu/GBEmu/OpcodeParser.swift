@@ -246,7 +246,11 @@ class OpcodeParser {
         }
       case 1 :
         if q == 0 {
-          assertionFailure("POP not implemented")
+          let reg = rp2[Int(p)]!
+          let loc = RegisterDataLocation(register: reg)
+          
+          parsedInstruction = POP(locationToStore: loc)
+          
         } else {
           switch(p) {
           case 3 :
@@ -263,6 +267,15 @@ class OpcodeParser {
         parsedInstruction = LD(readLocation: readReg, writeLocation: writeLoc)
       case 4 :
         assertionFailure("not yet implemented")
+      case 5 :
+        if q == 0 {
+          let reg = rp2[Int(p)]!
+          let loc = RegisterDataLocation(register: reg)
+          
+          parsedInstruction = PUSH(locationToWrite: loc)
+        } else {
+          assertionFailure("not yet implemented")
+        }
       case 6 :
         
         let readLocation = ConstantDataLocation(value: fetchNextBytePredicate())

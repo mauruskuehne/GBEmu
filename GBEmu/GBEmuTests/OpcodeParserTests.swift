@@ -199,4 +199,32 @@ class OpcodeParserTests: XCTestCase {
       XCTAssert(instruction is CP, "Opcode \(opcode) should be a CP instruction")
     }
   }
+  
+  func testPUSHParsing() {
+    
+    let opcodes : [UInt8] = [0xc5, 0xd5, 0xe5, 0xf5]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is PUSH, "Opcode \(opcode) should be a PUSH instruction")
+    }
+  }
+  
+  func testPOPParsing() {
+    
+    let opcodes : [UInt8] = [0xc1, 0xd1, 0xe1, 0xf1]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is POP, "Opcode \(opcode) should be a POP instruction")
+    }
+  }
 }
