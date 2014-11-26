@@ -50,6 +50,7 @@
 		724C058E1A1E82BF003D3AF6 /* DECTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C058D1A1E82BF003D3AF6 /* DECTests.swift */; };
 		725D0ADB1A263A0D0041236E /* ORTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0ADA1A263A0D0041236E /* ORTests.swift */; };
 		725D0ADD1A263F3C0041236E /* XORTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0ADC1A263F3C0041236E /* XORTests.swift */; };
+		725D0ADF1A263FCE0041236E /* CPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0ADE1A263FCE0041236E /* CPTests.swift */; };
 		7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8D1A15316200472013 /* AppDelegate.swift */; };
 		7264AF901A15316200472013 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8F1A15316200472013 /* ViewController.swift */; };
 		7264AF921A15316200472013 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF911A15316200472013 /* Images.xcassets */; };
@@ -114,6 +115,7 @@
 		724C058D1A1E82BF003D3AF6 /* DECTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DECTests.swift; sourceTree = "<group>"; };
 		725D0ADA1A263A0D0041236E /* ORTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORTests.swift; sourceTree = "<group>"; };
 		725D0ADC1A263F3C0041236E /* XORTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XORTests.swift; sourceTree = "<group>"; };
+		725D0ADE1A263FCE0041236E /* CPTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPTests.swift; sourceTree = "<group>"; };
 		7264AF881A15316200472013 /* GBEmu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBEmu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7264AF8C1A15316200472013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7264AF8D1A15316200472013 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				7200A3881A2632500045ECD8 /* ANDTests.swift */,
 				725D0ADA1A263A0D0041236E /* ORTests.swift */,
 				725D0ADC1A263F3C0041236E /* XORTests.swift */,
+				725D0ADE1A263FCE0041236E /* CPTests.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 			files = (
 				724484A21A1FB8BF00E780E0 /* SUBTests.swift in Sources */,
 				725D0ADB1A263A0D0041236E /* ORTests.swift in Sources */,
+				725D0ADF1A263FCE0041236E /* CPTests.swift in Sources */,
 				724C058E1A1E82BF003D3AF6 /* DECTests.swift in Sources */,
 				723E6AB81A24F2F3000E2088 /* CP.swift in Sources */,
 				7264AFB61A1545FC00472013 /* IntegerExtensions.swift in Sources */,
