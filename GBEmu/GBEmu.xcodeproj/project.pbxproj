@@ -51,6 +51,11 @@
 		725D0ADB1A263A0D0041236E /* ORTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0ADA1A263A0D0041236E /* ORTests.swift */; };
 		725D0ADD1A263F3C0041236E /* XORTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0ADC1A263F3C0041236E /* XORTests.swift */; };
 		725D0ADF1A263FCE0041236E /* CPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0ADE1A263FCE0041236E /* CPTests.swift */; };
+		725D0AE11A264A120041236E /* PUSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0AE01A264A120041236E /* PUSH.swift */; };
+		725D0AE21A264A120041236E /* PUSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0AE01A264A120041236E /* PUSH.swift */; };
+		725D0AE41A264A240041236E /* POP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0AE31A264A240041236E /* POP.swift */; };
+		725D0AE51A264A240041236E /* POP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0AE31A264A240041236E /* POP.swift */; };
+		725D0AE71A264BC90041236E /* PUSHPOPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D0AE61A264BC90041236E /* PUSHPOPTests.swift */; };
 		7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8D1A15316200472013 /* AppDelegate.swift */; };
 		7264AF901A15316200472013 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AF8F1A15316200472013 /* ViewController.swift */; };
 		7264AF921A15316200472013 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7264AF911A15316200472013 /* Images.xcassets */; };
@@ -116,6 +121,9 @@
 		725D0ADA1A263A0D0041236E /* ORTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORTests.swift; sourceTree = "<group>"; };
 		725D0ADC1A263F3C0041236E /* XORTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XORTests.swift; sourceTree = "<group>"; };
 		725D0ADE1A263FCE0041236E /* CPTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPTests.swift; sourceTree = "<group>"; };
+		725D0AE01A264A120041236E /* PUSH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PUSH.swift; sourceTree = "<group>"; };
+		725D0AE31A264A240041236E /* POP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POP.swift; sourceTree = "<group>"; };
+		725D0AE61A264BC90041236E /* PUSHPOPTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PUSHPOPTests.swift; sourceTree = "<group>"; };
 		7264AF881A15316200472013 /* GBEmu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBEmu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7264AF8C1A15316200472013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7264AF8D1A15316200472013 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +185,8 @@
 				723E6AB61A24F2F3000E2088 /* CP.swift */,
 				7245BDF81A18FE3C00AF205B /* NOP.swift */,
 				721ED1991A1A810600745D13 /* HALT.swift */,
+				725D0AE01A264A120041236E /* PUSH.swift */,
+				725D0AE31A264A240041236E /* POP.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -307,6 +317,7 @@
 				725D0ADA1A263A0D0041236E /* ORTests.swift */,
 				725D0ADC1A263F3C0041236E /* XORTests.swift */,
 				725D0ADE1A263FCE0041236E /* CPTests.swift */,
+				725D0AE61A264BC90041236E /* PUSHPOPTests.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -411,10 +422,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				728AB4631A1D2B7400715CAF /* ADC.swift in Sources */,
+				725D0AE41A264A240041236E /* POP.swift in Sources */,
 				724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */,
 				7245BDF61A18EC1000AF205B /* MemoryAccessor.swift in Sources */,
 				721ED19A1A1A810600745D13 /* HALT.swift in Sources */,
 				7245BDFC1A19094200AF205B /* ConstantDataLocation.swift in Sources */,
+				725D0AE11A264A120041236E /* PUSH.swift in Sources */,
 				724097A21A17B9A70034D1FB /* ExecutionContext.swift in Sources */,
 				724097A41A17BD230034D1FB /* Register.swift in Sources */,
 				723E6AB41A24EDB7000E2088 /* XOR.swift in Sources */,
@@ -448,6 +461,8 @@
 				724484A21A1FB8BF00E780E0 /* SUBTests.swift in Sources */,
 				725D0ADB1A263A0D0041236E /* ORTests.swift in Sources */,
 				725D0ADF1A263FCE0041236E /* CPTests.swift in Sources */,
+				725D0AE71A264BC90041236E /* PUSHPOPTests.swift in Sources */,
+				725D0AE51A264A240041236E /* POP.swift in Sources */,
 				724C058E1A1E82BF003D3AF6 /* DECTests.swift in Sources */,
 				723E6AB81A24F2F3000E2088 /* CP.swift in Sources */,
 				7264AFB61A1545FC00472013 /* IntegerExtensions.swift in Sources */,
@@ -480,6 +495,7 @@
 				7245BDFA1A18FE3C00AF205B /* NOP.swift in Sources */,
 				721ED1981A1A7B9F00745D13 /* DEC.swift in Sources */,
 				7245BDFD1A19094200AF205B /* ConstantDataLocation.swift in Sources */,
+				725D0AE21A264A120041236E /* PUSH.swift in Sources */,
 				7240979E1A17B7F90034D1FB /* DataLocationBase.swift in Sources */,
 				724097991A17AB010034D1FB /* LD.swift in Sources */,
 				7245BDF71A18EC1000AF205B /* MemoryAccessor.swift in Sources */,

@@ -75,7 +75,7 @@ public class Registers {
     H = 0
     L = 0
     Flags = 0
-    SP = 0
+    SP = 0xFFFF
     PC = 0x100
   }
   
