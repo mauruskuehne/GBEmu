@@ -32,7 +32,7 @@ extension UInt8 {
     self = self & ~flag.rawValue
   }
   
-  func isFlagSet(flag : Flags) -> BooleanType{
+  func isFlagSet(flag : Flags) -> Bool {
     return (self & flag.rawValue) > 0
   }
 }
