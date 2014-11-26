@@ -14,7 +14,7 @@ class XOR : Instruction {
   
   override var description : String {
     get {
-      return "OR \(register)"
+      return "XOR \(register)"
     }
   }
   
@@ -24,7 +24,7 @@ class XOR : Instruction {
   
   override func execute(context : ExecutionContext) {
     
-    context.registers.A = context.registers.A | register.read(context).getAsUInt8()
+    context.registers.A = context.registers.A ^ register.read(context).getAsUInt8()
     
     if context.registers.A == 0 {
       context.registers.Flags.setFlag(Flags.Zero)

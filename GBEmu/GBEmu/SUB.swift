@@ -65,6 +65,5 @@ class SUB : Instruction {
     } else {
       context.registers.Flags.resetFlag(Flags.HalfCarry)
     }
-    
   }
 }
