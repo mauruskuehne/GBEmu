@@ -109,7 +109,7 @@
 		723E6AB61A24F2F3000E2088 /* CP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CP.swift; sourceTree = "<group>"; };
 		724097941A17A1AD0034D1FB /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
 		724097971A17A5480034D1FB /* LD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LD.swift; sourceTree = "<group>"; };
-		7240979C1A17B7D20034D1FB /* DataLocationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLocationBase.swift; sourceTree = "<group>"; };
+		7240979C1A17B7D20034D1FB /* DataLocationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLocationBase.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterDataLocation.swift; sourceTree = "<group>"; };
 		724097A11A17B9A70034D1FB /* ExecutionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionContext.swift; sourceTree = "<group>"; };
 		724097A31A17BD230034D1FB /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };

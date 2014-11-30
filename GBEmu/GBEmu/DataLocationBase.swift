@@ -13,6 +13,7 @@ protocol DataLocationSupported {
   func getAsUInt8() -> UInt8
   func getAsSInt8() -> sint8
   func getAsUInt16() -> UInt16
+  func getAsInt32() -> Int32
   
   var isSigned : Bool { get }
 }

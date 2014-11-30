@@ -50,6 +50,10 @@ extension UInt8 : DataLocationSupported {
     return UInt16(self)
   }
   
+  func getAsInt32() -> Int32 {
+    return Int32(self)
+  }
+  
   var isSigned : Bool {
     get { return false }
   }
@@ -66,6 +70,10 @@ extension sint8 : DataLocationSupported {
   
   func getAsUInt16() -> UInt16 {
     return UInt16(self)
+  }
+  
+  func getAsInt32() -> Int32 {
+    return Int32(self)
   }
   
   var isSigned : Bool {
@@ -85,6 +93,10 @@ extension UInt16 : DataLocationSupported {
   func getAsUInt16() -> UInt16 {
     return self
     
+  }
+  
+  func getAsInt32() -> Int32 {
+    return Int32(self)
   }
   
   var isSigned : Bool {

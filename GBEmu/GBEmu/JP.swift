@@ -54,8 +54,11 @@ class JP : Instruction {
     }
     let oldAddress = context.registers.PC
     let newValue = locationToRead.read(context)
-    let newAddress = isRelative ? oldAddress + UInt16(newValue.getAsUInt8()) : newValue.getAsUInt16()
-    
-    context.registers.PC = newAddress
+    if isRelative {
+      let newAddress = oldAddress.getAsInt32() + newValue.getAsInt32()
+      context.registers.PC = UInt16(newAddress)
+    } else {
+      context.registers.PC = newValue.getAsUInt16()
+    }
   }
 }
