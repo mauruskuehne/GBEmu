@@ -227,4 +227,18 @@ class OpcodeParserTests: XCTestCase {
       XCTAssert(instruction is POP, "Opcode \(opcode) should be a POP instruction")
     }
   }
+  
+  func testJPParsing() {
+    
+    let opcodes : [UInt8] = [0x20, 0x30, 0x18, 0x28, 0x38, 0xc2, 0xd2, 0xc3, 0xca, 0xda, 0xe9]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is JP, "Opcode \(opcode) should be a JP instruction")
+    }
+  }
 }

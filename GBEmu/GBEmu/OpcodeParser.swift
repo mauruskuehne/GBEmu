@@ -29,6 +29,11 @@ class OpcodeParser {
     2 : Register.HL,
     3 : Register.AF]
   
+  let cc = [0 : JumpCondition.NotZero,
+    1 : JumpCondition.Zero,
+    2 : JumpCondition.NotCarry,
+    3 : JumpCondition.Carry]
+  
   func getDataLocationFor(idx : Int) -> ReadWriteDataLocation {
     let register = registerIndexDict[idx]!
     
@@ -76,6 +81,7 @@ class OpcodeParser {
     let z = (firstOpcodeByte & 0b0000_0111)
     let p = (firstOpcodeByte & 0b0011_0000) >> 4
     let q = (firstOpcodeByte & 0b0000_1000) >> 3
+    let r = (firstOpcodeByte & 0b0010_0000) >> 5
     
     switch(x) {
     case 0 :
@@ -98,18 +104,16 @@ class OpcodeParser {
           
           assertionFailure("unknown value for y in opcode!")
         case 3 :
-          
-          //MISSING OPCODE
-          //JR d
-          
-          
-          
-          assertionFailure("unknown value for y in opcode!")
+          let offset = sint8(bitPattern: fetchNextBytePredicate())
+          parsedInstruction = JP(locationToRead: ConstantDataLocation(value: offset), isRelative: true, condition: nil)
         default :
           
-          //MISSING OPCODE
-          //JR cc[y-4],d
-          assertionFailure("unknown value for y in opcode!")
+          let condition = cc[Int(y) - 4]!
+          
+          let val = fetchUInt16()
+          let loc = ConstantDataLocation(value: val)
+          
+          parsedInstruction = JP(locationToRead: loc, isRelative: false, condition: condition)
         }
       case 1 : //x = 0, z = 1
         if q == 0 {
@@ -255,6 +259,9 @@ class OpcodeParser {
           
         } else {
           switch(p) {
+          case 2 :
+            let val = RegisterDataLocation(register: Register.HL)
+            parsedInstruction = JP(locationToRead: val)
           case 3 :
             let writeReg = RegisterDataLocation(register: Register.SP)
             let readReg = RegisterDataLocation(register: Register.HL)
@@ -264,9 +271,26 @@ class OpcodeParser {
           }
         }
       case 2 :
-        let readReg = getDataLocationFor(7)
-        let writeLoc = RegisterDataLocation(register: Register.C, offset: 0xFF00)
-        parsedInstruction = LD(readLocation: readReg, writeLocation: writeLoc)
+        if r == 1 {
+          let readReg = getDataLocationFor(7)
+          let writeLoc = RegisterDataLocation(register: Register.C, offset: 0xFF00)
+          parsedInstruction = LD(readLocation: readReg, writeLocation: writeLoc)
+        } else {
+          let condition = cc[Int(y)]!
+          let addr = fetchUInt16()
+          let loc = ConstantDataLocation(value: addr)
+          
+          parsedInstruction = JP(locationToRead: loc, isRelative: false, condition: condition)
+        }
+      case 3 :
+        switch(y) {
+        case 0 :
+          let addr = fetchUInt16()
+          let loc = ConstantDataLocation(value: addr)
+          parsedInstruction = JP(locationToRead: loc)
+        default :
+          assertionFailure("not yet implemented")
+        }
       case 4 :
         assertionFailure("not yet implemented")
       case 5 :

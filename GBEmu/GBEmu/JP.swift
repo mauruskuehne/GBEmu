@@ -24,7 +24,7 @@ class JP : Instruction {
     }
   }
   
-  init(locationToRead : ReadableDataLocation, isRelative : Bool = false, condition : JumpCondition?) {
+  init(locationToRead : ReadableDataLocation, isRelative : Bool = false, condition : JumpCondition? = nil) {
     self.locationToRead = locationToRead
     self.isRelative = isRelative
     self.condition = condition
