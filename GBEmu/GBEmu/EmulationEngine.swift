@@ -39,6 +39,11 @@ class EmulationEngine {
     let instruction = parser.parseInstruction(firstOpcodeByte, fetchNextBytePredicate: {
       return self.memoryAccess.readUInt8(workingAddress++)
     })
+    
+    self.registers.PC = workingAddress
+    
+    
+    instruction.execute(executionContext)
   }
   
 }

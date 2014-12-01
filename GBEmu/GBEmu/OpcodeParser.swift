@@ -231,7 +231,7 @@ class OpcodeParser {
       let secondRegister = getDataLocationFor(Int(z))
       parsedInstruction = getAluInstructionForIndex(Int(y), withReadLocation: secondRegister)
       
-    case 3 :
+    case 3 : // x = 3
       
       switch(z) {
       case 0 :
@@ -249,6 +249,10 @@ class OpcodeParser {
           let offset = fetchNextBytePredicate()
           let readReg = RegisterDataLocation(register: Register.SP, offset: Int32(offset))
           parsedInstruction = LD(readLocation: readReg, writeLocation: writeReg)
+        } else {
+          
+          let condition = cc[Int(y)]!
+          parsedInstruction = RET(condition: condition)
         }
       case 1 :
         if q == 0 {
@@ -259,6 +263,10 @@ class OpcodeParser {
           
         } else {
           switch(p) {
+          case 0 :
+            parsedInstruction = RET()
+          case 1 :
+            parsedInstruction = RET(enableInterrupts: true)
           case 2 :
             let val = RegisterDataLocation(register: Register.HL)
             parsedInstruction = JP(locationToRead: val)

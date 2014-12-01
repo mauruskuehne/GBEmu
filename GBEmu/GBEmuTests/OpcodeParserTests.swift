@@ -269,4 +269,18 @@ class OpcodeParserTests: XCTestCase {
       XCTAssert(instruction is CALL, "Opcode \(opcode) should be a RST instruction")
     }
   }
+  
+  func testRETParsing() {
+    
+    let opcodes : [UInt8] = [0xc0, 0xd0, 0xc8, 0xd8, 0xc9, 0xd9]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is RET, "Opcode \(opcode) should be a RST instruction")
+    }
+  }
 }
