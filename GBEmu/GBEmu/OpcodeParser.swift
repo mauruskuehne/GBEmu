@@ -292,7 +292,11 @@ class OpcodeParser {
           assertionFailure("not yet implemented")
         }
       case 4 :
-        assertionFailure("not yet implemented")
+        
+        let condition = cc[Int(y)]
+        let address = fetchUInt16()
+        let loc = ConstantDataLocation(value: address)
+        parsedInstruction = CALL(addressToCall: loc, condition: condition)
       case 5 :
         if q == 0 {
           let reg = rp2[Int(p)]!
@@ -300,7 +304,14 @@ class OpcodeParser {
           
           parsedInstruction = PUSH(locationToWrite: loc)
         } else {
-          assertionFailure("not yet implemented")
+          switch(p) {
+          case 0 :
+            let address = fetchUInt16()
+            let loc = ConstantDataLocation(value: address)
+            parsedInstruction = CALL(addressToCall: loc)
+          default :
+            assertionFailure("not yet implemented")
+          }
         }
       case 6 :
         

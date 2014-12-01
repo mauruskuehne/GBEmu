@@ -75,6 +75,9 @@
 		7264AFB81A15461E00472013 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264AFB41A15448200472013 /* Flags.swift */; };
 		726DA8781A27B7AD00F302AC /* JPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726DA8771A27B7AD00F302AC /* JPTests.swift */; };
 		7282580D1A2CF4FD008C3119 /* RSTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282580C1A2CF4FD008C3119 /* RSTTests.swift */; };
+		7282580F1A2CF664008C3119 /* CALL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282580E1A2CF664008C3119 /* CALL.swift */; };
+		728258101A2CF664008C3119 /* CALL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282580E1A2CF664008C3119 /* CALL.swift */; };
+		728258121A2CFB15008C3119 /* CALLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728258111A2CFB15008C3119 /* CALLTests.swift */; };
 		728AB4611A1D2B5D00715CAF /* SUB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4601A1D2B5D00715CAF /* SUB.swift */; };
 		728AB4631A1D2B7400715CAF /* ADC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4621A1D2B7400715CAF /* ADC.swift */; };
 		728AB4651A1D2B8D00715CAF /* AND.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4641A1D2B8D00715CAF /* AND.swift */; };
@@ -148,6 +151,8 @@
 		7264AFB41A15448200472013 /* Flags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
 		726DA8771A27B7AD00F302AC /* JPTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPTests.swift; sourceTree = "<group>"; };
 		7282580C1A2CF4FD008C3119 /* RSTTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSTTests.swift; sourceTree = "<group>"; };
+		7282580E1A2CF664008C3119 /* CALL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALL.swift; sourceTree = "<group>"; };
+		728258111A2CFB15008C3119 /* CALLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALLTests.swift; sourceTree = "<group>"; };
 		728AB4601A1D2B5D00715CAF /* SUB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SUB.swift; sourceTree = "<group>"; };
 		728AB4621A1D2B7400715CAF /* ADC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADC.swift; sourceTree = "<group>"; };
 		728AB4641A1D2B8D00715CAF /* AND.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AND.swift; sourceTree = "<group>"; };
@@ -199,6 +204,7 @@
 				725D0AE31A264A240041236E /* POP.swift */,
 				723C3C021A265C7800A1D78F /* JP.swift */,
 				7200FA1E1A2B9CDF0009315A /* RST.swift */,
+				7282580E1A2CF664008C3119 /* CALL.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -332,6 +338,7 @@
 				725D0AE61A264BC90041236E /* PUSHPOPTests.swift */,
 				726DA8771A27B7AD00F302AC /* JPTests.swift */,
 				7282580C1A2CF4FD008C3119 /* RSTTests.swift */,
+				728258111A2CFB15008C3119 /* CALLTests.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -440,6 +447,7 @@
 				725D0AE41A264A240041236E /* POP.swift in Sources */,
 				724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */,
 				7245BDF61A18EC1000AF205B /* MemoryAccessor.swift in Sources */,
+				7282580F1A2CF664008C3119 /* CALL.swift in Sources */,
 				721ED19A1A1A810600745D13 /* HALT.swift in Sources */,
 				7245BDFC1A19094200AF205B /* ConstantDataLocation.swift in Sources */,
 				725D0AE11A264A120041236E /* PUSH.swift in Sources */,
@@ -489,6 +497,7 @@
 				72EEFE601A1FE6D3005A17FD /* OR.swift in Sources */,
 				7264AFB71A15461C00472013 /* Registers.swift in Sources */,
 				724097A61A17C0030034D1FB /* ExecutionContext.swift in Sources */,
+				728258101A2CF664008C3119 /* CALL.swift in Sources */,
 				724484A31A1FBC4800E780E0 /* SUB.swift in Sources */,
 				7264AFB11A15359B00472013 /* IntegerExtensionsTests.swift in Sources */,
 				72D1492F1A23BC3B00402393 /* OpcodeParser.swift in Sources */,
@@ -502,6 +511,7 @@
 				72B8FAEF1A1E90D500C2F27F /* ADDTests.swift in Sources */,
 				728AB46A1A1D2D0B00715CAF /* LDTests.swift in Sources */,
 				72D149311A23BC6300402393 /* OpcodeParserTests.swift in Sources */,
+				728258121A2CFB15008C3119 /* CALLTests.swift in Sources */,
 				7264AFB31A15404800472013 /* RegistersTest.swift in Sources */,
 				721ED19E1A1A8A5A00745D13 /* ADD.swift in Sources */,
 				72EEFE5C1A1FD2B0005A17FD /* SBCTests.swift in Sources */,
