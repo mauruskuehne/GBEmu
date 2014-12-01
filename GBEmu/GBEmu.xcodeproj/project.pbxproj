@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7200A3891A2632500045ECD8 /* ANDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200A3881A2632500045ECD8 /* ANDTests.swift */; };
+		7200FA1F1A2B9CDF0009315A /* RST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200FA1E1A2B9CDF0009315A /* RST.swift */; };
+		7200FA201A2B9CDF0009315A /* RST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200FA1E1A2B9CDF0009315A /* RST.swift */; };
 		721ED1911A1A555100745D13 /* EmulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A91A17D8260034D1FB /* EmulationEngine.swift */; };
 		721ED1921A1A555D00745D13 /* RegisterDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */; };
 		721ED1941A1A777D00745D13 /* INC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED1931A1A777D00745D13 /* INC.swift */; };
@@ -100,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		7200A3881A2632500045ECD8 /* ANDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANDTests.swift; sourceTree = "<group>"; };
+		7200FA1E1A2B9CDF0009315A /* RST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RST.swift; sourceTree = "<group>"; };
 		721ED1931A1A777D00745D13 /* INC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INC.swift; sourceTree = "<group>"; };
 		721ED1961A1A7A7E00745D13 /* DEC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DEC.swift; sourceTree = "<group>"; };
 		721ED1991A1A810600745D13 /* HALT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HALT.swift; sourceTree = "<group>"; };
@@ -193,6 +196,7 @@
 				725D0AE01A264A120041236E /* PUSH.swift */,
 				725D0AE31A264A240041236E /* POP.swift */,
 				723C3C021A265C7800A1D78F /* JP.swift */,
+				7200FA1E1A2B9CDF0009315A /* RST.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -457,6 +461,7 @@
 				7245BDF91A18FE3C00AF205B /* NOP.swift in Sources */,
 				7245BDFF1A190E0B00AF205B /* MemoryDataLocation.swift in Sources */,
 				728AB4611A1D2B5D00715CAF /* SUB.swift in Sources */,
+				7200FA1F1A2B9CDF0009315A /* RST.swift in Sources */,
 				72EEFE5F1A1FE6D3005A17FD /* OR.swift in Sources */,
 				721ED1941A1A777D00745D13 /* INC.swift in Sources */,
 			);
@@ -471,6 +476,7 @@
 				725D0ADF1A263FCE0041236E /* CPTests.swift in Sources */,
 				725D0AE71A264BC90041236E /* PUSHPOPTests.swift in Sources */,
 				725D0AE51A264A240041236E /* POP.swift in Sources */,
+				7200FA201A2B9CDF0009315A /* RST.swift in Sources */,
 				726DA8781A27B7AD00F302AC /* JPTests.swift in Sources */,
 				724C058E1A1E82BF003D3AF6 /* DECTests.swift in Sources */,
 				723E6AB81A24F2F3000E2088 /* CP.swift in Sources */,

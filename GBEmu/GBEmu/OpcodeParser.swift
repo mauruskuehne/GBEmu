@@ -306,7 +306,10 @@ class OpcodeParser {
         
         let readLocation = ConstantDataLocation(value: fetchNextBytePredicate())
         parsedInstruction = getAluInstructionForIndex(Int(y), withReadLocation: readLocation)
+      case 7 :
+        let val : UInt8 = y * 8
         
+        parsedInstruction = RST(newPCValue: val)
       default :
         assertionFailure("not yet implemented")
       }

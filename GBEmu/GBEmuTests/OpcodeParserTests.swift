@@ -241,4 +241,18 @@ class OpcodeParserTests: XCTestCase {
       XCTAssert(instruction is JP, "Opcode \(opcode) should be a JP instruction")
     }
   }
+  
+  func testRSTParsing() {
+    
+    let opcodes : [UInt8] = [0xC7, 0xD7, 0xE7, 0xF7, 0xCF, 0xDF, 0xEF, 0xFF]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is RST, "Opcode \(opcode) should be a RST instruction")
+    }
+  }
 }
