@@ -296,6 +296,10 @@ class OpcodeParser {
           let addr = fetchUInt16()
           let loc = ConstantDataLocation(value: addr)
           parsedInstruction = JP(locationToRead: loc)
+        case 6 :
+          parsedInstruction = DI()
+        case 7 :
+          parsedInstruction = EI()
         default :
           assertionFailure("not yet implemented")
         }

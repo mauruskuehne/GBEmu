@@ -23,6 +23,10 @@
 		721ED19E1A1A8A5A00745D13 /* ADD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED19C1A1A8A3800745D13 /* ADD.swift */; };
 		723C3C031A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
 		723C3C041A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
+		723E054D1A2E1EF000B2985D /* EI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E054C1A2E1EF000B2985D /* EI.swift */; };
+		723E054E1A2E1EF000B2985D /* EI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E054C1A2E1EF000B2985D /* EI.swift */; };
+		723E05501A2E20F400B2985D /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E054F1A2E20F400B2985D /* DI.swift */; };
+		723E05511A2E20F400B2985D /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E054F1A2E20F400B2985D /* DI.swift */; };
 		723E6AB41A24EDB7000E2088 /* XOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E6AB31A24EDB7000E2088 /* XOR.swift */; };
 		723E6AB51A24EDB7000E2088 /* XOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E6AB31A24EDB7000E2088 /* XOR.swift */; };
 		723E6AB71A24F2F3000E2088 /* CP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E6AB61A24F2F3000E2088 /* CP.swift */; };
@@ -116,6 +120,8 @@
 		721ED1991A1A810600745D13 /* HALT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HALT.swift; sourceTree = "<group>"; };
 		721ED19C1A1A8A3800745D13 /* ADD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADD.swift; sourceTree = "<group>"; };
 		723C3C021A265C7800A1D78F /* JP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JP.swift; sourceTree = "<group>"; };
+		723E054C1A2E1EF000B2985D /* EI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EI.swift; sourceTree = "<group>"; };
+		723E054F1A2E20F400B2985D /* DI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
 		723E6AB31A24EDB7000E2088 /* XOR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XOR.swift; sourceTree = "<group>"; };
 		723E6AB61A24F2F3000E2088 /* CP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CP.swift; sourceTree = "<group>"; };
 		724097941A17A1AD0034D1FB /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
@@ -211,6 +217,8 @@
 				7200FA1E1A2B9CDF0009315A /* RST.swift */,
 				7282580E1A2CF664008C3119 /* CALL.swift */,
 				728258131A2CFC92008C3119 /* RET.swift */,
+				723E054C1A2E1EF000B2985D /* EI.swift */,
+				723E054F1A2E20F400B2985D /* DI.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -469,9 +477,11 @@
 				721ED19D1A1A8A3800745D13 /* ADD.swift in Sources */,
 				724097A01A17B81A0034D1FB /* RegisterDataLocation.swift in Sources */,
 				724097951A17A1AD0034D1FB /* Instruction.swift in Sources */,
+				723E05501A2E20F400B2985D /* DI.swift in Sources */,
 				7264AFAC1A1531D300472013 /* Registers.swift in Sources */,
 				728258141A2CFC92008C3119 /* RET.swift in Sources */,
 				728AB4651A1D2B8D00715CAF /* AND.swift in Sources */,
+				723E054D1A2E1EF000B2985D /* EI.swift in Sources */,
 				7264AF8E1A15316200472013 /* AppDelegate.swift in Sources */,
 				721ED1971A1A7A7E00745D13 /* DEC.swift in Sources */,
 				724097981A17A5480034D1FB /* LD.swift in Sources */,
@@ -510,6 +520,7 @@
 				7264AFB11A15359B00472013 /* IntegerExtensionsTests.swift in Sources */,
 				72D1492F1A23BC3B00402393 /* OpcodeParser.swift in Sources */,
 				721ED1951A1A7A2A00745D13 /* INC.swift in Sources */,
+				723E05511A2E20F400B2985D /* DI.swift in Sources */,
 				721ED1911A1A555100745D13 /* EmulationEngine.swift in Sources */,
 				728258151A2CFC92008C3119 /* RET.swift in Sources */,
 				721ED19B1A1A817E00745D13 /* HALT.swift in Sources */,
@@ -525,6 +536,7 @@
 				721ED19E1A1A8A5A00745D13 /* ADD.swift in Sources */,
 				72EEFE5C1A1FD2B0005A17FD /* SBCTests.swift in Sources */,
 				7245BE001A190E0B00AF205B /* MemoryDataLocation.swift in Sources */,
+				723E054E1A2E1EF000B2985D /* EI.swift in Sources */,
 				7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */,
 				723E6AB51A24EDB7000E2088 /* XOR.swift in Sources */,
 				725D0ADD1A263F3C0041236E /* XORTests.swift in Sources */,

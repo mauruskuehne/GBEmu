@@ -283,4 +283,16 @@ class OpcodeParserTests: XCTestCase {
       XCTAssert(instruction is RET, "Opcode \(opcode) should be a RST instruction")
     }
   }
+  
+  func testMISCParsing() {
+    
+    let parser = OpcodeParser()
+    var instruction = parser.parseInstruction(0xF3, fetchNextBytePredicate: { return UInt8(0)})
+    var opcode = NSString(format: "%2X", 0xF3)
+    XCTAssert(instruction is DI, "Opcode \(opcode) should be a DI instruction")
+    
+    instruction = parser.parseInstruction(0xFB, fetchNextBytePredicate: { return UInt8(0)})
+    opcode = NSString(format: "%2X", 0xFB)
+    XCTAssert(instruction is EI, "Opcode \(opcode) should be an EI instruction")
+  }
 }
