@@ -9,21 +9,21 @@
 import Foundation
 
 
-enum Register : Printable {
-  case A,
-  B,
-  C,
-  D,
-  E,
-  H,
-  L,
-  Flags,
-  SP,
-  PC,
-  AF,
-  BC,
-  DE,
-  HL
+enum Register : Int, Printable {
+  case A = 0,
+  B = 1,
+  C = 2,
+  D = 3,
+  E = 4,
+  H = 5,
+  L = 6,
+  Flags = 7,
+  SP = 8,
+  PC = 9,
+  AF = 10,
+  BC = 11,
+  DE = 12,
+  HL = 13
   
   var description: String {
     get {
