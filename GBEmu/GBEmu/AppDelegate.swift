@@ -9,13 +9,13 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, EmulationEngineProvider {
 
-  let engine : EmulationEngine
+  let emulationEngine : EmulationEngine
   
   override init() {
     
-    engine = EmulationEngine()
+    emulationEngine = EmulationEngine()
     
     super.init()
     
@@ -39,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if let url = panel.URL {
       let data = NSData(contentsOfURL: url)
       
-      engine.loadRom(data!)
+      emulationEngine.loadRom(data!)
     }
   }
 
