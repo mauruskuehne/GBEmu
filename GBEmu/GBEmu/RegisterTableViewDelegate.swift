@@ -10,14 +10,8 @@ import Cocoa
 
 class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewDataSource {
   
-  var register : Registers!
-  
-  func displayRegisterData(register : Registers) {
-    self.register = register
-  }
-  
   func numberOfRowsInTableView(aTableView: NSTableView) -> Int {
-    if register == nil {
+    if EmulationEngineContainer.sharedEngine.registers == nil {
       return 0;
     } else {
       return 14
@@ -26,7 +20,7 @@ class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewData
   
   func tableView(aTableView: NSTableView, objectValueForTableColumn aTableColumn: NSTableColumn?, row rowIndex: Int) -> AnyObject? {
     
-    if register == nil {
+    if EmulationEngineContainer.sharedEngine.registers == nil {
       return nil
     }
     
@@ -37,12 +31,20 @@ class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewData
       if column.identifier == "Register" {
         return reg.description
       } else {
+        
+        var number : NSNumber = 0
+        var format = "0x%0X"
         if rowIndex >= 8 {
-          return NSNumber(unsignedShort: register[reg].getAsUInt16())
+          number = NSNumber(unsignedShort: EmulationEngineContainer.sharedEngine.registers[reg].getAsUInt16())
+          format = "0x%04X"
         } else {
-          return NSNumber(unsignedChar: register[reg].getAsUInt8())
+          number = NSNumber(unsignedChar: EmulationEngineContainer.sharedEngine.registers[reg].getAsUInt8())
+          
         }
         
+        let txt = String(format: "%X", number)
+        
+        return txt
       }
     }
     

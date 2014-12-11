@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class RootViewController: NSViewController, EmulationEngineDelegate {
 
   @IBOutlet var registerTableViewDataSource: RegisterTableViewDelegate!
   
@@ -18,6 +18,8 @@ class ViewController: NSViewController {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
+    
+    EmulationEngineContainer.sharedEngine.delegate = self
   }
 
   override var representedObject: AnyObject? {
@@ -26,6 +28,13 @@ class ViewController: NSViewController {
     }
   }
   
+  func engineDidLoadRom(engine: EmulationEngine) {
+    
+    registerTableView.reloadData()
+  }
   
+  @IBAction func runNextStep(sender: AnyObject) {
+    EmulationEngineContainer.sharedEngine.executeNextStep()
+  }
 }
 
