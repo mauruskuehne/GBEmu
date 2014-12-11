@@ -33,16 +33,22 @@ class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewData
       } else {
         
         var number : NSNumber = 0
-        var format = "0x%0X"
+        var format : String
         if rowIndex >= 8 {
           number = NSNumber(unsignedShort: EmulationEngineContainer.sharedEngine.registers[reg].getAsUInt16())
-          format = "0x%04X"
+          format = "0x%X"
         } else {
           number = NSNumber(unsignedChar: EmulationEngineContainer.sharedEngine.registers[reg].getAsUInt8())
-          
+          format = "0x%X"
         }
         
-        let txt = String(format: "%X", number)
+        var txt : String
+        if aTableColumn?.identifier == "HexVal" {
+          txt = String(format: format, number.intValue)
+        } else {
+          txt = number.stringValue
+        }
+        
         
         return txt
       }

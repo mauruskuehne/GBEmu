@@ -52,6 +52,8 @@ class EmulationEngine {
     self.registers.PC = workingAddress
     
     instruction.execute(executionContext)
+    
+    delegate?.executedInstruction(self, instruction: instruction)
   }
   
 }

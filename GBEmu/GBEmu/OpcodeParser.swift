@@ -71,7 +71,7 @@ class OpcodeParser {
     func fetchUInt16() -> UInt16 {
       let b1 = fetchNextBytePredicate()
       let b2 = fetchNextBytePredicate()
-      return UInt16.fromUpperByte(b1, lowerByte: b2)
+      return UInt16.fromUpperByte(b2, lowerByte: b1)
     }
     
     var parsedInstruction : Instruction!
@@ -117,7 +117,6 @@ class OpcodeParser {
         }
       case 1 : //x = 0, z = 1
         if q == 0 {
-          //LD RP[p], nn
           let reg = rp[Int(p)]!
           let writeAddr = RegisterDataLocation(register: reg)
           
@@ -235,22 +234,38 @@ class OpcodeParser {
       
       switch(z) {
       case 0 :
-        if y == 5 {
+        switch(y) {
           
+        case 4 :
+          let regRead = RegisterDataLocation(register: Register.A)
+          let nextByte = fetchNextBytePredicate()
+          let location = 0xFF00 + nextByte.getAsUInt16()
+          let memLoc = MemoryDataLocation(address: location, size: DataSize.UInt16)
+          
+          parsedInstruction = LD(readLocation: regRead, writeLocation: memLoc)
+        
+        case 5 :
           let value = Int8(fetchNextBytePredicate())
           let offset = ConstantDataLocation(value: value)
-          
           let writeLoc = RegisterDataLocation(register: Register.SP, dereferenceFirst: false)
           
           parsedInstruction = ADD(registerToStore: writeLoc, registerToAdd: offset)
           
-        } else if y == 7 {
+        case 6 :
+          let regRead = RegisterDataLocation(register: Register.A)
+          let nextByte = fetchNextBytePredicate()
+          let location = 0xFF00 + nextByte.getAsUInt16()
+          let readLoc = ConstantDataLocation(value: location)
+          
+          parsedInstruction = LD(readLocation: readLoc, writeLocation: regRead)
+          
+        case 7 :
           let writeReg = RegisterDataLocation(register: Register.HL)
           let offset = fetchNextBytePredicate()
           let readReg = RegisterDataLocation(register: Register.SP, offset: Int32(offset))
           parsedInstruction = LD(readLocation: readReg, writeLocation: writeReg)
-        } else {
-          
+         
+        default :
           let condition = cc[Int(y)]!
           parsedInstruction = RET(condition: condition)
         }

@@ -12,4 +12,6 @@ protocol EmulationEngineDelegate {
   
   func engineDidLoadRom(engine : EmulationEngine)
   
+  func executedInstruction(engine : EmulationEngine, instruction : Instruction)
+  
 }

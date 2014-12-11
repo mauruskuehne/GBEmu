@@ -13,6 +13,7 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   @IBOutlet var registerTableViewDataSource: RegisterTableViewDelegate!
   
   @IBOutlet weak var registerTableView: NSTableView!
+  @IBOutlet weak var lastInstructionLabel: NSTextField!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,6 +32,13 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   func engineDidLoadRom(engine: EmulationEngine) {
     
     registerTableView.reloadData()
+  }
+  
+  func executedInstruction(engine: EmulationEngine, instruction: Instruction) {
+    
+    registerTableView.reloadData()
+    
+    lastInstructionLabel.stringValue = instruction.description
   }
   
   @IBAction func runNextStep(sender: AnyObject) {
