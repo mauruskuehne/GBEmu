@@ -227,6 +227,7 @@ class OpcodeParser {
         
       }
     case 2 :
+      
       let secondRegister = getDataLocationFor(Int(z))
       parsedInstruction = getAluInstructionForIndex(Int(y), withReadLocation: secondRegister)
       
