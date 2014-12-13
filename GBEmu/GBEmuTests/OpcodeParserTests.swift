@@ -285,6 +285,20 @@ class OpcodeParserTests: XCTestCase {
     }
   }
   
+  func testRotateParsing() {
+    
+    let opcodes : [UInt8] = [0x07, 0x17, 0x0f, 0x1f]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is RotateInstruction, "Opcode \(opcode) should be a RST instruction")
+    }
+  }
+  
   func testMISCParsing() {
     
     let parser = OpcodeParser()

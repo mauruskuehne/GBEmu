@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RRCA : Instruction {
+class RRCA : RotateInstruction {
   
   override var description : String {
     get {

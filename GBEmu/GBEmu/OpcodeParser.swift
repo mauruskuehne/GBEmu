@@ -209,9 +209,23 @@ class OpcodeParser {
         parsedInstruction = LD(readLocation: readAddr, writeLocation: writeAddr)
         
       case 7 :
+        switch(y) {
+        case 0 :
+          parsedInstruction = RLCA()
+          
+        case 1 :
+          parsedInstruction = RRCA()
+          
+        case 2 :
+          parsedInstruction = RLA()
+          
+        case 3 :
+          parsedInstruction = RRA()
+          
+        default :
+          assertionFailure("unknown value for y in opcode!")
+        }
         
-        //MISSING OPCODES
-        assertionFailure("unknown value for z in opcode!")
       default :
         assertionFailure("unknown value for z in opcode!")
       }
