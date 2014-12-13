@@ -27,8 +27,10 @@ class RLCA : RotateInstruction {
     
     if lastBit > 0 {
       context.registers.A = newVal | 1
+      context.registers.Flags.setFlag(.Carry)
     } else {
       context.registers.A = newVal
+      context.registers.Flags.resetFlag(.Carry)
     }
     
     context.registers.Flags.resetFlag(.HalfCarry)

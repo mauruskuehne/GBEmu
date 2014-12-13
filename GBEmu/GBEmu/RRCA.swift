@@ -24,8 +24,10 @@ class RRCA : RotateInstruction {
     
     if firstBit > 0 {
       context.registers.A = newVal | 0b1000_0000
+      context.registers.Flags.setFlag(.Carry)
     } else {
       context.registers.A = newVal
+      context.registers.Flags.resetFlag(.Carry)
     }
     
     context.registers.Flags.resetFlag(.HalfCarry)

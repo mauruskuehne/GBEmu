@@ -23,7 +23,9 @@ class RLA : RotateInstruction {
     let lastBit = context.registers.A & 0b1000_0000
     
     if context.registers.Flags.isFlagSet(.Carry) {
-      context.registers.A |= 0b0000_0001
+      context.registers.A = newVal | 0b0000_0001
+    } else {
+      context.registers.A = newVal
     }
     
     if lastBit > 0 {

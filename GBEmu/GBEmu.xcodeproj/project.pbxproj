@@ -27,6 +27,7 @@
 		7220C6B01A3C9E9200EABF7C /* RRA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6AE1A3C9B3200EABF7C /* RRA.swift */; };
 		7220C6B11A3C9E9500EABF7C /* RRCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6AA1A3C9A5B00EABF7C /* RRCA.swift */; };
 		7220C6B21A3C9E9700EABF7C /* RLA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6AC1A3C9B1700EABF7C /* RLA.swift */; };
+		7220C6B41A3CAA3D00EABF7C /* RotateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B31A3CAA3D00EABF7C /* RotateTests.swift */; };
 		723C3C031A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
 		723C3C041A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
 		723DBE321A38CCBA007BB62E /* EmulationEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */; };
@@ -134,6 +135,7 @@
 		7220C6AA1A3C9A5B00EABF7C /* RRCA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRCA.swift; sourceTree = "<group>"; };
 		7220C6AC1A3C9B1700EABF7C /* RLA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLA.swift; sourceTree = "<group>"; };
 		7220C6AE1A3C9B3200EABF7C /* RRA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRA.swift; sourceTree = "<group>"; };
+		7220C6B31A3CAA3D00EABF7C /* RotateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateTests.swift; sourceTree = "<group>"; };
 		723C3C021A265C7800A1D78F /* JP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JP.swift; sourceTree = "<group>"; };
 		723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmulationEngineDelegate.swift; sourceTree = "<group>"; };
 		723E054C1A2E1EF000B2985D /* EI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EI.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				7282580C1A2CF4FD008C3119 /* RSTTests.swift */,
 				728258111A2CFB15008C3119 /* CALLTests.swift */,
 				7201DA431A2D0140006BEF0A /* RETTests.swift */,
+				7220C6B31A3CAA3D00EABF7C /* RotateTests.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				7240979A1A17AB300034D1FB /* Instruction.swift in Sources */,
 				7201DA441A2D0140006BEF0A /* RETTests.swift in Sources */,
 				7245BDFA1A18FE3C00AF205B /* NOP.swift in Sources */,
+				7220C6B41A3CAA3D00EABF7C /* RotateTests.swift in Sources */,
 				7282580D1A2CF4FD008C3119 /* RSTTests.swift in Sources */,
 				721ED1981A1A7B9F00745D13 /* DEC.swift in Sources */,
 				7245BDFD1A19094200AF205B /* ConstantDataLocation.swift in Sources */,
