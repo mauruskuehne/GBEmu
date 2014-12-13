@@ -41,13 +41,6 @@ class EmulationEngine {
   }
   
   func executeNextStep() {
-    /*
-    var workingAddress = self.registers.PC
-    let firstOpcodeByte =  memoryAccess.readUInt8(workingAddress++)
-    
-    let instruction = parser.parseInstruction(firstOpcodeByte, fetchNextBytePredicate: {
-      return self.memoryAccess.readUInt8(workingAddress++)
-    })*/
     
     let retVal = readNextInstruction()
     

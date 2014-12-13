@@ -14,6 +14,7 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   
   @IBOutlet weak var registerTableView: NSTableView!
   @IBOutlet weak var lastInstructionLabel: NSTextField!
+  @IBOutlet weak var nextInstructionLabel: NSTextField!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,9 +37,12 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   
   func executedInstruction(engine: EmulationEngine, instruction: Instruction) {
     
+    let nextInstruction = engine.readNextInstruction()
+    
     registerTableView.reloadData()
     
     lastInstructionLabel.stringValue = instruction.description
+    nextInstructionLabel.stringValue = nextInstruction.instruction.description
   }
   
   @IBAction func runNextStep(sender: AnyObject) {
