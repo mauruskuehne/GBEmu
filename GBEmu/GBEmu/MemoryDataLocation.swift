@@ -44,7 +44,7 @@ class MemoryDataLocation : ReadWriteDataLocation {
   
   var description: String {
     get {
-      return "(\(address))"
+      return String(format: "(%X)", address)
     }
   }
 }

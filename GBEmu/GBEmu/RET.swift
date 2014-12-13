@@ -16,7 +16,14 @@ class RET : Instruction {
   
   override var description : String {
     get {
-      return "RET \(condition)"
+      
+      var str = "RET "
+      
+      if let c = condition {
+        str += c.description + "?"
+      }
+      
+      return str
     }
   }
   

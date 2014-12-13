@@ -8,33 +8,6 @@
 
 import Foundation
 
-enum JumpCondition {
-  case Zero, NotZero, Carry, NotCarry
-  
-  func conditionSatisfied(context : ExecutionContext) -> Bool {
-    switch(self) {
-    case .Zero :
-      if !context.registers.Flags.isFlagSet(Flags.Zero) {
-        return false
-      }
-    case .NotZero :
-      if context.registers.Flags.isFlagSet(Flags.Zero) {
-        return false
-      }
-    case .Carry :
-      if !context.registers.Flags.isFlagSet(Flags.Carry) {
-        return false
-      }
-    case .NotCarry :
-      if context.registers.Flags.isFlagSet(Flags.Carry) {
-        return false
-      }
-    }
-    
-    return true
-  }
-}
-
 class JP : Instruction {
   
   let locationToRead : ReadableDataLocation
@@ -43,7 +16,13 @@ class JP : Instruction {
   
   override var description : String {
     get {
-      return "JP \(locationToRead)"
+      var str = "JP "
+      
+      if let c = condition {
+        str += c.description + "? "
+      }
+      str += locationToRead.description
+      return str
     }
   }
   

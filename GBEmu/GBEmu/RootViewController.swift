@@ -10,6 +10,8 @@ import Cocoa
 
 class RootViewController: NSViewController, EmulationEngineDelegate {
 
+  private var isROMLoaded = false
+  
   @IBOutlet var registerTableViewDataSource: RegisterTableViewDelegate!
   
   @IBOutlet weak var registerTableView: NSTableView!
@@ -31,11 +33,16 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   }
   
   func engineDidLoadRom(engine: EmulationEngine) {
-    
+    isROMLoaded = true
     registerTableView.reloadData()
   }
   
   func executedInstruction(engine: EmulationEngine, instruction: Instruction) {
+    
+    if !isROMLoaded {
+      let alert = NSAlert()
+      alert.messageText = "You have to load a ROM, before you can start running the rom!"
+    }
     
     let nextInstruction = engine.readNextInstruction()
     

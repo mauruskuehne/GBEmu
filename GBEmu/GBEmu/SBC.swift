@@ -15,7 +15,7 @@ class SBC : Instruction {
   
   override var description : String {
     get {
-      return "SUB \(registerToStore), \(registerToSubtract)"
+      return "SBC \(registerToStore), \(registerToSubtract)"
     }
   }
   

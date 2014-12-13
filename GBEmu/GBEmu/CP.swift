@@ -14,7 +14,7 @@ class CP : Instruction {
   
   override var description : String {
     get {
-      return "OR \(register)"
+      return "CP \(register)"
     }
   }
   

@@ -13,13 +13,12 @@ struct EmulationEngineContainer {
 }
 
 class EmulationEngine {
+  private let parser : OpcodeParser
+  private var romData : NSData!
+  private var executionContext : ExecutionContext!
   
-  let parser : OpcodeParser
-  var romData : NSData!
   var registers : Registers!
-  var executionContext : ExecutionContext!
   var memoryAccess : MemoryAccessor!
-  
   var delegate : EmulationEngineDelegate?
   
   init() {

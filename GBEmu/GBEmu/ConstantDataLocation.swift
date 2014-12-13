@@ -22,7 +22,7 @@ class ConstantDataLocation : ReadableDataLocation {
   
   var description: String {
     get {
-      return "\(constantValue)"
+      return String(format: "0x%X", constantValue.getAsUInt16())
     }
   }
 }
