@@ -327,6 +327,7 @@
 				7240979B1A17B7BF0034D1FB /* DataLocations */,
 				724097961A17A52D0034D1FB /* Instructions */,
 				7264AFAB1A1531D300472013 /* Registers.swift */,
+				7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */,
 				7264AFB41A15448200472013 /* Flags.swift */,
 				724097A11A17B9A70034D1FB /* ExecutionContext.swift */,
 				724097A31A17BD230034D1FB /* Register.swift */,
@@ -334,7 +335,6 @@
 				723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */,
 				7245BDF51A18EC1000AF205B /* MemoryAccessor.swift */,
 				72D1492D1A23BC3B00402393 /* OpcodeParser.swift */,
-				7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */,
 			);
 			name = Emulation;
 			sourceTree = "<group>";

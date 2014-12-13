@@ -13,16 +13,16 @@ struct EmulationEngineContainer {
 }
 
 class EmulationEngine {
-  private let parser : OpcodeParser
+  private let parser = OpcodeParser()
   private var romData : NSData!
   private var executionContext : ExecutionContext!
   
-  var registers : Registers!
+  let registers = Registers()
   var memoryAccess : MemoryAccessor!
   var delegate : EmulationEngineDelegate?
   
   init() {
-    parser = OpcodeParser()
+    
   }
   
   func loadRom(romData : NSData) {
@@ -34,7 +34,6 @@ class EmulationEngine {
   }
   
   private func setupExecution() {
-    self.registers = Registers()
     self.memoryAccess = MemoryAccessor(rom: self.romData)
     self.executionContext = ExecutionContext(registers: registers, memoryAccess : memoryAccess)
   }

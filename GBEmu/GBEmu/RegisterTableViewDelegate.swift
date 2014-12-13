@@ -11,24 +11,37 @@ import Cocoa
 class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewDataSource {
   
   func numberOfRowsInTableView(aTableView: NSTableView) -> Int {
-    if EmulationEngineContainer.sharedEngine.registers == nil {
-      return 0;
-    } else {
-      return 14
-    }
+    return 18
   }
   
   func tableView(aTableView: NSTableView, objectValueForTableColumn aTableColumn: NSTableColumn?, row rowIndex: Int) -> AnyObject? {
     
-    if EmulationEngineContainer.sharedEngine.registers == nil {
-      return nil
-    }
-    
-    if let column = aTableColumn {
+    if rowIndex >= 14 {
+      var flag : Flags
       
+      switch rowIndex {
+      case 14:
+        flag = .Carry
+      case 15:
+        flag = .HalfCarry
+      case 16:
+        flag = .Subtract
+      case 17:
+        flag = .Zero
+      default :
+        assertionFailure("unknown flag!")
+      }
+      
+      if aTableColumn?.identifier == "Register" {
+        return flag.description
+      } else {
+        return EmulationEngineContainer.sharedEngine.registers.Flags.isFlagSet(flag)
+      }
+    } else {
       let reg = Register(rawValue: rowIndex)!
       
-      if column.identifier == "Register" {
+      
+      if aTableColumn?.identifier == "Register" {
         return reg.description
       } else {
         
@@ -49,12 +62,11 @@ class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewData
           txt = number.stringValue
         }
         
-        
         return txt
       }
+      
     }
     
-    return "UNDEFINED"
   }
   
   func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
