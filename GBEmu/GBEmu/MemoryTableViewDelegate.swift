@@ -17,17 +17,11 @@ class MemoryTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewDataSo
   }
   
   func tableView(aTableView: NSTableView, objectValueForTableColumn aTableColumn: NSTableColumn?, row rowIndex: Int) -> AnyObject? {
-    
-    if let ma = engine.memoryAccess {
-      if aTableColumn?.identifier == "address" {
-        return NSString(format: "0x%X", rowIndex)
-      } else {
-        return engine.memoryAccess.readUInt8(UInt16(rowIndex)).description
-        
-      }
+    if aTableColumn?.identifier == "address" {
+      return NSString(format: "0x%X", rowIndex)
+    } else {
+      return engine.memoryAccess.readUInt8(UInt16(rowIndex)).description
     }
-    
-    return 0
   }
   
   func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {

@@ -23,7 +23,9 @@ class RRA : RotateInstruction {
     let firstBit = context.registers.A & 0b0000_0001
     
     if context.registers.Flags.isFlagSet(.Carry) {
-      context.registers.A |= 0b1000_0000
+      context.registers.A = newVal | 0b1000_0000
+    } else {
+      context.registers.A = newVal
     }
     
     if firstBit > 0 {

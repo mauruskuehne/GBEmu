@@ -21,7 +21,8 @@ class CALLTests: XCTestCase {
     
     var data = NSMutableData(length: 0xFFFF)
     
-    let memory = MemoryAccessor(rom: NSData(data: data!) )
+    let memory = MemoryAccessor()
+    memory.loadRom(NSData(data: data!))
     
     ctx = ExecutionContext(registers: regs, memoryAccess: memory)
     

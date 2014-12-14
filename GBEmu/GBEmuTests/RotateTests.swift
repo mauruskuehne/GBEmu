@@ -19,8 +19,8 @@ class RotateTests: XCTestCase {
     let regs = Registers()
     
     var data = NSMutableData(length: 0xFFFF)
-    
-    let memory = MemoryAccessor(rom: NSData(data: data!) )
+    let memory = MemoryAccessor()
+    memory.loadRom(NSData(data: data!))
     
     ctx = ExecutionContext(registers: regs, memoryAccess: memory)
     
@@ -83,7 +83,7 @@ class RotateTests: XCTestCase {
   func testRRA() {
     
     ctx.registers.A = 0b0000_0001
-    
+    ctx.registers.Flags.resetFlag(.Carry)
     let instr = RRA()
     instr.execute(ctx)
     

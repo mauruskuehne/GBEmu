@@ -9,13 +9,15 @@
 import Foundation
 
 class MemoryAccessor {
-  let rom : NSData
+  var rom : NSData!
   var memory : [UInt8]
   
-  init(rom : NSData) {
-    self.rom = rom
-    
+  init() {
     self.memory = [UInt8](count: 0xFFFF, repeatedValue: 0)
+  }
+  
+  func loadRom(rom : NSData) {
+    self.rom = rom
     rom.getBytes(&self.memory, length: 0x4000)
   }
   

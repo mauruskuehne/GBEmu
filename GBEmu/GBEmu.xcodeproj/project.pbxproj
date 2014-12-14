@@ -11,7 +11,6 @@
 		7200FA1F1A2B9CDF0009315A /* RST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200FA1E1A2B9CDF0009315A /* RST.swift */; };
 		7200FA201A2B9CDF0009315A /* RST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200FA1E1A2B9CDF0009315A /* RST.swift */; };
 		7201DA441A2D0140006BEF0A /* RETTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7201DA431A2D0140006BEF0A /* RETTests.swift */; };
-		721ED1911A1A555100745D13 /* EmulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724097A91A17D8260034D1FB /* EmulationEngine.swift */; };
 		721ED1921A1A555D00745D13 /* RegisterDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240979F1A17B81A0034D1FB /* RegisterDataLocation.swift */; };
 		721ED1941A1A777D00745D13 /* INC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED1931A1A777D00745D13 /* INC.swift */; };
 		721ED1951A1A7A2A00745D13 /* INC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721ED1931A1A777D00745D13 /* INC.swift */; };
@@ -31,10 +30,10 @@
 		7220C6B61A3CE8F300EABF7C /* JumpCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */; };
 		7220C6B71A3CE91D00EABF7C /* JumpCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */; };
 		7220C6B91A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B81A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift */; };
+		722CB7441A3D9685004116CE /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7431A3D9685004116CE /* Display.swift */; };
 		723C3C031A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
 		723C3C041A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
 		723DBE321A38CCBA007BB62E /* EmulationEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */; };
-		723DBE331A38CEC4007BB62E /* EmulationEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */; };
 		723E054D1A2E1EF000B2985D /* EI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E054C1A2E1EF000B2985D /* EI.swift */; };
 		723E054E1A2E1EF000B2985D /* EI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E054C1A2E1EF000B2985D /* EI.swift */; };
 		723E05501A2E20F400B2985D /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723E054F1A2E20F400B2985D /* DI.swift */; };
@@ -142,6 +141,7 @@
 		7220C6B31A3CAA3D00EABF7C /* RotateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateTests.swift; sourceTree = "<group>"; };
 		7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpCondition.swift; sourceTree = "<group>"; };
 		7220C6B81A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewDelegate.swift; sourceTree = "<group>"; };
+		722CB7431A3D9685004116CE /* Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		723C3C021A265C7800A1D78F /* JP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JP.swift; sourceTree = "<group>"; };
 		723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmulationEngineDelegate.swift; sourceTree = "<group>"; };
 		723E054C1A2E1EF000B2985D /* EI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EI.swift; sourceTree = "<group>"; };
@@ -222,6 +222,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		722CB7421A3D9636004116CE /* Hardware */ = {
+			isa = PBXGroup;
+			children = (
+				722CB7431A3D9685004116CE /* Display.swift */,
+			);
+			name = Hardware;
+			sourceTree = "<group>";
+		};
 		724097961A17A52D0034D1FB /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +338,7 @@
 		7264AFAA1A1531B200472013 /* Emulation */ = {
 			isa = PBXGroup;
 			children = (
+				722CB7421A3D9636004116CE /* Hardware */,
 				7240979B1A17B7BF0034D1FB /* DataLocations */,
 				724097961A17A52D0034D1FB /* Instructions */,
 				7264AFAB1A1531D300472013 /* Registers.swift */,
@@ -496,6 +505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				722CB7441A3D9685004116CE /* Display.swift in Sources */,
 				728AB4631A1D2B7400715CAF /* ADC.swift in Sources */,
 				723C3C031A265C7800A1D78F /* JP.swift in Sources */,
 				725D0AE41A264A240041236E /* POP.swift in Sources */,
@@ -573,7 +583,6 @@
 				72D1492F1A23BC3B00402393 /* OpcodeParser.swift in Sources */,
 				721ED1951A1A7A2A00745D13 /* INC.swift in Sources */,
 				723E05511A2E20F400B2985D /* DI.swift in Sources */,
-				721ED1911A1A555100745D13 /* EmulationEngine.swift in Sources */,
 				728258151A2CFC92008C3119 /* RET.swift in Sources */,
 				721ED19B1A1A817E00745D13 /* HALT.swift in Sources */,
 				7200A3891A2632500045ECD8 /* ANDTests.swift in Sources */,
@@ -590,7 +599,6 @@
 				7245BE001A190E0B00AF205B /* MemoryDataLocation.swift in Sources */,
 				723E054E1A2E1EF000B2985D /* EI.swift in Sources */,
 				7264AFA11A15316200472013 /* GBEmuTests.swift in Sources */,
-				723DBE331A38CEC4007BB62E /* EmulationEngineDelegate.swift in Sources */,
 				723E6AB51A24EDB7000E2088 /* XOR.swift in Sources */,
 				725D0ADD1A263F3C0041236E /* XORTests.swift in Sources */,
 				7240979A1A17AB300034D1FB /* Instruction.swift in Sources */,

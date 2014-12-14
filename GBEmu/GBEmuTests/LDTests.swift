@@ -20,7 +20,8 @@ class LDTests: XCTestCase {
     
     var data = NSMutableData(length: 0xFFFF)
     
-    let memory = MemoryAccessor(rom: NSData(data: data!) )
+    let memory = MemoryAccessor()
+    memory.loadRom(NSData(data: data!))
     
     ctx = ExecutionContext(registers: regs, memoryAccess: memory)
     
@@ -39,7 +40,7 @@ class LDTests: XCTestCase {
     
     let instruction = LD(readLocation: valToStore, writeLocation: regToBeLoaded)
     
-    XCTAssertEqual("LD A, 7", instruction.description, "wrong description")
+    XCTAssertEqual("LD A, 0x7", instruction.description, "wrong description")
     
     instruction.execute(ctx)
     
@@ -53,7 +54,7 @@ class LDTests: XCTestCase {
     
     let instruction = LD(readLocation: valToStore, writeLocation: regToBeLoaded)
     
-    XCTAssertEqual("LD HL, 800", instruction.description, "wrong description")
+    XCTAssertEqual("LD HL, 0x320", instruction.description, "wrong description")
     
     instruction.execute(ctx)
     
@@ -70,7 +71,7 @@ class LDTests: XCTestCase {
     
     let instruction = LD(readLocation: valToStore, writeLocation: regToBeLoaded)
     
-    XCTAssertEqual("LD (HL), 250", instruction.description, "wrong description")
+    XCTAssertEqual("LD (HL), 0xFA", instruction.description, "wrong description")
     
     instruction.execute(ctx)
     

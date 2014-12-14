@@ -18,15 +18,19 @@ class EmulationEngine {
   private var executionContext : ExecutionContext!
   
   let registers = Registers()
-  var memoryAccess : MemoryAccessor!
+  let memoryAccess = MemoryAccessor()
   var delegate : EmulationEngineDelegate?
   
+  //Hardware
+  let display : Display
+  
   init() {
-    
+    self.display = Display(memory: self.memoryAccess)
   }
   
   func loadRom(romData : NSData) {
     self.romData = romData
+    self.memoryAccess.loadRom(self.romData)
     
     setupExecution()
     
@@ -34,8 +38,8 @@ class EmulationEngine {
   }
   
   private func setupExecution() {
-    self.memoryAccess = MemoryAccessor(rom: self.romData)
     self.executionContext = ExecutionContext(registers: registers, memoryAccess : memoryAccess)
+    self.display.initialize()
   }
   
   func executeNextStep() {
@@ -45,6 +49,8 @@ class EmulationEngine {
     self.registers.PC += retVal.opcodeSize
     
     retVal.instruction.execute(executionContext)
+    
+    display.refresh()
     
     delegate?.executedInstruction(self, instruction: retVal.instruction)
   }
