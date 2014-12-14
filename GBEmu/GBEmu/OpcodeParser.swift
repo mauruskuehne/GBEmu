@@ -267,12 +267,12 @@ class OpcodeParser {
           parsedInstruction = ADD(registerToStore: writeLoc, registerToAdd: offset)
           
         case 6 :
-          let regRead = RegisterDataLocation(register: Register.A)
+          let reg = RegisterDataLocation(register: Register.A)
           let nextByte = fetchNextBytePredicate()
           let location = 0xFF00 + nextByte.getAsUInt16()
-          let readLoc = ConstantDataLocation(value: location)
-          
-          parsedInstruction = LD(readLocation: readLoc, writeLocation: regRead)
+          //let readLoc = MemoryDataLocation(address: location, size: .UInt8)
+          let readLoc = MemoryDataLocation(address: location, size: .UInt8)
+          parsedInstruction = LD(readLocation: readLoc, writeLocation: reg)
           
         case 7 :
           let writeReg = RegisterDataLocation(register: Register.HL)

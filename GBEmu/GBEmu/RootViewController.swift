@@ -11,10 +11,13 @@ import Cocoa
 class RootViewController: NSViewController, EmulationEngineDelegate {
 
   private var isROMLoaded = false
+  private let engine = EmulationEngineContainer.sharedEngine
   
   @IBOutlet var registerTableViewDataSource: RegisterTableViewDelegate!
   
   @IBOutlet weak var registerTableView: NSTableView!
+  @IBOutlet weak var memoryTableView: NSTableView!
+  @IBOutlet weak var opcodeTableView: NSTableView!
   @IBOutlet weak var lastInstructionLabel: NSTextField!
   @IBOutlet weak var nextInstructionLabel: NSTextField!
   
@@ -35,6 +38,9 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   func engineDidLoadRom(engine: EmulationEngine) {
     isROMLoaded = true
     registerTableView.reloadData()
+    memoryTableView.reloadData()
+    
+    jumpToMemoryLocation()
   }
   
   func executedInstruction(engine: EmulationEngine, instruction: Instruction) {
@@ -50,6 +56,13 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     
     lastInstructionLabel.stringValue = instruction.description
     nextInstructionLabel.stringValue = nextInstruction.instruction.description
+    
+    jumpToMemoryLocation()
+  }
+  
+  func jumpToMemoryLocation() {
+    memoryTableView.scrollRowToVisible(Int(engine.registers.PC +  3))
+    memoryTableView.selectRowIndexes(NSIndexSet(index: Int(engine.registers.PC)), byExtendingSelection: false)
   }
   
   @IBAction func runNextStep(sender: AnyObject) {

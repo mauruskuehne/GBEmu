@@ -30,6 +30,7 @@
 		7220C6B41A3CAA3D00EABF7C /* RotateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B31A3CAA3D00EABF7C /* RotateTests.swift */; };
 		7220C6B61A3CE8F300EABF7C /* JumpCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */; };
 		7220C6B71A3CE91D00EABF7C /* JumpCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */; };
+		7220C6B91A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B81A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift */; };
 		723C3C031A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
 		723C3C041A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
 		723DBE321A38CCBA007BB62E /* EmulationEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */; };
@@ -105,6 +106,7 @@
 		728AB4671A1D2BB900715CAF /* SBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4661A1D2BB900715CAF /* SBC.swift */; };
 		728AB46A1A1D2D0B00715CAF /* LDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4691A1D2D0B00715CAF /* LDTests.swift */; };
 		72B8FAEF1A1E90D500C2F27F /* ADDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B8FAEE1A1E90D500C2F27F /* ADDTests.swift */; };
+		72C181D71A3CF5800075D402 /* OpcodeTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C181D61A3CF5800075D402 /* OpcodeTableViewDelegate.swift */; };
 		72D1492E1A23BC3B00402393 /* OpcodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1492D1A23BC3B00402393 /* OpcodeParser.swift */; };
 		72D1492F1A23BC3B00402393 /* OpcodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1492D1A23BC3B00402393 /* OpcodeParser.swift */; };
 		72D149311A23BC6300402393 /* OpcodeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D149301A23BC6300402393 /* OpcodeParserTests.swift */; };
@@ -139,6 +141,7 @@
 		7220C6AE1A3C9B3200EABF7C /* RRA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRA.swift; sourceTree = "<group>"; };
 		7220C6B31A3CAA3D00EABF7C /* RotateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateTests.swift; sourceTree = "<group>"; };
 		7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpCondition.swift; sourceTree = "<group>"; };
+		7220C6B81A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewDelegate.swift; sourceTree = "<group>"; };
 		723C3C021A265C7800A1D78F /* JP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JP.swift; sourceTree = "<group>"; };
 		723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmulationEngineDelegate.swift; sourceTree = "<group>"; };
 		723E054C1A2E1EF000B2985D /* EI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EI.swift; sourceTree = "<group>"; };
@@ -193,6 +196,7 @@
 		728AB4661A1D2BB900715CAF /* SBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBC.swift; sourceTree = "<group>"; };
 		728AB4691A1D2D0B00715CAF /* LDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LDTests.swift; sourceTree = "<group>"; };
 		72B8FAEE1A1E90D500C2F27F /* ADDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADDTests.swift; sourceTree = "<group>"; };
+		72C181D61A3CF5800075D402 /* OpcodeTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpcodeTableViewDelegate.swift; sourceTree = "<group>"; };
 		72D1492D1A23BC3B00402393 /* OpcodeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpcodeParser.swift; sourceTree = "<group>"; };
 		72D149301A23BC6300402393 /* OpcodeParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpcodeParserTests.swift; sourceTree = "<group>"; };
 		72E22AC51A30D6BC0055D4FF /* WeakContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakContainer.swift; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 				7264AF911A15316200472013 /* Images.xcassets */,
 				7264AF931A15316200472013 /* Main.storyboard */,
 				723E05A81A2E243900B2985D /* RegisterTableViewDelegate.swift */,
+				7220C6B81A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift */,
+				72C181D61A3CF5800075D402 /* OpcodeTableViewDelegate.swift */,
 				7264AF8B1A15316200472013 /* Supporting Files */,
 			);
 			path = GBEmu;
@@ -496,6 +502,7 @@
 				724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */,
 				7245BDF61A18EC1000AF205B /* MemoryAccessor.swift in Sources */,
 				7220C6AF1A3C9B3200EABF7C /* RRA.swift in Sources */,
+				72C181D71A3CF5800075D402 /* OpcodeTableViewDelegate.swift in Sources */,
 				723E05A91A2E243900B2985D /* RegisterTableViewDelegate.swift in Sources */,
 				7282580F1A2CF664008C3119 /* CALL.swift in Sources */,
 				721ED19A1A1A810600745D13 /* HALT.swift in Sources */,
@@ -530,6 +537,7 @@
 				7245BDFF1A190E0B00AF205B /* MemoryDataLocation.swift in Sources */,
 				728AB4611A1D2B5D00715CAF /* SUB.swift in Sources */,
 				7200FA1F1A2B9CDF0009315A /* RST.swift in Sources */,
+				7220C6B91A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift in Sources */,
 				72EEFE5F1A1FE6D3005A17FD /* OR.swift in Sources */,
 				7220C6B61A3CE8F300EABF7C /* JumpCondition.swift in Sources */,
 				721ED1941A1A777D00745D13 /* INC.swift in Sources */,
