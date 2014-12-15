@@ -9,6 +9,7 @@
 import Foundation
 
 class Display {
+  
   let memory : MemoryAccessor
   
   init(memory : MemoryAccessor) {
@@ -17,9 +18,12 @@ class Display {
   
   func refresh() {
     
+    //let lcdc = memory.readUInt8(IORegister.LCDC.rawValue)
+    
   }
   
   func initialize() {
-    
+    //Set LCLDC to 0x
+    memory.write(IORegister.LCDC.rawValue, value: UInt8(0x91))
   }
 }

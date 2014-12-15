@@ -31,6 +31,8 @@
 		7220C6B71A3CE91D00EABF7C /* JumpCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */; };
 		7220C6B91A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220C6B81A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift */; };
 		722CB7441A3D9685004116CE /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7431A3D9685004116CE /* Display.swift */; };
+		722CB7461A3E09D7004116CE /* IORegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7451A3E09D7004116CE /* IORegister.swift */; };
+		722CB7471A3E1740004116CE /* IORegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7451A3E09D7004116CE /* IORegister.swift */; };
 		723C3C031A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
 		723C3C041A265C7800A1D78F /* JP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C3C021A265C7800A1D78F /* JP.swift */; };
 		723DBE321A38CCBA007BB62E /* EmulationEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */; };
@@ -142,6 +144,7 @@
 		7220C6B51A3CE8F300EABF7C /* JumpCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpCondition.swift; sourceTree = "<group>"; };
 		7220C6B81A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewDelegate.swift; sourceTree = "<group>"; };
 		722CB7431A3D9685004116CE /* Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
+		722CB7451A3E09D7004116CE /* IORegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IORegister.swift; sourceTree = "<group>"; };
 		723C3C021A265C7800A1D78F /* JP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JP.swift; sourceTree = "<group>"; };
 		723DBE311A38CCBA007BB62E /* EmulationEngineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmulationEngineDelegate.swift; sourceTree = "<group>"; };
 		723E054C1A2E1EF000B2985D /* EI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EI.swift; sourceTree = "<group>"; };
@@ -226,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				722CB7431A3D9685004116CE /* Display.swift */,
+				722CB7451A3E09D7004116CE /* IORegister.swift */,
 			);
 			name = Hardware;
 			sourceTree = "<group>";
@@ -549,6 +553,7 @@
 				7200FA1F1A2B9CDF0009315A /* RST.swift in Sources */,
 				7220C6B91A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift in Sources */,
 				72EEFE5F1A1FE6D3005A17FD /* OR.swift in Sources */,
+				722CB7461A3E09D7004116CE /* IORegister.swift in Sources */,
 				7220C6B61A3CE8F300EABF7C /* JumpCondition.swift in Sources */,
 				721ED1941A1A777D00745D13 /* INC.swift in Sources */,
 				726035031A3C96E7005808FB /* RLCA.swift in Sources */,
@@ -559,6 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				722CB7471A3E1740004116CE /* IORegister.swift in Sources */,
 				724484A21A1FB8BF00E780E0 /* SUBTests.swift in Sources */,
 				725D0ADB1A263A0D0041236E /* ORTests.swift in Sources */,
 				725D0ADF1A263FCE0041236E /* CPTests.swift in Sources */,

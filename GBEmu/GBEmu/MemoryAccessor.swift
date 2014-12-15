@@ -22,6 +22,10 @@ class MemoryAccessor {
   }
   
   func readUInt8(address : UInt16) -> UInt8 {
+    if let ioreg = IORegister(rawValue: address) {
+      println("the address that is about to be read to is an IO Register")
+    }
+    
     return self.memory[Int(address)]
   }
   
@@ -32,6 +36,14 @@ class MemoryAccessor {
   }
   
   func write(address : UInt16, value : DataLocationSupported) {
+    
+    if value is UInt16 {
+      if let ioreg = IORegister(rawValue: value.getAsUInt16()) {
+        println("the address that is about to be written to is an IO Register")
+      }
+    }
+    
+    
     
     if(value is UInt16) {
       let bytes = (value as UInt16).toBytes()
