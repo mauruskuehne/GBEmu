@@ -17,9 +17,17 @@ class Display {
   }
   
   func refresh() {
+    var ly = memory.readUInt8(IORegister.LY.rawValue)
+    ly += 1
+    if ly > 153 {
+      ly = 0
+    }
     
-    //let lcdc = memory.readUInt8(IORegister.LCDC.rawValue)
+    memory.write(IORegister.LY.rawValue, value: ly)
     
+    if ly > 144 {
+      println("in vsync")
+    }
   }
   
   func initialize() {

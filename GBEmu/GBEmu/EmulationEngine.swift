@@ -13,6 +13,9 @@ struct EmulationEngineContainer {
 }
 
 class EmulationEngine {
+  
+  private let CLOCK_SPEED = 4.194304 * 1000 * 1000
+  
   private let parser = OpcodeParser()
   private var romData : NSData!
   private var executionContext : ExecutionContext!
@@ -42,7 +45,7 @@ class EmulationEngine {
     self.display.initialize()
   }
   
-  func executeNextStep() {
+  func executeNextFrame() {
     
     let retVal = readNextInstruction()
     

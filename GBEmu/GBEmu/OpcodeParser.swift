@@ -110,10 +110,10 @@ class OpcodeParser {
           
           let condition = cc[Int(y) - 4]!
           
-          let val = fetchUInt16()
+          let val = sint8(bitPattern: fetchNextBytePredicate())
           let loc = ConstantDataLocation(value: val)
           
-          parsedInstruction = JP(locationToRead: loc, isRelative: false, condition: condition)
+          parsedInstruction = JP(locationToRead: loc, isRelative: true, condition: condition)
         }
       case 1 : //x = 0, z = 1
         if q == 0 {

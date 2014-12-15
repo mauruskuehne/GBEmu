@@ -65,8 +65,8 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     memoryTableView.selectRowIndexes(NSIndexSet(index: Int(engine.registers.PC)), byExtendingSelection: false)
   }
   
-  @IBAction func runNextStep(sender: AnyObject) {
-    EmulationEngineContainer.sharedEngine.executeNextStep()
+  @IBAction func runNextFrame(sender: AnyObject) {
+    EmulationEngineContainer.sharedEngine.executeNextFrame()
   }
 }
 
