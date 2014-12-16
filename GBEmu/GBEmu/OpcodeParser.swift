@@ -213,16 +213,16 @@ class OpcodeParser {
       case 7 :
         switch(y) {
         case 0 :
-          parsedInstruction = RLCA(opcode: opcode)
+          parsedInstruction = RLC(opcode: opcode, register: getDataLocationFor(7))
           
         case 1 :
-          parsedInstruction = RRCA(opcode: opcode)
+          parsedInstruction = RRC(opcode: opcode, register: getDataLocationFor(7))
           
         case 2 :
-          parsedInstruction = RLA(opcode: opcode)
+          parsedInstruction = RL(opcode: opcode, register: getDataLocationFor(7))
           
         case 3 :
-          parsedInstruction = RRA(opcode: opcode)
+          parsedInstruction = RR(opcode: opcode, register: getDataLocationFor(7))
           
         default :
           assertionFailure("unknown value for y in opcode!")
@@ -375,6 +375,24 @@ class OpcodeParser {
     
     if parsedInstruction == nil {
       parsedInstruction = Instruction(opcode: opcode)
+    }
+    
+    return parsedInstruction
+  }
+  
+  func getPrefixedOpcode(secondOpcodeByte : UInt8) -> Instruction {
+    var parsedInstruction : Instruction!
+    
+    let x = (secondOpcodeByte & 0b1100_0000) >> 6
+    let y = (secondOpcodeByte & 0b0011_1000) >> 3
+    let z = (secondOpcodeByte & 0b0000_0111)
+    let p = (secondOpcodeByte & 0b0011_0000) >> 4
+    let q = (secondOpcodeByte & 0b0000_1000) >> 3
+    let r = (secondOpcodeByte & 0b0010_0000) >> 5
+    
+    
+    if parsedInstruction == nil {
+      parsedInstruction = Instruction(opcode: secondOpcodeByte)
     }
     
     return parsedInstruction

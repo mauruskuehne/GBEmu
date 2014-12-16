@@ -55,6 +55,9 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     registerTableView.reloadData()
     
     lastInstructionLabel.stringValue = instruction.description
+    
+    println(lastInstructionLabel.stringValue)
+    
     nextInstructionLabel.stringValue = nextInstruction.instruction.description
     
     jumpToMemoryLocation()

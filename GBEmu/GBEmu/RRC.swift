@@ -8,27 +8,40 @@
 
 import Foundation
 
-class RRCA : RotateInstruction {
+class RRC : RotateInstruction {
+  
+  let register : ReadWriteDataLocation
   
   override var description : String {
     get {
-      return "RRCA"
+      return "RRC \(register.description)"
     }
+  }
+  
+  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadWriteDataLocation) {
+    self.register = register
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) -> InstructionResult {
     
-    let newVal = context.registers.A >> 1;
+    var newVal : UInt8 = 0
+    let oldVal = register.read(context).getAsUInt8()
     
-    let firstBit = context.registers.A & 0b0000_0001
+    let shiftedVal = oldVal >> 1;
+    
+    let firstBit = oldVal & 0b0000_0001
     
     if firstBit > 0 {
-      context.registers.A = newVal | 0b1000_0000
+      newVal = shiftedVal | 0b1000_0000
       context.registers.Flags.setFlag(.Carry)
     } else {
-      context.registers.A = newVal
+      newVal = shiftedVal
       context.registers.Flags.resetFlag(.Carry)
     }
+    
+    register.write(newVal, context: context)
     
     context.registers.Flags.resetFlag(.HalfCarry)
     context.registers.Flags.resetFlag(.Subtract)

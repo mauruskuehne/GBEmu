@@ -8,27 +8,40 @@
 
 import Foundation
 
-class RRA : RotateInstruction {
+class RL : RotateInstruction {
+  
+  let register : ReadWriteDataLocation
   
   override var description : String {
     get {
-      return "RRA"
+      return "RL \(register.description)"
     }
+  }
+  
+  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadWriteDataLocation) {
+    self.register = register
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) -> InstructionResult {
     
-    let newVal = context.registers.A >> 1;
+    var newVal : UInt8 = 0
+    let oldVal = register.read(context).getAsUInt8()
     
-    let firstBit = context.registers.A & 0b0000_0001
+    let shiftedVal = oldVal << 1;
+    
+    let lastBit = oldVal & 0b1000_0000
     
     if context.registers.Flags.isFlagSet(.Carry) {
-      context.registers.A = newVal | 0b1000_0000
+      newVal = shiftedVal | 0b0000_0001
     } else {
-      context.registers.A = newVal
+      newVal = shiftedVal
     }
     
-    if firstBit > 0 {
+    register.write(newVal, context: context)
+    
+    if lastBit > 0 {
       context.registers.Flags.setFlag(.Carry)
     } else {
       context.registers.Flags.resetFlag(.Carry)
