@@ -19,9 +19,11 @@ class CALL : Instruction {
     }
   }
   
-  init(addressToCall : ReadableDataLocation, condition : JumpCondition? = nil ) {
+  init(opcode : UInt8, prefix : UInt8? = nil, addressToCall : ReadableDataLocation, condition : JumpCondition? = nil ) {
     self.addressToCall = addressToCall
     self.condition = condition
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

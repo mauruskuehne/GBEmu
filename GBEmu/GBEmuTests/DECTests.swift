@@ -40,7 +40,7 @@ class DECTests: XCTestCase {
     
     let register = RegisterDataLocation(register: Register.A)
     
-    let instruction = DEC(locToDecrease: register)
+    let instruction = DEC(opcode: 0, locToDecrease: register)
     
     instruction.execute(ctx)
     
@@ -55,7 +55,7 @@ class DECTests: XCTestCase {
     
     let memoryLocation = MemoryDataLocation(address: address, size: DataSize.UInt8)
     
-    let instruction = DEC(locToDecrease: memoryLocation)
+    let instruction = DEC(opcode: 0, locToDecrease: memoryLocation)
     
     instruction.execute(ctx)
     
@@ -70,7 +70,7 @@ class DECTests: XCTestCase {
     
     let register = RegisterDataLocation(register: Register.HL)
     
-    let instruction = DEC(locToDecrease: register)
+    let instruction = DEC(opcode: 0, locToDecrease: register)
     
     instruction.execute(ctx)
     

@@ -16,7 +16,13 @@ class JP : Instruction {
   
   override var description : String {
     get {
-      var str = "JP "
+      var str : String
+      
+      if isRelative {
+        str = "JR "
+      } else {
+        str = "JP "
+      }
       
       if let c = condition {
         str += c.description + "? "
@@ -26,10 +32,12 @@ class JP : Instruction {
     }
   }
   
-  init(locationToRead : ReadableDataLocation, isRelative : Bool = false, condition : JumpCondition? = nil) {
+  init(opcode : UInt8, prefix : UInt8? = nil, locationToRead : ReadableDataLocation, isRelative : Bool = false, condition : JumpCondition? = nil) {
     self.locationToRead = locationToRead
     self.isRelative = isRelative
     self.condition = condition
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

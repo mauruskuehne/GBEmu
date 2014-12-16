@@ -19,9 +19,11 @@ class ADD : Instruction {
     }
   }
   
-  init(registerToStore : ReadWriteDataLocation, registerToAdd : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : ReadWriteDataLocation, registerToAdd : ReadableDataLocation) {
     self.registerToStore = registerToStore
     self.registerToAdd = registerToAdd
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

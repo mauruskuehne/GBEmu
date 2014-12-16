@@ -39,10 +39,10 @@ class RETTests: XCTestCase {
     
     let adrToCall = ConstantDataLocation(value: UInt16(0x200))
     
-    let callInstr = CALL(addressToCall: adrToCall, condition: nil)
+    let callInstr = CALL(opcode: 0, addressToCall: adrToCall, condition: nil)
     callInstr.execute(ctx)
     
-    let retInstr = RET()
+    let retInstr = RET(opcode: 0)
     retInstr.execute(ctx)
     
     XCTAssertEqual(ctx.registers.PC, oldPCValue + 1, "could not return from call")

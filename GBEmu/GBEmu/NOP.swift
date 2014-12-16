@@ -19,5 +19,6 @@ class NOP : Instruction {
   
   override func execute(context : ExecutionContext) {
     //NOP
+    context.consumeClockCycles(4)
   }
 }

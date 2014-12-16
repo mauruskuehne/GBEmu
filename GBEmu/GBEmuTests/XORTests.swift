@@ -39,7 +39,7 @@ class XORTests: XCTestCase {
     
     let reg = RegisterDataLocation(register: Register.B)
     
-    let instruction = XOR(register: reg)
+    let instruction = XOR(opcode: 0, register: reg)
     
     instruction.execute(ctx)
     

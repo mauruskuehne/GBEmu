@@ -18,8 +18,10 @@ class POP : Instruction {
     }
   }
   
-  init(locationToStore : WriteableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, locationToStore : WriteableDataLocation) {
     self.locToStore = locationToStore
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

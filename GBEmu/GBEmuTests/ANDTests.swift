@@ -39,7 +39,7 @@ class ANDTests: XCTestCase {
       
       let reg = RegisterDataLocation(register: Register.B)
       
-      let instruction = AND(register: reg)
+      let instruction = AND(opcode: 0, register: reg)
       
       instruction.execute(ctx)
       

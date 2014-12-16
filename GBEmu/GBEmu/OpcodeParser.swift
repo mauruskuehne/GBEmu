@@ -44,22 +44,22 @@ class OpcodeParser {
     }
   }
   
-  func getAluInstructionForIndex(index : Int, withReadLocation: ReadableDataLocation) -> Instruction {
+  func getAluInstructionForIndex(index : Int, withReadLocation: ReadableDataLocation, opcode : UInt8) -> Instruction {
     
     let locationRegA = getDataLocationFor(7)
     
-    let sbcInstr = SBC(registerToStore: locationRegA, registerToSubtract: withReadLocation)
-    let adcInstr = ADC(registerToStore: locationRegA, registerToAdd: withReadLocation)
+    let sbcInstr = SBC(opcode: opcode, registerToStore: locationRegA, registerToSubtract: withReadLocation)
+    let adcInstr = ADC(opcode: opcode, registerToStore: locationRegA, registerToAdd: withReadLocation)
     
     let aluInstructions : [Int: Instruction] =
-     [0 : ADD(registerToStore: locationRegA, registerToAdd: withReadLocation),
+     [0 : ADD(opcode: opcode, registerToStore: locationRegA, registerToAdd: withReadLocation),
       1 : adcInstr,
-      2 : SUB(registerToStore: locationRegA, registerToSubtract: withReadLocation),
+      2 : SUB(opcode: opcode, registerToStore: locationRegA, registerToSubtract: withReadLocation),
       3 : sbcInstr,
-      4 : AND(register: withReadLocation),
-      5 : XOR(register: withReadLocation), // XOR,
-      6 : OR(register: withReadLocation), //Register.HL,
-      7 : CP(register: withReadLocation)] //Register.A]
+      4 : AND(opcode: opcode, register: withReadLocation),
+      5 : XOR(opcode: opcode, register: withReadLocation), // XOR,
+      6 : OR(opcode: opcode, register: withReadLocation), //Register.HL,
+      7 : CP(opcode: opcode, register: withReadLocation)] //Register.A]
     
     let val = aluInstructions[index]
     
@@ -67,6 +67,8 @@ class OpcodeParser {
   }
   
   func parseInstruction(firstOpcodeByte : UInt8, fetchNextBytePredicate : () -> UInt8) -> Instruction {
+    
+    let opcode = firstOpcodeByte
     
     func fetchUInt16() -> UInt16 {
       let b1 = fetchNextBytePredicate()
@@ -89,14 +91,14 @@ class OpcodeParser {
       case 0 :
         switch(y) {
         case 0 :
-          parsedInstruction = NOP()
+          parsedInstruction = NOP(opcode: opcode)
         case 1 :
           
           let read = RegisterDataLocation(register: Register.SP, dereferenceFirst: false)
           let writeAddr = fetchUInt16()
           let write = MemoryDataLocation(address: writeAddr, size: .UInt16)
           
-          parsedInstruction = LD(readLocation: read, writeLocation: write)
+          parsedInstruction = LD(opcode: opcode, readLocation: read, writeLocation: write)
         case 2 :
           
           //MISSING OPCODE
@@ -105,7 +107,7 @@ class OpcodeParser {
           assertionFailure("unknown value for y in opcode!")
         case 3 :
           let offset = sint8(bitPattern: fetchNextBytePredicate())
-          parsedInstruction = JP(locationToRead: ConstantDataLocation(value: offset), isRelative: true, condition: nil)
+          parsedInstruction = JP(opcode: opcode, locationToRead: ConstantDataLocation(value: offset), isRelative: true, condition: nil)
         default :
           
           let condition = cc[Int(y) - 4]!
@@ -113,7 +115,7 @@ class OpcodeParser {
           let val = sint8(bitPattern: fetchNextBytePredicate())
           let loc = ConstantDataLocation(value: val)
           
-          parsedInstruction = JP(locationToRead: loc, isRelative: true, condition: condition)
+          parsedInstruction = JP(opcode: opcode, locationToRead: loc, isRelative: true, condition: condition)
         }
       case 1 : //x = 0, z = 1
         if q == 0 {
@@ -122,13 +124,13 @@ class OpcodeParser {
           
           let valueToLoad = fetchUInt16()
           let constRead = ConstantDataLocation(value: valueToLoad)
-          parsedInstruction = LD(readLocation: constRead, writeLocation: writeAddr)
+          parsedInstruction = LD(opcode: opcode, readLocation: constRead, writeLocation: writeAddr)
         }
         else {
           
           let writeReg = RegisterDataLocation(register: Register.HL, dereferenceFirst: false)
           let readReg = RegisterDataLocation(register: rp[Int(p)]!, dereferenceFirst: false)
-          parsedInstruction = ADD(registerToStore: writeReg, registerToAdd: readReg)
+          parsedInstruction = ADD(opcode: opcode, registerToStore: writeReg, registerToAdd: readReg)
         }
       case 2 : // z = 2
         
@@ -180,24 +182,24 @@ class OpcodeParser {
           }
         }
         
-        parsedInstruction = LD(readLocation: readAddr, writeLocation: writeAddr)
+        parsedInstruction = LD(opcode: opcode, readLocation: readAddr, writeLocation: writeAddr)
         
       case 3 :
         let reg = rp[Int(p)]!
         if q == 0 { // 16Bit INC
-          parsedInstruction = INC(register: reg)
+          parsedInstruction = INC(opcode: opcode, register: reg)
           
         } else { // 16Bit DEC
-          parsedInstruction = DEC(register: reg)
+          parsedInstruction = DEC(opcode: opcode, register: reg)
         }
         
       case 4 : // 8Bit INC
         let reg = getDataLocationFor(Int(p))
-        parsedInstruction = INC(locToIncrease: reg)
+        parsedInstruction = INC(opcode: opcode, locToIncrease: reg)
         
       case 5 :
         let reg = getDataLocationFor(Int(p))
-        parsedInstruction = DEC(locToDecrease: reg)
+        parsedInstruction = DEC(opcode: opcode, locToDecrease: reg)
         
       case 6 : // LD r[y], n
         let reg = getDataLocationFor(Int(p))
@@ -206,21 +208,21 @@ class OpcodeParser {
         let writeAddr = reg
         let readAddr = ConstantDataLocation(value: val)
         
-        parsedInstruction = LD(readLocation: readAddr, writeLocation: writeAddr)
+        parsedInstruction = LD(opcode: opcode, readLocation: readAddr, writeLocation: writeAddr)
         
       case 7 :
         switch(y) {
         case 0 :
-          parsedInstruction = RLCA()
+          parsedInstruction = RLCA(opcode: opcode)
           
         case 1 :
-          parsedInstruction = RRCA()
+          parsedInstruction = RRCA(opcode: opcode)
           
         case 2 :
-          parsedInstruction = RLA()
+          parsedInstruction = RLA(opcode: opcode)
           
         case 3 :
-          parsedInstruction = RRA()
+          parsedInstruction = RRA(opcode: opcode)
           
         default :
           assertionFailure("unknown value for y in opcode!")
@@ -231,19 +233,19 @@ class OpcodeParser {
       }
     case 1 :
       if z == 6 && y == 6 {
-        parsedInstruction = HALT()
+        parsedInstruction = HALT(opcode: opcode)
       }
       else {
         let regRead = getDataLocationFor(Int(z))
         let regWrite = getDataLocationFor(Int(y))
         
-        parsedInstruction = LD(readLocation: regRead, writeLocation: regWrite)
+        parsedInstruction = LD(opcode: opcode, readLocation: regRead, writeLocation: regWrite)
         
       }
     case 2 :
       
       let secondRegister = getDataLocationFor(Int(z))
-      parsedInstruction = getAluInstructionForIndex(Int(y), withReadLocation: secondRegister)
+      parsedInstruction = getAluInstructionForIndex(Int(y), withReadLocation: secondRegister, opcode: opcode)
       
     case 3 : // x = 3
       
@@ -257,14 +259,14 @@ class OpcodeParser {
           let location = 0xFF00 + nextByte.getAsUInt16()
           let memLoc = MemoryDataLocation(address: location, size: DataSize.UInt16)
           
-          parsedInstruction = LD(readLocation: regRead, writeLocation: memLoc)
+          parsedInstruction = LD(opcode: opcode, readLocation: regRead, writeLocation: memLoc)
         
         case 5 :
           let value = Int8(fetchNextBytePredicate())
           let offset = ConstantDataLocation(value: value)
           let writeLoc = RegisterDataLocation(register: Register.SP, dereferenceFirst: false)
           
-          parsedInstruction = ADD(registerToStore: writeLoc, registerToAdd: offset)
+          parsedInstruction = ADD(opcode: opcode, registerToStore: writeLoc, registerToAdd: offset)
           
         case 6 :
           let reg = RegisterDataLocation(register: Register.A)
@@ -272,38 +274,38 @@ class OpcodeParser {
           let location = 0xFF00 + nextByte.getAsUInt16()
           //let readLoc = MemoryDataLocation(address: location, size: .UInt8)
           let readLoc = MemoryDataLocation(address: location, size: .UInt8)
-          parsedInstruction = LD(readLocation: readLoc, writeLocation: reg)
+          parsedInstruction = LD(opcode: opcode, readLocation: readLoc, writeLocation: reg)
           
         case 7 :
           let writeReg = RegisterDataLocation(register: Register.HL)
           let offset = fetchNextBytePredicate()
           let readReg = RegisterDataLocation(register: Register.SP, offset: Int32(offset))
-          parsedInstruction = LD(readLocation: readReg, writeLocation: writeReg)
+          parsedInstruction = LD(opcode: opcode, readLocation: readReg, writeLocation: writeReg)
          
         default :
           let condition = cc[Int(y)]!
-          parsedInstruction = RET(condition: condition)
+          parsedInstruction = RET(opcode: opcode, condition: condition)
         }
       case 1 :
         if q == 0 {
           let reg = rp2[Int(p)]!
           let loc = RegisterDataLocation(register: reg)
           
-          parsedInstruction = POP(locationToStore: loc)
+          parsedInstruction = POP(opcode: opcode, locationToStore: loc)
           
         } else {
           switch(p) {
           case 0 :
-            parsedInstruction = RET()
+            parsedInstruction = RET(opcode: opcode)
           case 1 :
-            parsedInstruction = RET(enableInterrupts: true)
+            parsedInstruction = RET(opcode: opcode, enableInterrupts: true)
           case 2 :
             let val = RegisterDataLocation(register: Register.HL)
-            parsedInstruction = JP(locationToRead: val)
+            parsedInstruction = JP(opcode: opcode, locationToRead: val)
           case 3 :
             let writeReg = RegisterDataLocation(register: Register.SP)
             let readReg = RegisterDataLocation(register: Register.HL)
-            parsedInstruction = LD(readLocation: readReg, writeLocation: writeReg)
+            parsedInstruction = LD(opcode: opcode, readLocation: readReg, writeLocation: writeReg)
           default :
             assertionFailure("not yet implemented")
           }
@@ -312,24 +314,24 @@ class OpcodeParser {
         if r == 1 {
           let readReg = getDataLocationFor(7)
           let writeLoc = RegisterDataLocation(register: Register.C, offset: 0xFF00)
-          parsedInstruction = LD(readLocation: readReg, writeLocation: writeLoc)
+          parsedInstruction = LD(opcode: opcode, readLocation: readReg, writeLocation: writeLoc)
         } else {
           let condition = cc[Int(y)]!
           let addr = fetchUInt16()
           let loc = ConstantDataLocation(value: addr)
           
-          parsedInstruction = JP(locationToRead: loc, isRelative: false, condition: condition)
+          parsedInstruction = JP(opcode: opcode, locationToRead: loc, isRelative: false, condition: condition)
         }
       case 3 :
         switch(y) {
         case 0 :
           let addr = fetchUInt16()
           let loc = ConstantDataLocation(value: addr)
-          parsedInstruction = JP(locationToRead: loc)
+          parsedInstruction = JP(opcode: opcode, locationToRead: loc)
         case 6 :
-          parsedInstruction = DI()
+          parsedInstruction = DI(opcode: opcode)
         case 7 :
-          parsedInstruction = EI()
+          parsedInstruction = EI(opcode: opcode)
         default :
           assertionFailure("not yet implemented")
         }
@@ -338,19 +340,19 @@ class OpcodeParser {
         let condition = cc[Int(y)]
         let address = fetchUInt16()
         let loc = ConstantDataLocation(value: address)
-        parsedInstruction = CALL(addressToCall: loc, condition: condition)
+        parsedInstruction = CALL(opcode: opcode, addressToCall: loc, condition: condition)
       case 5 :
         if q == 0 {
           let reg = rp2[Int(p)]!
           let loc = RegisterDataLocation(register: reg)
           
-          parsedInstruction = PUSH(locationToWrite: loc)
+          parsedInstruction = PUSH(opcode: opcode, locationToWrite: loc)
         } else {
           switch(p) {
           case 0 :
             let address = fetchUInt16()
             let loc = ConstantDataLocation(value: address)
-            parsedInstruction = CALL(addressToCall: loc)
+            parsedInstruction = CALL(opcode: opcode, addressToCall: loc)
           default :
             assertionFailure("not yet implemented")
           }
@@ -358,11 +360,11 @@ class OpcodeParser {
       case 6 :
         
         let readLocation = ConstantDataLocation(value: fetchNextBytePredicate())
-        parsedInstruction = getAluInstructionForIndex(Int(y), withReadLocation: readLocation)
+        parsedInstruction = getAluInstructionForIndex(Int(y), withReadLocation: readLocation, opcode: opcode)
       case 7 :
         let val : UInt8 = y * 8
         
-        parsedInstruction = RST(newPCValue: val)
+        parsedInstruction = RST(opcode: opcode, newPCValue: val)
       default :
         assertionFailure("not yet implemented")
       }
@@ -372,9 +374,19 @@ class OpcodeParser {
     }
     
     if parsedInstruction == nil {
-      parsedInstruction = Instruction()
+      parsedInstruction = Instruction(opcode: opcode)
     }
     
     return parsedInstruction
+  }
+  
+  func getClockCyclesForInstruction(instr : Instruction) {
+    
+    var executedCycles = 0
+    var notExecutedCycles = 0
+    
+    if instr is NOP {
+      executedCycles = 4
+    }
   }
 }

@@ -41,7 +41,7 @@ class RSTTests: XCTestCase {
     ctx.registers.SP = 500
     
     
-    let instruction = RST(newPCValue: val)
+    let instruction = RST(opcode: 0, newPCValue: val)
     
     instruction.execute(ctx)
     

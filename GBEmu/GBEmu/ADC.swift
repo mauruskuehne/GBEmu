@@ -18,7 +18,7 @@ class ADC : Instruction {
     }
   }
   
-  convenience init(registerToAdd : RegisterDataLocation) {
+  convenience init(opcode : UInt8, prefix : UInt8? = nil, registerToAdd : RegisterDataLocation) {
     
     let bigRegisters = [ Register.BC, Register.DE, Register.HL, Register.SP ]
     
@@ -29,12 +29,14 @@ class ADC : Instruction {
       store = RegisterDataLocation(register: Register.A, dereferenceFirst: false)
     }
     
-    self.init(registerToStore: store, registerToAdd: registerToAdd)
+    self.init(opcode: opcode, prefix: prefix, registerToStore: store, registerToAdd: registerToAdd)
   }
   
-  init(registerToStore : ReadWriteDataLocation, registerToAdd : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : ReadWriteDataLocation, registerToAdd : ReadableDataLocation) {
     self.registerToStore = registerToStore
     self.registerToAdd = registerToAdd
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

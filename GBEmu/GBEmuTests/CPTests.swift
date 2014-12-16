@@ -42,7 +42,7 @@ class CPTests: XCTestCase {
     
     let regToSub = RegisterDataLocation(register: Register.B)
     
-    let instruction = CP(register: regToSub)
+    let instruction = CP(opcode: 0, register: regToSub)
     
     instruction.execute(ctx)
     

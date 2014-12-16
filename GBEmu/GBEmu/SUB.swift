@@ -19,9 +19,11 @@ class SUB : Instruction {
     }
   }
   
-  init(registerToStore : ReadWriteDataLocation, registerToSubtract : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : ReadWriteDataLocation, registerToSubtract : ReadableDataLocation) {
     self.registerToStore = registerToStore
     self.registerToSubtract = registerToSubtract
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

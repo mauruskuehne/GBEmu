@@ -27,9 +27,11 @@ class RET : Instruction {
     }
   }
   
-  init(condition : JumpCondition? = nil, enableInterrupts : Bool = false ) {
+  init(opcode : UInt8, prefix : UInt8? = nil, condition : JumpCondition? = nil, enableInterrupts : Bool = false ) {
     self.condition = condition
     self.enableInterrupts = enableInterrupts
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

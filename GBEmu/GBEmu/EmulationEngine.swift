@@ -47,6 +47,11 @@ class EmulationEngine {
   
   func executeNextFrame() {
     
+    //cycles = clock speed in Hz / required frames-per-second
+    
+    let cycles = CLOCK_SPEED / 59.73
+    
+    
     let retVal = readNextInstruction()
     
     self.registers.PC += retVal.opcodeSize

@@ -36,7 +36,7 @@ class RotateTests: XCTestCase {
     
     ctx.registers.A = 0b1000_0000
     
-    let instr = RLCA()
+    let instr = RLCA(opcode: 0)
     instr.execute(ctx)
     
     XCTAssertEqual(ctx.registers.A, { 0b0000_0001 }(), "could not rotate register A")
@@ -52,7 +52,7 @@ class RotateTests: XCTestCase {
     
     ctx.registers.A = 0b1000_0000
     
-    let instr = RLA()
+    let instr = RLA(opcode: 0)
     instr.execute(ctx)
     
     XCTAssertEqual(ctx.registers.A, { 0b0000_0000 }(), "could not rotate register A")
@@ -68,7 +68,7 @@ class RotateTests: XCTestCase {
     
     ctx.registers.A = 0b0000_0001
     
-    let instr = RRCA()
+    let instr = RRCA(opcode: 0)
     instr.execute(ctx)
     
     XCTAssertEqual(ctx.registers.A, { 0b1000_0000 }(), "could not left rotate register A")
@@ -84,7 +84,7 @@ class RotateTests: XCTestCase {
     
     ctx.registers.A = 0b0000_0001
     ctx.registers.Flags.resetFlag(.Carry)
-    let instr = RRA()
+    let instr = RRA(opcode: 0)
     instr.execute(ctx)
     
     XCTAssertEqual(ctx.registers.A, { 0b0000_0000 }(), "could not rotate register A")

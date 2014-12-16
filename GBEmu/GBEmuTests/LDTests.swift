@@ -38,7 +38,7 @@ class LDTests: XCTestCase {
     let valToStore = ConstantDataLocation(value: UInt8(7))
     let regToBeLoaded = RegisterDataLocation(register: Register.A)
     
-    let instruction = LD(readLocation: valToStore, writeLocation: regToBeLoaded)
+    let instruction = LD(opcode: 0, readLocation: valToStore, writeLocation: regToBeLoaded)
     
     XCTAssertEqual("LD A, 0x7", instruction.description, "wrong description")
     
@@ -52,7 +52,7 @@ class LDTests: XCTestCase {
     let valToStore = ConstantDataLocation(value: UInt16(800))
     let regToBeLoaded = RegisterDataLocation(register: Register.HL)
     
-    let instruction = LD(readLocation: valToStore, writeLocation: regToBeLoaded)
+    let instruction = LD(opcode: 0, readLocation: valToStore, writeLocation: regToBeLoaded)
     
     XCTAssertEqual("LD HL, 0x320", instruction.description, "wrong description")
     
@@ -69,7 +69,7 @@ class LDTests: XCTestCase {
     let valToStore = ConstantDataLocation(value: UInt16(250))
     let regToBeLoaded = RegisterDataLocation(register: Register.HL, dereferenceFirst : true)
     
-    let instruction = LD(readLocation: valToStore, writeLocation: regToBeLoaded)
+    let instruction = LD(opcode: 0, readLocation: valToStore, writeLocation: regToBeLoaded)
     
     XCTAssertEqual("LD (HL), 0xFA", instruction.description, "wrong description")
     

@@ -19,12 +19,14 @@ class DEC : Instruction {
   }
   
   
-  init(locToDecrease : ReadWriteDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, locToDecrease : ReadWriteDataLocation) {
     self.location = locToDecrease
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
-  convenience init(register : Register) {
-    self.init(locToDecrease: RegisterDataLocation(register: register, dereferenceFirst: false))
+  convenience init(opcode : UInt8, prefix : UInt8? = nil, register : Register) {
+    self.init(opcode: opcode, prefix: prefix, locToDecrease: RegisterDataLocation(register: register, dereferenceFirst: false))
   }
   
   override func execute(context : ExecutionContext) {

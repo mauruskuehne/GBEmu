@@ -39,13 +39,13 @@ class JPTests: XCTestCase {
     ctx.registers.HL = 0x200
     let loc = RegisterDataLocation(register: Register.HL)
     
-    var instruction = JP(locationToRead: loc, isRelative: false)
+    var instruction = JP(opcode: 0, locationToRead: loc, isRelative: false)
     
     instruction.execute(ctx)
     
     XCTAssertEqual(ctx.registers.PC, {0x200}(), "could not jump to location 0x200")
     
-    instruction = JP(locationToRead: loc, isRelative: true)
+    instruction = JP(opcode: 0, locationToRead: loc, isRelative: true)
     
     instruction.execute(ctx)
     
@@ -58,7 +58,7 @@ class JPTests: XCTestCase {
     ctx.registers.HL = 0x200
     let loc = RegisterDataLocation(register: Register.HL)
     ctx.registers.Flags.resetFlag(Flags.Carry)
-    var instruction = JP(locationToRead: loc, condition: JumpCondition.Carry)
+    var instruction = JP(opcode: 0, locationToRead: loc, condition: JumpCondition.Carry)
     instruction.execute(ctx)
     
     XCTAssertEqual(ctx.registers.PC, {0x100}(), "Condition has been ignored")

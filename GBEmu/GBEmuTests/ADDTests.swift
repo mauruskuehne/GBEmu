@@ -43,7 +43,7 @@ class ADDTests: XCTestCase {
     let regToWrite = RegisterDataLocation(register: Register.A)
     let regToAdd = RegisterDataLocation(register: Register.B)
     
-    let instruction = ADD(registerToStore: regToWrite, registerToAdd: regToAdd)
+    let instruction = ADD(opcode: 0, registerToStore: regToWrite, registerToAdd: regToAdd)
     
     instruction.execute(ctx)
     
@@ -93,7 +93,7 @@ class ADDTests: XCTestCase {
     let regToWrite = RegisterDataLocation(register: Register.SP)
     var regToAdd = ConstantDataLocation(value: sint8(-10))
     
-    var instruction = ADD(registerToStore: regToWrite, registerToAdd: regToAdd)
+    var instruction = ADD(opcode: 0, registerToStore: regToWrite, registerToAdd: regToAdd)
     
     instruction.execute(ctx)
     
@@ -112,7 +112,7 @@ class ADDTests: XCTestCase {
     let regToWrite = RegisterDataLocation(register: Register.BC)
     let regToAdd = RegisterDataLocation(register: Register.DE)
     
-    let instruction = ADD(registerToStore: regToWrite, registerToAdd: regToAdd)
+    let instruction = ADD(opcode: 0, registerToStore: regToWrite, registerToAdd: regToAdd)
     
     instruction.execute(ctx)
     

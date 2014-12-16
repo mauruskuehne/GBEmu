@@ -16,4 +16,8 @@ class ExecutionContext  {
     self.registers = registers;
     self.memoryAccess = memoryAccess
   }
+  
+  func consumeClockCycles(cycles : UInt16) {
+    
+  }
 }

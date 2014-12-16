@@ -44,7 +44,7 @@ class CALLTests: XCTestCase {
     
     let adrLoc = ConstantDataLocation(value: val)
     
-    let instruction = CALL(addressToCall: adrLoc)
+    let instruction = CALL(opcode: 0, addressToCall: adrLoc)
     
     instruction.execute(ctx)
     

@@ -19,7 +19,7 @@ class SBC : Instruction {
     }
   }
   
-  convenience init(registerToSubtract : RegisterDataLocation) {
+  convenience init(opcode : UInt8, prefix : UInt8? = nil, registerToSubtract : RegisterDataLocation) {
     
     let bigRegisters = [ Register.BC, Register.DE, Register.HL, Register.SP ]
     
@@ -30,12 +30,14 @@ class SBC : Instruction {
       store = RegisterDataLocation(register: Register.A, dereferenceFirst: false)
     }
     
-    self.init(registerToStore: store, registerToSubtract: registerToSubtract)
+    self.init(opcode: opcode, prefix: prefix, registerToStore: store, registerToSubtract: registerToSubtract)
   }
   
-  init(registerToStore : ReadWriteDataLocation, registerToSubtract : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : ReadWriteDataLocation, registerToSubtract : ReadableDataLocation) {
     self.registerToStore = registerToStore
     self.registerToSubtract = registerToSubtract
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

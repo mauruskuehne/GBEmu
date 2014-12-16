@@ -9,7 +9,8 @@
 import Foundation
 
 class Instruction : Printable{
-  
+  let opcode : UInt8
+  let prefix : UInt8?
   
   var description: String {
     get {
@@ -17,6 +18,10 @@ class Instruction : Printable{
     }
   }
   
+  init(opcode : UInt8, prefix : UInt8? = nil) {
+    self.opcode = opcode
+    self.prefix = prefix
+  }
   
   func execute(context : ExecutionContext) {
     

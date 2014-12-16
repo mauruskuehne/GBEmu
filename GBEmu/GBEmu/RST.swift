@@ -18,8 +18,10 @@ class RST : Instruction {
     }
   }
   
-  init(newPCValue : UInt8 ) {
+  init(opcode : UInt8, prefix : UInt8? = nil, newPCValue : UInt8 ) {
     self.newPCValue = newPCValue
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

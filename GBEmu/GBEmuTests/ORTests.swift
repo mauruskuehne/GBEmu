@@ -39,7 +39,7 @@ class ORTests: XCTestCase {
     
     let reg = RegisterDataLocation(register: Register.B)
     
-    let instruction = OR(register: reg)
+    let instruction = OR(opcode: 0, register: reg)
     
     instruction.execute(ctx)
     

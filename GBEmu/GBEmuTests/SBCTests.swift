@@ -43,7 +43,7 @@ class SBCTests: XCTestCase {
     let regToWrite = RegisterDataLocation(register: Register.A)
     let regToSub = RegisterDataLocation(register: Register.B)
     
-    let instruction = SBC(registerToStore: regToWrite, registerToSubtract: regToSub)
+    let instruction = SBC(opcode: 0, registerToStore: regToWrite, registerToSubtract: regToSub)
     
     instruction.execute(ctx)
     

@@ -18,8 +18,10 @@ class PUSH : Instruction {
     }
   }
   
-  init(locationToWrite : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, locationToWrite : ReadableDataLocation) {
     self.locToWrite = locationToWrite
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

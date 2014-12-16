@@ -43,7 +43,7 @@ class ADCTests: XCTestCase {
     let regToWrite = RegisterDataLocation(register: Register.A)
     let regToAdd = RegisterDataLocation(register: Register.B)
     
-    let instruction = ADC(registerToStore: regToWrite, registerToAdd: regToAdd)
+    let instruction = ADC(opcode: 0, registerToStore: regToWrite, registerToAdd: regToAdd)
     
     instruction.execute(ctx)
     
@@ -96,7 +96,7 @@ class ADCTests: XCTestCase {
     let regToWrite = RegisterDataLocation(register: Register.BC)
     let regToAdd = RegisterDataLocation(register: Register.DE)
     
-    let instruction = ADC(registerToStore: regToWrite, registerToAdd: regToAdd)
+    let instruction = ADC(opcode: 0, registerToStore: regToWrite, registerToAdd: regToAdd)
     
     instruction.execute(ctx)
     

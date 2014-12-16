@@ -40,7 +40,7 @@ class INCTests: XCTestCase {
     
     let register = RegisterDataLocation(register: Register.A)
     
-    let instruction = INC(locToIncrease: register)
+    let instruction = INC(opcode: 0, locToIncrease: register)
     
     instruction.execute(ctx)
     
@@ -55,7 +55,7 @@ class INCTests: XCTestCase {
     
     let memoryLocation = MemoryDataLocation(address: address, size: DataSize.UInt8)
     
-    let instruction = INC(locToIncrease: memoryLocation)
+    let instruction = INC(opcode: 0, locToIncrease: memoryLocation)
     
     instruction.execute(ctx)
     
@@ -70,7 +70,7 @@ class INCTests: XCTestCase {
     
     let register = RegisterDataLocation(register: Register.HL)
     
-    let instruction = INC(locToIncrease: register)
+    let instruction = INC(opcode: 0, locToIncrease: register)
     
     instruction.execute(ctx)
     

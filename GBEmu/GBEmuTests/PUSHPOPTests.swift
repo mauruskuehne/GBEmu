@@ -39,8 +39,8 @@ class PUSHPOPTests: XCTestCase {
       let readReg = RegisterDataLocation(register: Register.HL)
       let writeReg = RegisterDataLocation(register: Register.BC)
       
-      let pushInstr = PUSH(locationToWrite: readReg)
-      let popInstr = POP(locationToStore: writeReg)
+      let pushInstr = PUSH(opcode: 0, locationToWrite: readReg)
+      let popInstr = POP(opcode: 0, locationToStore: writeReg)
       
       pushInstr.execute(ctx)
       

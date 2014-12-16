@@ -18,8 +18,10 @@ class OR : Instruction {
     }
   }
   
-  init(register : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadableDataLocation) {
     self.register = register
+    
+    super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {

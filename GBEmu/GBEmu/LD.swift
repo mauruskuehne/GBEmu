@@ -19,16 +19,18 @@ class LD : Instruction {
     }
   }
   
-  init(readLocation : ReadableDataLocation, writeLocation : WriteableDataLocation) {
-    self.readLocation = readLocation
-    self.writeLocation = writeLocation
-    
+  init(opcode : UInt8, prefix : UInt8? = nil, readLocation : ReadableDataLocation,
+    writeLocation : WriteableDataLocation) {
+      
+      self.readLocation = readLocation
+      self.writeLocation = writeLocation
+      super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) {
     
     let val = readLocation.read(context)
-    
+
     writeLocation.write(val, context: context)
   }
 }
