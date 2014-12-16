@@ -16,7 +16,9 @@ class EI : Instruction {
     }
   }
   
-  override func execute(context : ExecutionContext) {
-      println("enable interrupts")
+  override func execute(context : ExecutionContext) -> InstructionResult {
+    println("enable interrupts")
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

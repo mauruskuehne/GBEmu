@@ -24,12 +24,14 @@ class POP : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     let value = context.memoryAccess.readUInt16(context.registers.SP)
     
     context.registers.SP += 2
     
     locToStore.write(value, context: context)
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

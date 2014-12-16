@@ -24,12 +24,14 @@ class PUSH : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     context.registers.SP -= 2
     
     let value = locToWrite.read(context)
     
     context.memoryAccess.write(context.registers.SP, value: value)
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

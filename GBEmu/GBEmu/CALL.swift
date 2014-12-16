@@ -26,11 +26,11 @@ class CALL : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     if let cond = condition {
       if !cond.conditionSatisfied(context) {
-        return
+        return InstructionResult(opcode: self.opcode, executed: false)
       }
     }
     
@@ -41,5 +41,7 @@ class CALL : Instruction {
     context.memoryAccess.write(context.registers.SP, value: context.registers.PC + 1)
     
     context.registers.PC = address
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

@@ -26,7 +26,7 @@ class ADD : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     
     let oldValue = registerToStore.read(context)
@@ -103,5 +103,6 @@ class ADD : Instruction {
     
     context.registers.Flags.resetFlag(Flags.Subtract)
     
+    return InstructionResult(opcode: self.opcode)
   }
 }

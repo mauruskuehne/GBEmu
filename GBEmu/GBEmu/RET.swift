@@ -34,11 +34,11 @@ class RET : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     if let cond = condition {
       if !cond.conditionSatisfied(context) {
-        return
+        return InstructionResult(opcode: self.opcode, executed: false)
       }
     }
     
@@ -51,5 +51,7 @@ class RET : Instruction {
     context.registers.SP += 2
     
     context.registers.PC = newPC
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

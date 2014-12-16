@@ -27,7 +27,7 @@ class INC : Instruction {
     self.init(opcode: opcode, prefix: prefix, locToIncrease: RegisterDataLocation(register: register, dereferenceFirst: false))
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     let oldVal = location.read(context).getAsUInt16()
     
@@ -35,5 +35,6 @@ class INC : Instruction {
     
     location.write(newVal, context: context)
     
+    return InstructionResult(opcode: self.opcode)
   }
 }

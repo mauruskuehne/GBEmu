@@ -23,8 +23,7 @@ class Instruction : Printable{
     self.prefix = prefix
   }
   
-  func execute(context : ExecutionContext) {
-    
+  func execute(context : ExecutionContext) -> InstructionResult {
+    return InstructionResult(usedCycles: 0)
   }
-  
 }

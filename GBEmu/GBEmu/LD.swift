@@ -27,10 +27,12 @@ class LD : Instruction {
       super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     let val = readLocation.read(context)
 
     writeLocation.write(val, context: context)
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

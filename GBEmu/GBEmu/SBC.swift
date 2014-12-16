@@ -40,7 +40,7 @@ class SBC : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     let oldValue = registerToStore.read(context)
     let valToSub = registerToSubtract.read(context)
@@ -84,5 +84,6 @@ class SBC : Instruction {
       context.registers.Flags.resetFlag(Flags.HalfCarry)
     }
     
+    return InstructionResult(opcode: self.opcode)
   }
 }

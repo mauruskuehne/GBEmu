@@ -19,7 +19,7 @@ class RLCA : RotateInstruction {
     }
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     let newVal = context.registers.A << 1;
     
@@ -35,5 +35,7 @@ class RLCA : RotateInstruction {
     
     context.registers.Flags.resetFlag(.HalfCarry)
     context.registers.Flags.resetFlag(.Subtract)
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

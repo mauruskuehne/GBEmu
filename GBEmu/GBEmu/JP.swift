@@ -40,11 +40,11 @@ class JP : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     if let cond = condition {
       if !cond.conditionSatisfied(context) {
-        return
+        return InstructionResult(opcode: self.opcode, executed: false)
       }
     }
     
@@ -56,5 +56,7 @@ class JP : Instruction {
     } else {
       context.registers.PC = newValue.getAsUInt16()
     }
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

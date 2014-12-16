@@ -106,6 +106,8 @@
 		728AB4651A1D2B8D00715CAF /* AND.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4641A1D2B8D00715CAF /* AND.swift */; };
 		728AB4671A1D2BB900715CAF /* SBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4661A1D2BB900715CAF /* SBC.swift */; };
 		728AB46A1A1D2D0B00715CAF /* LDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4691A1D2D0B00715CAF /* LDTests.swift */; };
+		72A3D7911A40943D00C8043B /* InstructionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3D7901A40943D00C8043B /* InstructionResult.swift */; };
+		72A3D7921A40947200C8043B /* InstructionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3D7901A40943D00C8043B /* InstructionResult.swift */; };
 		72B8FAEF1A1E90D500C2F27F /* ADDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B8FAEE1A1E90D500C2F27F /* ADDTests.swift */; };
 		72C181D71A3CF5800075D402 /* OpcodeTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C181D61A3CF5800075D402 /* OpcodeTableViewDelegate.swift */; };
 		72D1492E1A23BC3B00402393 /* OpcodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1492D1A23BC3B00402393 /* OpcodeParser.swift */; };
@@ -198,6 +200,7 @@
 		728AB4641A1D2B8D00715CAF /* AND.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AND.swift; sourceTree = "<group>"; };
 		728AB4661A1D2BB900715CAF /* SBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBC.swift; sourceTree = "<group>"; };
 		728AB4691A1D2D0B00715CAF /* LDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LDTests.swift; sourceTree = "<group>"; };
+		72A3D7901A40943D00C8043B /* InstructionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionResult.swift; sourceTree = "<group>"; };
 		72B8FAEE1A1E90D500C2F27F /* ADDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADDTests.swift; sourceTree = "<group>"; };
 		72C181D61A3CF5800075D402 /* OpcodeTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpcodeTableViewDelegate.swift; sourceTree = "<group>"; };
 		72D1492D1A23BC3B00402393 /* OpcodeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpcodeParser.swift; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				724097941A17A1AD0034D1FB /* Instruction.swift */,
+				72A3D7901A40943D00C8043B /* InstructionResult.swift */,
 				724097971A17A5480034D1FB /* LD.swift */,
 				721ED1931A1A777D00745D13 /* INC.swift */,
 				721ED1961A1A7A7E00745D13 /* DEC.swift */,
@@ -518,6 +522,7 @@
 				7220C6AF1A3C9B3200EABF7C /* RRA.swift in Sources */,
 				72C181D71A3CF5800075D402 /* OpcodeTableViewDelegate.swift in Sources */,
 				723E05A91A2E243900B2985D /* RegisterTableViewDelegate.swift in Sources */,
+				72A3D7911A40943D00C8043B /* InstructionResult.swift in Sources */,
 				7282580F1A2CF664008C3119 /* CALL.swift in Sources */,
 				721ED19A1A1A810600745D13 /* HALT.swift in Sources */,
 				7245BDFC1A19094200AF205B /* ConstantDataLocation.swift in Sources */,
@@ -591,6 +596,7 @@
 				723E05511A2E20F400B2985D /* DI.swift in Sources */,
 				728258151A2CFC92008C3119 /* RET.swift in Sources */,
 				721ED19B1A1A817E00745D13 /* HALT.swift in Sources */,
+				72A3D7921A40947200C8043B /* InstructionResult.swift in Sources */,
 				7200A3891A2632500045ECD8 /* ANDTests.swift in Sources */,
 				7264AFB81A15461E00472013 /* Flags.swift in Sources */,
 				724484A41A1FCC6000E780E0 /* ADC.swift in Sources */,

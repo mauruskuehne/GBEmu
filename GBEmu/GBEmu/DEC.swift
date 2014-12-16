@@ -29,7 +29,7 @@ class DEC : Instruction {
     self.init(opcode: opcode, prefix: prefix, locToDecrease: RegisterDataLocation(register: register, dereferenceFirst: false))
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     let oldVal = location.read(context)
     
@@ -39,5 +39,6 @@ class DEC : Instruction {
       location.write(oldVal.getAsUInt8() - 1, context: context)
     }
     
+    return InstructionResult(opcode: self.opcode)
   }
 }

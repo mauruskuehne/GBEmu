@@ -24,7 +24,7 @@ class OR : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     context.registers.A = context.registers.A | register.read(context).getAsUInt8()
     
@@ -37,5 +37,7 @@ class OR : Instruction {
     context.registers.Flags.resetFlag(Flags.Subtract)
     context.registers.Flags.resetFlag(Flags.HalfCarry)
     context.registers.Flags.resetFlag(Flags.Carry)
+
+    return InstructionResult(opcode: self.opcode)
   }
 }

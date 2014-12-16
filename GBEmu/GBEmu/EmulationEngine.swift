@@ -49,18 +49,24 @@ class EmulationEngine {
     
     //cycles = clock speed in Hz / required frames-per-second
     
-    let cycles = CLOCK_SPEED / 59.73
+    let cycles = UInt32( CLOCK_SPEED / 59.73)
+    var usedCycles : UInt32 = 0
     
+    while usedCycles < cycles {
+      
+      let retVal = readNextInstruction()
+      
+      self.registers.PC += retVal.opcodeSize
+      
+      let result = retVal.instruction.execute(executionContext)
+      
+      usedCycles += UInt32(result.usedCycles)
+      
+      display.refresh()
+      
+      delegate?.executedInstruction(self, instruction: retVal.instruction)
+    }
     
-    let retVal = readNextInstruction()
-    
-    self.registers.PC += retVal.opcodeSize
-    
-    retVal.instruction.execute(executionContext)
-    
-    display.refresh()
-    
-    delegate?.executedInstruction(self, instruction: retVal.instruction)
   }
   
   func readNextInstruction() -> (instruction : Instruction, opcodeSize: UInt16) {

@@ -24,7 +24,7 @@ class CP : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     let oldValue = context.registers[Register.A]
     let valToSub = register.read(context)
@@ -64,5 +64,7 @@ class CP : Instruction {
     } else {
       context.registers.Flags.setFlag(Flags.HalfCarry)
     }
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

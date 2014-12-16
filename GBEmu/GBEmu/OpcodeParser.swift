@@ -379,14 +379,4 @@ class OpcodeParser {
     
     return parsedInstruction
   }
-  
-  func getClockCyclesForInstruction(instr : Instruction) {
-    
-    var executedCycles = 0
-    var notExecutedCycles = 0
-    
-    if instr is NOP {
-      executedCycles = 4
-    }
-  }
 }

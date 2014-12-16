@@ -39,7 +39,7 @@ class ADC : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
 
     let oldValue = registerToStore.read(context)
     let valToAdd = registerToAdd.read(context)
@@ -85,5 +85,6 @@ class ADC : Instruction {
     
     context.registers.Flags.resetFlag(Flags.Subtract)
     
+    return InstructionResult(opcode: self.opcode)
   }
 }

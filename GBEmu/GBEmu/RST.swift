@@ -24,12 +24,14 @@ class RST : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     context.registers.SP -= 2
     
     context.memoryAccess.write(context.registers.SP, value: context.registers.PC)
     
     context.registers.PC = newPCValue.getAsUInt16()
+    
+    return InstructionResult(opcode: self.opcode)
   }
 }

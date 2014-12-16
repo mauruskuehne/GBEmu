@@ -17,10 +17,11 @@ class HALT : Instruction {
   }
   
   
-  override func execute(context : ExecutionContext) {
+  override func execute(context : ExecutionContext) -> InstructionResult {
     
     //HALT
     assertionFailure("HALT")
     
+    return InstructionResult(opcode: self.opcode)
   }
 }
