@@ -44,6 +44,25 @@ class OpcodeParser {
     }
   }
   
+  func getRotateInstructionForIndex(index : Int, withRegisterIndex: Int, opcode : UInt8, prefix : UInt8? = nil) -> Instruction {
+    
+    let location = getDataLocationFor(withRegisterIndex)
+    
+    let rotInstructions : [Int: Instruction] =
+    [ 0 : RLC(opcode: opcode, prefix : prefix, register: location),
+      1 : RRC(opcode: opcode, prefix : prefix, register: location),
+      2 : RL(opcode: opcode, prefix : prefix, register: location),
+      3 : RR(opcode: opcode, prefix : prefix, register: location)//,
+    //  4 : SLA(opcode: opcode, prefix : prefix, register: location),
+    //  5 : SRA(opcode: opcode, prefix : prefix, register: location),
+    //  6 : SLL(opcode: opcode, prefix : prefix, register: location),
+    //  7 : SRL(opcode: opcode, prefix : prefix, register: location)
+    ]
+    let val = rotInstructions[index]
+    
+    return val!
+  }
+  
   func getAluInstructionForIndex(index : Int, withReadLocation: ReadableDataLocation, opcode : UInt8) -> Instruction {
     
     let locationRegA = getDataLocationFor(7)
@@ -390,6 +409,25 @@ class OpcodeParser {
     let q = (secondOpcodeByte & 0b0000_1000) >> 3
     let r = (secondOpcodeByte & 0b0010_0000) >> 5
     
+    switch(x) {
+    case 0 :
+      parsedInstruction = getRotateInstructionForIndex(Int(y), withRegisterIndex: Int(z), opcode: secondOpcodeByte, prefix: 0xCB)
+      
+    case 1 :
+      let reg = getDataLocationFor(Int(z))
+      parsedInstruction = BIT(opcode: secondOpcodeByte, prefix: 0xCB, register: reg, bitPosition: y)
+      
+    case 2 :
+      let reg = getDataLocationFor(Int(z))
+      parsedInstruction = RES(opcode: secondOpcodeByte, prefix: 0xCB, register: reg, bitPosition: y)
+      
+    case 3 :
+      let reg = getDataLocationFor(Int(z))
+      parsedInstruction = SET(opcode: secondOpcodeByte, prefix: 0xCB, register: reg, bitPosition: y)
+      
+    default :
+      assertionFailure("not a valid CB opcode")
+    }
     
     if parsedInstruction == nil {
       parsedInstruction = Instruction(opcode: secondOpcodeByte)
