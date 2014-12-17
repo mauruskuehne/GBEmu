@@ -25,16 +25,20 @@ class RR : RotateInstruction {
   }
   
   override func execute(context : ExecutionContext) -> InstructionResult {
+    var newVal : UInt8 = 0
+    let oldVal = register.read(context).getAsUInt8()
     
-    let newVal = context.registers.A >> 1;
+    let shiftedVal = oldVal >> 1;
     
-    let firstBit = context.registers.A & 0b0000_0001
+    let firstBit = oldVal & 0b0000_0001
     
     if context.registers.Flags.isFlagSet(.Carry) {
-      context.registers.A = newVal | 0b1000_0000
+      newVal = shiftedVal | 0b1000_0000
     } else {
-      context.registers.A = newVal
+      newVal = shiftedVal
     }
+    
+    register.write(newVal, context: context)
     
     if firstBit > 0 {
       context.registers.Flags.setFlag(.Carry)
