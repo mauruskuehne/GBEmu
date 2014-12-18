@@ -189,6 +189,9 @@ class OpcodeParser {
             readAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true)
             
           } else if p == 2 {
+            
+            // this should be LD A, (HL++)
+            
             writeAddr = RegisterDataLocation(register: rp[2]!)
             let address = fetchUInt16()
             readAddr = MemoryDataLocation(address: address, size: .UInt16)
@@ -213,15 +216,15 @@ class OpcodeParser {
         }
         
       case 4 : // 8Bit INC
-        let reg = getDataLocationFor(Int(p))
+        let reg = getDataLocationFor(Int(y))
         parsedInstruction = INC(opcode: opcode, locToIncrease: reg)
         
       case 5 :
-        let reg = getDataLocationFor(Int(p))
+        let reg = getDataLocationFor(Int(y))
         parsedInstruction = DEC(opcode: opcode, locToDecrease: reg)
         
       case 6 : // LD r[y], n
-        let reg = getDataLocationFor(Int(p))
+        let reg = getDataLocationFor(Int(y))
         let val = fetchNextBytePredicate()
         
         let writeAddr = reg
@@ -352,7 +355,7 @@ class OpcodeParser {
         case 7 :
           parsedInstruction = EI(opcode: opcode)
         default :
-          assertionFailure("not yet implemented")
+          parsedInstruction = getPrefixedOpcode(fetchNextBytePredicate())
         }
       case 4 :
         
