@@ -29,11 +29,17 @@ class INC : Instruction {
   
   override func execute(context : ExecutionContext) -> InstructionResult {
     
-    let oldVal = location.read(context).getAsUInt16()
+    let oldVal = location.read(context)
     
-    let newVal = oldVal + 1
+    //let newVal = oldVal + 1
     
-    location.write(newVal, context: context)
+    let res = ADD.calculateResultForUnsignedAdd(context, oldValue: oldVal, valToAdd: UInt8(1))
+    
+    location.write(res.result, context: context)
+    
+    if oldVal is UInt8 {
+      context.registers.Flags = res.flags
+    }
     
     return InstructionResult(opcode: self.opcode)
   }

@@ -31,31 +31,39 @@ class SUB : Instruction {
     let oldValue = registerToStore.read(context)
     let valToSub = registerToSubtract.read(context)
     
+    let res = SUB.calculateResultForUnsignedSub(context, oldValue: oldValue, valToSub: valToSub)
+    
+    registerToStore.write(res.result, context: context)
+    context.registers.Flags = res.flags
+    return InstructionResult(opcode: self.opcode)
+  }
+  
+  class func calculateResultForUnsignedSub(context : ExecutionContext, oldValue : DataLocationSupported, valToSub : DataLocationSupported) -> (result : DataLocationSupported, flags : UInt8){
+    var flags = context.registers.Flags
+    
     let oldValueTyped = oldValue.getAsUInt16()
     let valToSubTyped = valToSub.getAsUInt16()
     
-    
     //Execute SUB
     let newValue = oldValueTyped &- valToSubTyped
-    registerToStore.write(newValue, context: context)
     
     //Calculate Flags
     
     // Subtract Flag
-    context.registers.Flags.setFlag(Flags.Subtract)
+    flags.setFlag(Flags.Subtract)
     
     // Zero Flag
     if newValue == 0 {
-      context.registers.Flags.setFlag(Flags.Zero)
+      flags.setFlag(Flags.Zero)
     } else {
-      context.registers.Flags.resetFlag(Flags.Zero)
+      flags.resetFlag(Flags.Zero)
     }
     
     //Carry Flag
     if oldValueTyped < valToSubTyped {
-      context.registers.Flags.setFlag(Flags.Carry)
+      flags.setFlag(Flags.Carry)
     } else {
-      context.registers.Flags.resetFlag(Flags.Carry)
+      flags.resetFlag(Flags.Carry)
     }
     
     //HalfCarry Flag
@@ -63,11 +71,11 @@ class SUB : Instruction {
     let halfCarryMask : UInt16 = 0x0F
     
     if (oldValueTyped & halfCarryMask) < (valToSubTyped & halfCarryMask) {
-      context.registers.Flags.setFlag(Flags.HalfCarry)
+      flags.setFlag(Flags.HalfCarry)
     } else {
-      context.registers.Flags.resetFlag(Flags.HalfCarry)
+      flags.resetFlag(Flags.HalfCarry)
     }
     
-    return InstructionResult(opcode: self.opcode)
+    return (newValue, flags)
   }
 }

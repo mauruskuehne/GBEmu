@@ -33,10 +33,12 @@ class DEC : Instruction {
     
     let oldVal = location.read(context)
     
-    if oldVal is UInt16 {
-      location.write(oldVal.getAsUInt16() - 1, context: context)
-    } else {
-      location.write(oldVal.getAsUInt8() - 1, context: context)
+    let res = SUB.calculateResultForUnsignedSub(context, oldValue: oldVal, valToSub: UInt8(1))
+    
+    location.write(res.result, context: context)
+    
+    if oldVal is UInt8 {
+      context.registers.Flags = res.flags
     }
     
     return InstructionResult(opcode: self.opcode)
