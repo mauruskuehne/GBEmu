@@ -38,7 +38,7 @@ class CALL : Instruction {
     
     context.registers.SP -= 2
     
-    context.memoryAccess.write(context.registers.SP, value: context.registers.PC + 1)
+    context.memoryAccess.write(context.registers.SP, value: context.registers.PC)
     
     context.registers.PC = address
     

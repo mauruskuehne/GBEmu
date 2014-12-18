@@ -45,7 +45,7 @@ class RETTests: XCTestCase {
     let retInstr = RET(opcode: 0)
     retInstr.execute(ctx)
     
-    XCTAssertEqual(ctx.registers.PC, oldPCValue + 1, "could not return from call")
+    XCTAssertEqual(ctx.registers.PC, oldPCValue, "could not return from call")
     
   }
   

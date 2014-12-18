@@ -52,7 +52,7 @@ class CALLTests: XCTestCase {
     
     let valAtSP : UInt16 = ctx.memoryAccess.readUInt16(ctx.registers.SP)
     
-    XCTAssertEqual(valAtSP, oldPC + 1, "did not correctly store return location in SP")
+    XCTAssertEqual(valAtSP, oldPC, "did not correctly store return location in SP")
   }
   
 }
