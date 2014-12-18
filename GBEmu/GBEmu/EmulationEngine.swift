@@ -69,6 +69,34 @@ class EmulationEngine {
     
   }
   
+  func executeNextInstruction() {
+    let retVal = readNextInstruction()
+    
+    self.registers.PC += retVal.opcodeSize
+    
+    let result = retVal.instruction.execute(executionContext)
+    
+    display.refresh()
+    
+    delegate?.executedInstruction(self, instruction: retVal.instruction)
+    
+  }
+  
+  func executeToVSync() {
+    while executionContext.memoryAccess.readUInt8(IORegister.LY.rawValue) < 144 {
+      
+      let retVal = readNextInstruction()
+      
+      self.registers.PC += retVal.opcodeSize
+      
+      let result = retVal.instruction.execute(executionContext)
+      
+      display.refresh()
+      
+      delegate?.executedInstruction(self, instruction: retVal.instruction)
+    }
+  }
+  
   func readNextInstruction() -> (instruction : Instruction, opcodeSize: UInt16) {
     var workingAddress = self.registers.PC
     let firstOpcodeByte =  memoryAccess.readUInt8(workingAddress++)

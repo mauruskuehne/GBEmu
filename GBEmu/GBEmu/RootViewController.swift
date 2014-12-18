@@ -71,5 +71,12 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   @IBAction func runNextFrame(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeNextFrame()
   }
+  
+  @IBAction func runToVSync(sender: AnyObject) {
+    EmulationEngineContainer.sharedEngine.executeToVSync()
+  }
+  @IBAction func executeNextInstruction(sender: AnyObject) {
+    EmulationEngineContainer.sharedEngine.executeNextInstruction()
+  }
 }
 

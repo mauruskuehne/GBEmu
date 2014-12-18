@@ -20,7 +20,7 @@ class MemoryTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewDataSo
     if aTableColumn?.identifier == "address" {
       return NSString(format: "0x%X", rowIndex)
     } else {
-      return engine.memoryAccess.readUInt8(UInt16(rowIndex)).description
+      return NSString(format: "0x%X", engine.memoryAccess.readUInt8(UInt16(rowIndex))).description
     }
   }
   
