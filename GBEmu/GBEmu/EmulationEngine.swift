@@ -42,6 +42,9 @@ class EmulationEngine {
   
   private func setupExecution() {
     self.executionContext = ExecutionContext(registers: registers, memoryAccess : memoryAccess)
+    
+    registers.reset()
+    
     self.display.initialize()
   }
   
@@ -83,8 +86,8 @@ class EmulationEngine {
   }
   
   func executeToVSync() {
-    while executionContext.memoryAccess.readUInt8(IORegister.LY.rawValue) < 144 {
-      
+    
+    do {
       let retVal = readNextInstruction()
       
       self.registers.PC += retVal.opcodeSize
@@ -94,7 +97,7 @@ class EmulationEngine {
       display.refresh()
       
       delegate?.executedInstruction(self, instruction: retVal.instruction)
-    }
+    } while executionContext.memoryAccess.readUInt8(IORegister.LY.rawValue) != 144
   }
   
   func readNextInstruction() -> (instruction : Instruction, opcodeSize: UInt16) {

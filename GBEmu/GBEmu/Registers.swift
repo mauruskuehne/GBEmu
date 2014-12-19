@@ -79,6 +79,19 @@ public class Registers {
     PC = 0x100
   }
   
+  func reset() {
+    A = 0
+    B = 0
+    C = 0
+    D = 0
+    E = 0
+    H = 0
+    L = 0
+    Flags = 0
+    SP = 0xFFFF
+    PC = 0x100
+  }
+  
   subscript(register : Register) -> DataLocationSupported {
     get {
       switch(register) {

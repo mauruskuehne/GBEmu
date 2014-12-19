@@ -25,8 +25,10 @@ class Display {
     
     memory.write(IORegister.LY.rawValue, value: ly)
     
-    if ly > 144 {
+    if ly == 145 {
       println("in vsync")
+    } else if ly == 0 {
+      println("out of vsync")
     }
   }
   
