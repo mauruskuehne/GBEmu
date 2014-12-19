@@ -166,45 +166,42 @@ class OpcodeParser {
             writeAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true)
             
           } else if p == 2 {
-            
-            let address = fetchUInt16()
-            writeAddr = MemoryDataLocation(address: address, size: .UInt16)
-            readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
-            
+            // LD HL+, A
+            let read = RegisterDataLocation(register: Register.A)
+            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Inc)
           } else if p == 3 {
-            let address = fetchUInt16()
-            
-            writeAddr = MemoryDataLocation(address: address, size: .UInt16)
-            readAddr = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
-            
+            let read = RegisterDataLocation(register: Register.A)
+            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Dec)
           }
         }
         else { //q == 1
-          if p == 0 {
+          if p == 0 { //0x0a
             writeAddr = RegisterDataLocation(register: registerIndexDict[7]!)
             readAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true)
             
-          } else if p == 1 {
+          } else if p == 1 { //0x1a
             writeAddr = RegisterDataLocation(register: registerIndexDict[7]!)
             readAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true)
             
           } else if p == 2 {
-            
-            // this should be LD A, (HL++)
-            
-            writeAddr = RegisterDataLocation(register: rp[2]!)
-            let address = fetchUInt16()
-            readAddr = MemoryDataLocation(address: address, size: .UInt16)
+            // LD A,HL+
+            let read = RegisterDataLocation(register: Register.A)
+            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Inc)
             
           } else if p == 3 {
-            writeAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            let address = fetchUInt16()
-            readAddr = MemoryDataLocation(address: address, size: .UInt16)
-            
+            // LD A,HL+
+            let read = RegisterDataLocation(register: Register.A)
+            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Dec)
           }
         }
         
-        parsedInstruction = LD(opcode: opcode, readLocation: readAddr, writeLocation: writeAddr)
+        if parsedInstruction == nil {
+          parsedInstruction = LD(opcode: opcode, readLocation: readAddr, writeLocation: writeAddr)
+        }
         
       case 3 :
         let reg = rp[Int(p)]!

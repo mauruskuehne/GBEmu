@@ -45,6 +45,21 @@ class OpcodeParserTests: XCTestCase {
     }
   }
   
+  func testLdIncDecParsing() {
+    
+    let opcodes : [UInt8] = [ 0x22, 0x32, 0x2a, 0x3a ]
+    
+    let parser = OpcodeParser()
+    
+    for code in opcodes {
+      
+      let instruction = parser.parseInstruction(code, fetchNextBytePredicate: { return UInt8(0)})
+      
+      let opcode = NSString(format: "%2X", code)
+      XCTAssert(instruction is LDIncDec, "Opcode \(opcode) should be a LD instruction")
+    }
+  }
+  
   func testIncParsing() {
     
     let opcodes : [UInt8] = [
