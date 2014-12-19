@@ -78,5 +78,8 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   @IBAction func executeNextInstruction(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeNextInstruction()
   }
+  @IBAction func runToRet(sender: AnyObject) {
+    EmulationEngineContainer.sharedEngine.executeToRet()
+  }
 }
 
