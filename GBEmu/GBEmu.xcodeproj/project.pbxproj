@@ -46,6 +46,7 @@
 		722CB7441A3D9685004116CE /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7431A3D9685004116CE /* Display.swift */; };
 		722CB7461A3E09D7004116CE /* IORegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7451A3E09D7004116CE /* IORegister.swift */; };
 		722CB7471A3E1740004116CE /* IORegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7451A3E09D7004116CE /* IORegister.swift */; };
+		7239895F1A46D36900D161ED /* LCDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7239895E1A46D36900D161ED /* LCDC.swift */; };
 		723C105B1A44B68A003409A6 /* LDIncDec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C105A1A44B68A003409A6 /* LDIncDec.swift */; };
 		723C105C1A44B68A003409A6 /* LDIncDec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C105A1A44B68A003409A6 /* LDIncDec.swift */; };
 		723C105F1A44BE2D003409A6 /* LDIncDecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C105D1A44BE2D003409A6 /* LDIncDecTests.swift */; };
@@ -171,6 +172,7 @@
 		722341111A422F170048CD74 /* SRA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRA.swift; sourceTree = "<group>"; };
 		722CB7431A3D9685004116CE /* Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		722CB7451A3E09D7004116CE /* IORegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IORegister.swift; sourceTree = "<group>"; };
+		7239895E1A46D36900D161ED /* LCDC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDC.swift; sourceTree = "<group>"; };
 		723C105A1A44B68A003409A6 /* LDIncDec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LDIncDec.swift; sourceTree = "<group>"; };
 		723C105D1A44BE2D003409A6 /* LDIncDecTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LDIncDecTests.swift; sourceTree = "<group>"; };
 		723C3C021A265C7800A1D78F /* JP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JP.swift; sourceTree = "<group>"; };
@@ -258,7 +260,7 @@
 		722CB7421A3D9636004116CE /* Hardware */ = {
 			isa = PBXGroup;
 			children = (
-				722CB7431A3D9685004116CE /* Display.swift */,
+				72433FBA1A45DEC800220A52 /* Display */,
 				722CB7451A3E09D7004116CE /* IORegister.swift */,
 			);
 			name = Hardware;
@@ -314,6 +316,15 @@
 				7245BDFE1A190E0B00AF205B /* MemoryDataLocation.swift */,
 			);
 			name = DataLocations;
+			sourceTree = "<group>";
+		};
+		72433FBA1A45DEC800220A52 /* Display */ = {
+			isa = PBXGroup;
+			children = (
+				722CB7431A3D9685004116CE /* Display.swift */,
+				7239895E1A46D36900D161ED /* LCDC.swift */,
+			);
+			name = Display;
 			sourceTree = "<group>";
 		};
 		7264AF7F1A15316200472013 = {
@@ -559,6 +570,7 @@
 				724097AA1A17D8260034D1FB /* EmulationEngine.swift in Sources */,
 				7245BDF61A18EC1000AF205B /* MemoryAccessor.swift in Sources */,
 				7220C6AF1A3C9B3200EABF7C /* RR.swift in Sources */,
+				7239895F1A46D36900D161ED /* LCDC.swift in Sources */,
 				72C181D71A3CF5800075D402 /* OpcodeTableViewDelegate.swift in Sources */,
 				723E05A91A2E243900B2985D /* RegisterTableViewDelegate.swift in Sources */,
 				72A3D7911A40943D00C8043B /* InstructionResult.swift in Sources */,

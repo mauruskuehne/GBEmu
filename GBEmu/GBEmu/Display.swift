@@ -9,6 +9,23 @@
 import Foundation
 
 class Display {
+  var isDisplayOperating = false
+  var isWindowDisplayOn = false
+  var isBgAndWindowDisplayOn = false
+  
+  let tileMapSize : UInt16 = 0x3FF
+  
+  //Window Tile Map Display Select
+  var windowTileMapDisplaySelectStart : UInt16 = 0
+  
+  //BG & Window Tile Data Select
+  let tileDataSize : UInt16 = 0xFFF
+  var bgAndWindowTileDataSelectStart : UInt16 = 0
+  var bgAndWindowTileMapDisplaySelectStart : UInt16 = 0
+  
+  // OBJ / Sprite
+  var spriteSize : UInt8 = 0
+  var isSpriteDisplayOn = false
   
   let memory : MemoryAccessor
   
@@ -16,14 +33,26 @@ class Display {
     self.memory = memory
   }
   
+  func initialize() {
+    //Set LCLDC to 0x
+    memory[IORegister.LCDC.rawValue] = 0x91
+    
+    configureFromLCDC()
+  }
+  
   func refresh() {
-    var ly = memory.readUInt8(IORegister.LY.rawValue)
+    
+    //react to LCDC
+    configureFromLCDC()
+    
+    //update data
+    var ly = memory[IORegister.LY.rawValue]
     ly += 1
     if ly > 153 {
       ly = 0
     }
     
-    memory.write(IORegister.LY.rawValue, value: ly)
+    memory[IORegister.LY.rawValue] = ly
     
     if ly == 145 {
       println("in vsync")
@@ -32,8 +61,40 @@ class Display {
     }
   }
   
-  func initialize() {
-    //Set LCLDC to 0x
-    memory.write(IORegister.LCDC.rawValue, value: UInt8(0x91))
+  private func configureFromLCDC() {
+    let lcdc = memory[IORegister.LCDC.rawValue]
+    
+    isDisplayOperating = lcdc & LCDC.LCD_Control_Operation.rawValue > 0
+    
+    if lcdc & LCDC.Window_Tile_Map_Display_Select.rawValue > 0 {
+      windowTileMapDisplaySelectStart = 0x9C00
+    } else {
+      windowTileMapDisplaySelectStart = 0x9800
+    }
+    
+    isWindowDisplayOn = lcdc & LCDC.Window_Display.rawValue > 0
+    
+    if lcdc & LCDC.BG_Window_Tile_Data_Select.rawValue > 0 {
+      bgAndWindowTileDataSelectStart = 0x8000
+    } else {
+      bgAndWindowTileDataSelectStart = 0x8800
+    }
+    
+    if lcdc & LCDC.BG_Window_Tile_Map_Display_Select.rawValue > 0 {
+      bgAndWindowTileMapDisplaySelectStart = 0x9C00
+    } else {
+      bgAndWindowTileMapDisplaySelectStart = 0x9800
+    }
+    
+    if lcdc & LCDC.OBJ_Sprite_Size.rawValue > 0 { // width * height
+      spriteSize = 8 * 16
+    } else {
+      spriteSize = 8 * 8
+    }
+    
+    isSpriteDisplayOn = lcdc & LCDC.OBJ_Sprite_Display.rawValue > 0
+    
+    isBgAndWindowDisplayOn = lcdc & LCDC.BG_Window_Display.rawValue > 0
   }
 }
+

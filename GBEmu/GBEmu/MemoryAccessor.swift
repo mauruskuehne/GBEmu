@@ -44,8 +44,6 @@ class MemoryAccessor {
       }
     }
     
-    
-    
     if(value is UInt16) {
       let bytes = (value as UInt16).toBytes()
       memory[Int(address)] = bytes.lower
@@ -53,6 +51,15 @@ class MemoryAccessor {
     }
     else {
       memory[Int(address)] = value as UInt8
+    }
+  }
+  
+  subscript(index: UInt16) -> UInt8 {
+    get {
+      return readUInt8(index)
+    }
+    set(newValue) {
+      write(index, value: newValue)
     }
   }
 }
