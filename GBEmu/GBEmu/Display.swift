@@ -47,6 +47,12 @@ class Display {
     }
   }
   
+  var BG_Window_Palette_Data : UInt8 {
+    get {
+      return memory.readUInt8(IORegister.BGP.rawValue)
+    }
+  }
+  
   init(memory : MemoryAccessor) {
     self.memory = memory
   }

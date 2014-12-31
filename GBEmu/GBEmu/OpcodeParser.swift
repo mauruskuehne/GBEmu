@@ -167,8 +167,8 @@ class OpcodeParser {
             
           } else if p == 2 {
             // LD HL+, A
-            let write = RegisterDataLocation(register: Register.A)
-            let read = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            let read = RegisterDataLocation(register: Register.A)
+            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Inc)
           } else if p == 3 {
             let write = RegisterDataLocation(register: Register.A)
