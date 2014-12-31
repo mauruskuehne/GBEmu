@@ -14,7 +14,7 @@ class DisplayView : NSView {
   let display = EmulationEngineContainer.sharedEngine.display
   
   func refresh() {
-    
+    super.needsDisplay = true
   }
   
   override func drawRect(dirtyRect: NSRect) {

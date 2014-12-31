@@ -26,7 +26,7 @@ class LDIncDec : Instruction {
     get {
       var str : String
       var writeStr = "\(writeLocation.description)"
-      var readStr = "\(writeLocation.description)"
+      var readStr = "\(readLocation.description)"
       if operation == .Inc {
         str = "LDI "
       } else {

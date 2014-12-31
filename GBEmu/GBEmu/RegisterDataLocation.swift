@@ -34,12 +34,12 @@ class RegisterDataLocation : ReadWriteDataLocation {
   func read(context : ExecutionContext) -> DataLocationSupported {
     
     if dereferenceFirst {
-      if size == DataSize.UInt16 {
+      /*if size == DataSize.UInt16 {
         return context.memoryAccess.readUInt16(context.registers[register].getAsUInt16())
       }
-      else {
+      else {*/
         return context.memoryAccess.readUInt8(context.registers[register].getAsUInt16())
-      }
+      //}
     }
     else {
       //size ist egal, wir geben immer das ganze Register zurück

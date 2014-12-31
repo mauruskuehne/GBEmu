@@ -167,12 +167,12 @@ class OpcodeParser {
             
           } else if p == 2 {
             // LD HL+, A
-            let read = RegisterDataLocation(register: Register.A)
-            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            let write = RegisterDataLocation(register: Register.A)
+            let read = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Inc)
           } else if p == 3 {
-            let read = RegisterDataLocation(register: Register.A)
-            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            let write = RegisterDataLocation(register: Register.A)
+            let read = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Dec)
           }
         }
@@ -187,14 +187,14 @@ class OpcodeParser {
             
           } else if p == 2 {
             // LD A,HL+
-            let read = RegisterDataLocation(register: Register.A)
-            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            let write = RegisterDataLocation(register: Register.A)
+            let read = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Inc)
             
           } else if p == 3 {
-            // LD A,HL+
-            let read = RegisterDataLocation(register: Register.A)
-            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            // LD A,HL-
+            let write = RegisterDataLocation(register: Register.A)
+            let read = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Dec)
           }
         }
