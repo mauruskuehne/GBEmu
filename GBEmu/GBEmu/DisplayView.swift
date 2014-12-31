@@ -9,6 +9,14 @@
 import Cocoa
 
 class DisplayView : NSView {
+  
+  let engine = EmulationEngineContainer.sharedEngine
+  let display = EmulationEngineContainer.sharedEngine.display
+  
+  func refresh() {
+    
+  }
+  
   override func drawRect(dirtyRect: NSRect) {
     NSColor.redColor().set()
     NSRectFill(dirtyRect)

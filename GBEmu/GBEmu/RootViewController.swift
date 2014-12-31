@@ -15,6 +15,7 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   
   @IBOutlet var registerTableViewDataSource: RegisterTableViewDelegate!
   
+  @IBOutlet weak var displayView: DisplayView!
   @IBOutlet weak var registerTableView: NSTableView!
   @IBOutlet weak var memoryTableView: NSTableView!
   @IBOutlet weak var opcodeTableView: NSTableView!
@@ -40,6 +41,7 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     registerTableView.reloadData()
     memoryTableView.reloadData()
     
+    displayView.refresh()
     jumpToMemoryLocation()
   }
   
@@ -59,6 +61,8 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     println(lastInstructionLabel.stringValue)
     
     nextInstructionLabel.stringValue = nextInstruction.instruction.description
+    
+    displayView.refresh()
     
     jumpToMemoryLocation()
   }

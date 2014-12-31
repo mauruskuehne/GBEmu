@@ -54,6 +54,11 @@ class MemoryAccessor {
     }
   }
   
+  func getRange(address : UInt16, length : UInt16) -> [UInt8] {
+    let val = self.memory[Int(address)...Int(address + length)]
+    return Array(val)
+  }
+  
   subscript(index: UInt16) -> UInt8 {
     get {
       return readUInt8(index)
