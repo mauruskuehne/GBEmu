@@ -243,6 +243,9 @@ class OpcodeParser {
         case 3 :
           parsedInstruction = RR(opcode: opcode, register: getDataLocationFor(7))
           
+        case 5 :
+          parsedInstruction = CPL(opcode: opcode)
+          
         default :
           assertionFailure("unknown value for y in opcode!")
         }

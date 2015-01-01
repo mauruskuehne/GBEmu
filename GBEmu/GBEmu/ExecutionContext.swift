@@ -12,6 +12,8 @@ class ExecutionContext  {
   let registers : Registers
   let memoryAccess : MemoryAccessor
   
+  var interruptMasterEnable = true
+  
   init(registers : Registers, memoryAccess : MemoryAccessor) {
     self.registers = registers;
     self.memoryAccess = memoryAccess

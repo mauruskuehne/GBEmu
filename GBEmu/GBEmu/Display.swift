@@ -80,8 +80,7 @@ class Display {
     
     if ly == 145 {
       println("in vsync")
-    } else if ly == 0 {
-      println("out of vsync")
+      memory[IORegister.IF.rawValue] |= InterruptFlag.VBlank.rawValue
     }
   }
   

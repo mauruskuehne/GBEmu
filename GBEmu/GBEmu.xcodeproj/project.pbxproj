@@ -46,6 +46,7 @@
 		722CB7441A3D9685004116CE /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7431A3D9685004116CE /* Display.swift */; };
 		722CB7461A3E09D7004116CE /* IORegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7451A3E09D7004116CE /* IORegister.swift */; };
 		722CB7471A3E1740004116CE /* IORegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722CB7451A3E09D7004116CE /* IORegister.swift */; };
+		722DAEE61A55B15D006DE1EF /* InterruptFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722DAEE51A55B15D006DE1EF /* InterruptFlag.swift */; };
 		7239895F1A46D36900D161ED /* LCDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7239895E1A46D36900D161ED /* LCDC.swift */; };
 		723C105B1A44B68A003409A6 /* LDIncDec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C105A1A44B68A003409A6 /* LDIncDec.swift */; };
 		723C105C1A44B68A003409A6 /* LDIncDec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C105A1A44B68A003409A6 /* LDIncDec.swift */; };
@@ -175,6 +176,7 @@
 		722341111A422F170048CD74 /* SRA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRA.swift; sourceTree = "<group>"; };
 		722CB7431A3D9685004116CE /* Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		722CB7451A3E09D7004116CE /* IORegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IORegister.swift; sourceTree = "<group>"; };
+		722DAEE51A55B15D006DE1EF /* InterruptFlag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterruptFlag.swift; sourceTree = "<group>"; };
 		7239895E1A46D36900D161ED /* LCDC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDC.swift; sourceTree = "<group>"; };
 		723C105A1A44B68A003409A6 /* LDIncDec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LDIncDec.swift; sourceTree = "<group>"; };
 		723C105D1A44BE2D003409A6 /* LDIncDecTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LDIncDecTests.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			children = (
 				72433FBA1A45DEC800220A52 /* Display */,
 				722CB7451A3E09D7004116CE /* IORegister.swift */,
+				722DAEE51A55B15D006DE1EF /* InterruptFlag.swift */,
 			);
 			name = Hardware;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				7200FA1F1A2B9CDF0009315A /* RST.swift in Sources */,
 				7220C6B91A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift in Sources */,
 				722341031A4220310048CD74 /* RES.swift in Sources */,
+				722DAEE61A55B15D006DE1EF /* InterruptFlag.swift in Sources */,
 				72EEFE5F1A1FE6D3005A17FD /* OR.swift in Sources */,
 				722CB7461A3E09D7004116CE /* IORegister.swift in Sources */,
 				7220C6B61A3CE8F300EABF7C /* JumpCondition.swift in Sources */,

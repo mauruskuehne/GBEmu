@@ -19,6 +19,8 @@ class EI : Instruction {
   override func execute(context : ExecutionContext) -> InstructionResult {
     println("enable interrupts")
     
+    context.interruptMasterEnable = true
+    
     return InstructionResult(opcode: self.opcode)
   }
 }

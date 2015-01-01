@@ -17,10 +17,14 @@ class RET : Instruction {
   override var description : String {
     get {
       
-      var str = "RET "
+      var str = "RET"
+      
+      if enableInterrupts {
+        str += "I"
+      }
       
       if let c = condition {
-        str += c.description + "?"
+        str += " " + c.description + "?"
       }
       
       return str
@@ -43,7 +47,7 @@ class RET : Instruction {
     }
     
     if enableInterrupts {
-      assertionFailure("not yet implemented")
+      context.interruptMasterEnable = true
     }
     
     let newPC = context.memoryAccess.readUInt16(context.registers.SP)
