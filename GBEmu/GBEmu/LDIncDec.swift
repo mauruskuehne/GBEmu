@@ -33,7 +33,7 @@ class LDIncDec : Instruction {
         str = "LDD "
       }
       
-      return str + readStr + ", " + writeStr
+      return str + writeStr + ", " + readStr
     }
   }
   
