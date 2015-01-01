@@ -28,6 +28,7 @@ class Display {
   var isSpriteDisplayOn = false
   
   let memory : MemoryAccessor
+  let executionContext : ExecutionContext
   
   var Window_Tile_Map_Display_Select_Range : [UInt8] {
     get {
@@ -53,8 +54,9 @@ class Display {
     }
   }
   
-  init(memory : MemoryAccessor) {
-    self.memory = memory
+  init(context : ExecutionContext) {
+    self.memory = context.memoryAccess
+    self.executionContext = context
   }
   
   func initialize() {
@@ -71,10 +73,13 @@ class Display {
     
     //update data
     var ly = memory[IORegister.LY.rawValue]
-    ly += 1
-    if ly > 153 {
-      ly = 0
-    }
+    
+    let usedCycles = executionContext.usedClockCyclesInCurrentFrame
+    let cyclesPerFrame = executionContext.CYCLES_PER_FRAME
+    
+    let factor = Double(usedCycles) / Double(cyclesPerFrame)
+    
+    ly = UInt8(153.0 * factor)
     
     memory[IORegister.LY.rawValue] = ly
     

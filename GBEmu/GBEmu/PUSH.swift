@@ -25,13 +25,13 @@ class PUSH : Instruction {
   }
   
   override func execute(context : ExecutionContext) -> InstructionResult {
-    
-    context.registers.SP -= 2
-    
     let value = locToWrite.read(context)
-    
-    context.memoryAccess.write(context.registers.SP, value: value)
-    
+    PUSH.pushToStack(context, value: value.getAsUInt16())
     return InstructionResult(opcode: self.opcode)
+  }
+  
+  class func pushToStack(context : ExecutionContext, value : UInt16) {
+    context.registers.SP -= 2
+    context.memoryAccess.write(context.registers.SP, value: value)
   }
 }

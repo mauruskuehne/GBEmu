@@ -14,11 +14,9 @@ struct EmulationEngineContainer {
 
 class EmulationEngine {
   
-  private let CLOCK_SPEED = 4.194304 * 1000 * 1000
-  
   private let parser = OpcodeParser()
   private var romData : NSData!
-  private var executionContext : ExecutionContext!
+  private var executionContext : ExecutionContext
   
   let registers = Registers()
   let memoryAccess = MemoryAccessor()
@@ -28,7 +26,8 @@ class EmulationEngine {
   let display : Display
   
   init() {
-    self.display = Display(memory: self.memoryAccess)
+    self.executionContext = ExecutionContext(registers: registers, memoryAccess : memoryAccess)
+    self.display = Display(context: self.executionContext)
   }
   
   func loadRom(romData : NSData) {
@@ -41,7 +40,6 @@ class EmulationEngine {
   }
   
   private func setupExecution() {
-    self.executionContext = ExecutionContext(registers: registers, memoryAccess : memoryAccess)
     
     registers.reset()
     
@@ -51,14 +49,11 @@ class EmulationEngine {
   func executeNextFrame() {
     
     //cycles = clock speed in Hz / required frames-per-second
+    // => Anzahl Cycles die 60x pro Sekunde ausgeführt werden müssen
     
-    let cycles = UInt32( CLOCK_SPEED / 59.73)
-    var usedCycles : UInt32 = 0
-    
-    while usedCycles < cycles {
+    do {
       let executedInstruction = executeNextInstruction()
-      usedCycles += UInt32(executedInstruction.result.usedCycles)
-    }
+    } while executionContext.usedClockCyclesInCurrentFrame != 0
     
   }
   
@@ -69,7 +64,51 @@ class EmulationEngine {
     
     let result = retVal.instruction.execute(executionContext)
     
+    executionContext.usedClockCyclesInCurrentFrame += UInt32(result.usedCycles)
+    
     display.refresh()
+    
+    
+    if executionContext.interruptMasterEnable && memoryAccess[IORegister.IE.rawValue] > 0 {
+      
+      //aktuellen PC in Stack pushen
+      PUSH.pushToStack(executionContext, value: registers.PC)
+      
+      //PC auf korrekte Adresse setzen
+      func isInterruptRequested(interrupt: InterruptFlag) -> Bool {
+        return (memoryAccess[IORegister.IE.rawValue] & interrupt.rawValue > 0) && (memoryAccess[IORegister.IF.rawValue] & interrupt.rawValue > 0)
+      }
+      
+      if isInterruptRequested(.VBlank) {
+        println("VBlank Interrupt")
+        executionContext.registers.PC = 0x0040
+        memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.VBlank.rawValue
+        
+      } else if isInterruptRequested(.LCDC) {
+        println("LCDC Interrupt")
+        executionContext.registers.PC = 0x0048
+        memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.LCDC.rawValue
+        
+      } else if isInterruptRequested(.Timer_Overflow) {
+        println("Timer_Overflow Interrupt")
+        executionContext.registers.PC = 0x0050
+        memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.Timer_Overflow.rawValue
+        
+      } else if isInterruptRequested(.Serial_Transfer_Complete) {
+        println("Serial_Transfer_Complete Interrupt")
+        executionContext.registers.PC = 0x0058
+        memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.Serial_Transfer_Complete.rawValue
+        
+      } else if isInterruptRequested(.PIN_Hi_Lo_Change) {
+        println("PIN_Hi_Lo_Change Interrupt")
+        executionContext.registers.PC = 0x0060
+        memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.PIN_Hi_Lo_Change.rawValue
+        
+      }
+      
+      //Interrupts deaktivieren
+      executionContext.interruptMasterEnable = false
+    }
     
     delegate?.executedInstruction(self, instruction: retVal.instruction)
     
@@ -108,3 +147,4 @@ class EmulationEngine {
     return (instruction, opcodeSize)
   }
 }
+
