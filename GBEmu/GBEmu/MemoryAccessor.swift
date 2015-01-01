@@ -13,7 +13,7 @@ class MemoryAccessor {
   var memory : [UInt8]
   
   init() {
-    self.memory = [UInt8](count: 0xFFFF, repeatedValue: 0)
+    self.memory = [UInt8](count: 0x10000, repeatedValue: 0)
   }
   
   func loadRom(rom : NSData) {

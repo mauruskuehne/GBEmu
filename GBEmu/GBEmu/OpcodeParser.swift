@@ -332,7 +332,8 @@ class OpcodeParser {
       case 2 :
         if r == 1 {
           let readReg = getDataLocationFor(7)
-          let writeLoc = RegisterDataLocation(register: Register.C, offset: 0xFF00)
+          let addr = fetchUInt16()
+          let writeLoc = MemoryDataLocation(address: addr, size: .UInt8)
           parsedInstruction = LD(opcode: opcode, readLocation: readReg, writeLocation: writeLoc)
         } else {
           let condition = cc[Int(y)]!
