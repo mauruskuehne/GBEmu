@@ -8,7 +8,12 @@
 
 import Foundation
 
+private struct BigRegisterContainer {
+  static let bigRegisters = [ Register.HL, Register.AF, Register.BC, Register.DE, Register.PC, Register.SP ]
+}
+
 class RegisterDataLocation : ReadWriteDataLocation {
+  
   let register : Register
   let dereferenceFirst : Bool
   let size : DataSize
@@ -19,11 +24,11 @@ class RegisterDataLocation : ReadWriteDataLocation {
     self.dereferenceFirst = dereferenceFirst
     self.offset = offset
     
-    let bigRegisters = [ Register.HL, Register.AF, Register.BC, Register.DE, Register.PC, Register.SP ]
+    
     
     //if(self.register)
     
-    if contains(bigRegisters, self.register) {
+    if contains(BigRegisterContainer.bigRegisters, self.register) {
       size = .UInt16
     } else {
       size = .UInt8

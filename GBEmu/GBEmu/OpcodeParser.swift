@@ -48,41 +48,52 @@ class OpcodeParser {
     
     let location = getDataLocationFor(withRegisterIndex)
     
-    let rotInstructions : [Int: Instruction] =
-    [ 0 : RLC(opcode: opcode, prefix : prefix, register: location),
-      1 : RRC(opcode: opcode, prefix : prefix, register: location),
-      2 : RL(opcode: opcode, prefix : prefix, register: location),
-      3 : RR(opcode: opcode, prefix : prefix, register: location),
-      4 : SLA(opcode: opcode, prefix : prefix, register: location),
-      5 : SRA(opcode: opcode, prefix : prefix, register: location),
-      6 : SCF(opcode: opcode, prefix : prefix),//6 : SLL(opcode: opcode, prefix : prefix, register: location),
-      7 : SRL(opcode: opcode, prefix : prefix, register: location)
-    ]
-    let val = rotInstructions[index]
-    
-    return val!
+    switch(index) {
+    case 0 :
+      return RLC(opcode: opcode, prefix : prefix, register: location)
+    case 1 :
+      return RRC(opcode: opcode, prefix : prefix, register: location)
+    case 2 :
+      return RL(opcode: opcode, prefix : prefix, register: location)
+    case 3 :
+      return RR(opcode: opcode, prefix : prefix, register: location)
+    case 4 :
+      return SLA(opcode: opcode, prefix : prefix, register: location)
+    case 5 :
+      return SRA(opcode: opcode, prefix : prefix, register: location)
+    case 6 :
+      return SCF(opcode: opcode, prefix : prefix)
+    case 7 :
+      return SRL(opcode: opcode, prefix : prefix, register: location)
+    default :
+      assertionFailure("invalid index")
+    }
   }
   
   func getAluInstructionForIndex(index : Int, withReadLocation: ReadableDataLocation, opcode : UInt8) -> Instruction {
     
     let locationRegA = getDataLocationFor(7)
     
-    let sbcInstr = SBC(opcode: opcode, registerToStore: locationRegA, registerToSubtract: withReadLocation)
-    let adcInstr = ADC(opcode: opcode, registerToStore: locationRegA, registerToAdd: withReadLocation)
-    
-    let aluInstructions : [Int: Instruction] =
-     [0 : ADD(opcode: opcode, registerToStore: locationRegA, registerToAdd: withReadLocation),
-      1 : adcInstr,
-      2 : SUB(opcode: opcode, registerToStore: locationRegA, registerToSubtract: withReadLocation),
-      3 : sbcInstr,
-      4 : AND(opcode: opcode, register: withReadLocation),
-      5 : XOR(opcode: opcode, register: withReadLocation), // XOR,
-      6 : OR(opcode: opcode, register: withReadLocation), //Register.HL,
-      7 : CP(opcode: opcode, register: withReadLocation)] //Register.A]
-    
-    let val = aluInstructions[index]
-    
-    return val!
+    switch(index) {
+    case 0 :
+      return ADD(opcode: opcode, registerToStore: locationRegA, registerToAdd: withReadLocation)
+    case 1 :
+      return ADC(opcode: opcode, registerToStore: locationRegA, registerToAdd: withReadLocation)
+    case 2 :
+      return SUB(opcode: opcode, registerToStore: locationRegA, registerToSubtract: withReadLocation)
+    case 3 :
+      return SBC(opcode: opcode, registerToStore: locationRegA, registerToSubtract: withReadLocation)
+    case 4 :
+      return AND(opcode: opcode, register: withReadLocation)
+    case 5 :
+      return XOR(opcode: opcode, register: withReadLocation)
+    case 6 :
+      return OR(opcode: opcode, register: withReadLocation)
+    case 7 :
+      return CP(opcode: opcode, register: withReadLocation)
+    default :
+      assertionFailure("invalid index")
+    }
   }
   
   func parseInstruction(firstOpcodeByte : UInt8, fetchNextBytePredicate : () -> UInt8) -> Instruction {
