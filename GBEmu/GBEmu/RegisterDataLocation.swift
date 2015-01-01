@@ -51,8 +51,13 @@ class RegisterDataLocation : ReadWriteDataLocation {
   func write(value : DataLocationSupported, context : ExecutionContext) {
     
     if dereferenceFirst {
-      let addr = context.registers[register].getAsUInt16()
-      context.memoryAccess.write(addr, value: value)
+      if let memOffset = offset {
+        let addr = UInt16(memOffset + Int32(context.registers[register].getAsUInt16()))
+        context.memoryAccess.write(addr, value: value)
+      } else {
+        let addr = context.registers[register].getAsUInt16()
+        context.memoryAccess.write(addr, value: value)
+      }
     }
     else {
       
@@ -69,12 +74,16 @@ class RegisterDataLocation : ReadWriteDataLocation {
   
   var description: String {
     get {
+      var str = register.description
+      
+      if let o = offset {
+        str = String(format: "0x%X", o) + "+" + str
+      }
+      
       if dereferenceFirst {
-        return "(\(register.description))"
+        str = "(" + str + ")"
       }
-      else {
-        return "\(register.description)"
-      }
+      return str
     }
   }
 }

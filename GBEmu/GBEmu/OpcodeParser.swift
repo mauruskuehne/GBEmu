@@ -171,8 +171,8 @@ class OpcodeParser {
             let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Inc)
           } else if p == 3 {
-            let write = RegisterDataLocation(register: Register.A)
-            let read = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            let read = RegisterDataLocation(register: Register.A)
+            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Dec)
           }
         }
@@ -330,10 +330,16 @@ class OpcodeParser {
           }
         }
       case 2 :
-        if r == 1 {
+        if r == 1 { // currently handles E2 and EA!!
           let readReg = getDataLocationFor(7)
-          let addr = fetchUInt16()
-          let writeLoc = MemoryDataLocation(address: addr, size: .UInt8)
+          var writeLoc : WriteableDataLocation
+          if q == 0 {
+            writeLoc = RegisterDataLocation(register: Register.C, offset: 0xFF00, dereferenceFirst: true)
+          } else {
+            let addr = fetchUInt16()
+            writeLoc = MemoryDataLocation(address: addr, size: .UInt8)
+          }
+          
           parsedInstruction = LD(opcode: opcode, readLocation: readReg, writeLocation: writeLoc)
         } else {
           let condition = cc[Int(y)]!
