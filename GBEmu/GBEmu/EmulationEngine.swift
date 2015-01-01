@@ -56,23 +56,13 @@ class EmulationEngine {
     var usedCycles : UInt32 = 0
     
     while usedCycles < cycles {
-      
-      let retVal = readNextInstruction()
-      
-      self.registers.PC += retVal.opcodeSize
-      
-      let result = retVal.instruction.execute(executionContext)
-      
-      usedCycles += UInt32(result.usedCycles)
-      
-      display.refresh()
-      
-      delegate?.executedInstruction(self, instruction: retVal.instruction)
+      let executedInstruction = executeNextInstruction()
+      usedCycles += UInt32(executedInstruction.result.usedCycles)
     }
     
   }
   
-  func executeNextInstruction() {
+  func executeNextInstruction() -> (instruction : Instruction, result: InstructionResult) {
     let retVal = readNextInstruction()
     
     self.registers.PC += retVal.opcodeSize
@@ -83,49 +73,25 @@ class EmulationEngine {
     
     delegate?.executedInstruction(self, instruction: retVal.instruction)
     
+    return (instruction: retVal.instruction, result: result)
   }
   
   func executeToVSync() {
-    
     do {
-      let retVal = readNextInstruction()
-      
-      self.registers.PC += retVal.opcodeSize
-      
-      let result = retVal.instruction.execute(executionContext)
-      
-      display.refresh()
-      
-      delegate?.executedInstruction(self, instruction: retVal.instruction)
+      executeNextInstruction()
     } while executionContext.memoryAccess.readUInt8(IORegister.LY.rawValue) != 144
   }
   
   func executeToRet() {
     var res : Instruction!
     do {
-      let retVal = readNextInstruction()
-      res = retVal.instruction
-      self.registers.PC += retVal.opcodeSize
-      
-      let result = retVal.instruction.execute(executionContext)
-      
-      display.refresh()
-      
-      delegate?.executedInstruction(self, instruction: retVal.instruction)
+      res = executeNextInstruction().instruction
     } while !(res is RET)
   }
   
   func executeToAddress(address : UInt16) {
     do {
-      let retVal = readNextInstruction()
-      let res = retVal.instruction
-      self.registers.PC += retVal.opcodeSize
-      
-      let result = retVal.instruction.execute(executionContext)
-      
-      display.refresh()
-      
-      delegate?.executedInstruction(self, instruction: retVal.instruction)
+      executeNextInstruction()
     } while registers.PC != address
   }
   
