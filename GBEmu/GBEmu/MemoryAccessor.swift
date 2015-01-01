@@ -18,7 +18,8 @@ class MemoryAccessor {
   
   func loadRom(rom : NSData) {
     self.rom = rom
-    rom.getBytes(&self.memory, length: 0x4000)
+    //we currently only support 32KByte ROMs
+    rom.getBytes(&self.memory, length: 0x8000)
   }
   
   func readUInt8(address : UInt16) -> UInt8 {
