@@ -13,8 +13,13 @@ class DisplayView : NSView {
   let engine = EmulationEngineContainer.sharedEngine
   let display = EmulationEngineContainer.sharedEngine.display
   
+  let DARK_COLOR = NSColor(red: 0, green: 0, blue: 0, alpha: 1)
+  let LIGHT_COLOR = NSColor(red: 1, green: 1, blue: 1, alpha: 1)
+  let MID_DARK_COLOR = NSColor(red: 0.33, green: 0.33, blue: 0.33, alpha: 1)
+  let MID_LIGHT_COLOR = NSColor(red: 0.66, green: 0.66, blue: 0.66, alpha: 1)
+  
   func refresh() {
-    super.needsDisplay = true
+    needsDisplay = true
   }
   
   func getColorForDotData(data : UInt8) -> NSColor {
@@ -39,15 +44,27 @@ class DisplayView : NSView {
     }
     
     var intensity = (display.BG_Window_Palette_Data & bitMask) >> shiftVal
-    
-    let whiteness = (Float(intensity) * 25.0 / 100.0)
-    
-    let col = NSColor(white: CGFloat(whiteness), alpha: 1)
+    var col : NSColor
+    switch(intensity) {
+    case 0 :
+      col = DARK_COLOR
+    case 1 :
+      col = MID_DARK_COLOR
+    case 2 :
+      col = MID_LIGHT_COLOR
+    case 3 :
+      col = LIGHT_COLOR
+    default:
+      assertionFailure("this color is not supported")
+    }
     
     return col
   }
   
   override func drawRect(dirtyRect: NSRect) {
+    
+    let ctx = NSGraphicsContext.currentContext()!
+    
     NSColor.blackColor().set()
     NSRectFill(dirtyRect)
     
@@ -82,7 +99,7 @@ class DisplayView : NSView {
         
         let singleTileData = tileData[tileStart..<(tileStart + 16)]
         //self.memory[Int(address)...Int(address + length)]
-        drawTileData(Array(singleTileData), tilePositionX: colIndex, tilePositionY: rowIndex, inRect : dirtyRect)
+        drawTileData(Array(singleTileData), tilePositionX: colIndex, tilePositionY: rowIndex)
         
         colIndex++
       }
@@ -90,7 +107,7 @@ class DisplayView : NSView {
     }
   }
   
-  func drawTileData(data : [UInt8], tilePositionX : Int, tilePositionY : Int, inRect rect : NSRect) {
+  func drawTileData(data : [UInt8], tilePositionX : Int, tilePositionY : Int) {
     
     let xPixelStart = 8 * tilePositionX
     let yPixelStart = 8 * tilePositionY

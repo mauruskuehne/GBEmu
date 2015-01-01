@@ -53,12 +53,11 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     }
     
     let nextInstruction = engine.readNextInstruction()
-    
     registerTableView.reloadData()
     
     lastInstructionLabel.stringValue = instruction.description
     
-    println(lastInstructionLabel.stringValue)
+    //println(lastInstructionLabel.stringValue)
     
     nextInstructionLabel.stringValue = nextInstruction.instruction.description
     
