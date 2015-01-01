@@ -115,6 +115,20 @@ class EmulationEngine {
     } while !(res is RET)
   }
   
+  func executeToAddress(address : UInt16) {
+    do {
+      let retVal = readNextInstruction()
+      let res = retVal.instruction
+      self.registers.PC += retVal.opcodeSize
+      
+      let result = retVal.instruction.execute(executionContext)
+      
+      display.refresh()
+      
+      delegate?.executedInstruction(self, instruction: retVal.instruction)
+    } while registers.PC != address
+  }
+  
   func readNextInstruction() -> (instruction : Instruction, opcodeSize: UInt16) {
     var workingAddress = self.registers.PC
     let firstOpcodeByte =  memoryAccess.readUInt8(workingAddress++)

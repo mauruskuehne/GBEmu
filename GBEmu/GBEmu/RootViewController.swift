@@ -21,6 +21,7 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   @IBOutlet weak var opcodeTableView: NSTableView!
   @IBOutlet weak var lastInstructionLabel: NSTextField!
   @IBOutlet weak var nextInstructionLabel: NSTextField!
+  @IBOutlet weak var txtPCBreakpoint: NSTextField!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -83,6 +84,19 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   }
   @IBAction func runToRet(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeToRet()
+  }
+  
+  @IBAction func runToPC(sender: AnyObject) {
+    
+    let scanner = NSScanner(string: txtPCBreakpoint.stringValue)
+    var res : UInt32 = 0
+    if scanner.scanHexInt(&res) {
+      EmulationEngineContainer.sharedEngine.executeToAddress(UInt16(res))
+    } else {
+      let alert = NSAlert()
+      alert.messageText = "The entered address is not a valid HEX address"
+    }
+    
   }
 }
 
