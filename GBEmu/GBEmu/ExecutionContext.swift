@@ -18,17 +18,16 @@ class ExecutionContext  {
   
   var interruptMasterEnable = true
   
-  private var _usedClockCyclesInCurrentFrame : UInt32 = 0
-  var usedClockCyclesInCurrentFrame : UInt32 {
-    get {
-      return _usedClockCyclesInCurrentFrame
-    }
-    set(value) {
-      if value >= CYCLES_PER_FRAME {
-        _usedClockCyclesInCurrentFrame = 0
-      } else {
-        _usedClockCyclesInCurrentFrame = value
-      }
+  private(set) var usedClockCyclesInCurrentFrame : UInt32 = 0
+  
+  func addClockCyclesToFrame(cycles : UInt16) -> Bool{
+    
+    if (usedClockCyclesInCurrentFrame + UInt32(cycles)) >= CYCLES_PER_FRAME {
+      usedClockCyclesInCurrentFrame = 0
+      return true
+    } else {
+      usedClockCyclesInCurrentFrame += UInt32(cycles)
+      return false
     }
   }
   

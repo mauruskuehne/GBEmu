@@ -14,4 +14,5 @@ protocol EmulationEngineDelegate {
   
   func executedInstruction(engine : EmulationEngine, instruction : Instruction)
   
+  func frameCompleted(engine : EmulationEngine)
 }

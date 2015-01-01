@@ -11,6 +11,8 @@ import Cocoa
 class RootViewController: NSViewController, EmulationEngineDelegate {
 
   private var isROMLoaded = false
+  private var lastExecutedInstruction : Instruction?
+  
   private let engine = EmulationEngineContainer.sharedEngine
   
   @IBOutlet var registerTableViewDataSource: RegisterTableViewDelegate!
@@ -42,8 +44,12 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     registerTableView.reloadData()
     memoryTableView.reloadData()
     
+    updateTables()
+  }
+  
+  func frameCompleted(engine: EmulationEngine) {
+    
     displayView.refresh()
-    jumpToMemoryLocation()
   }
   
   func executedInstruction(engine: EmulationEngine, instruction: Instruction) {
@@ -53,37 +59,43 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
       alert.messageText = "You have to load a ROM, before you can start running the rom!"
     }
     
-    let nextInstruction = engine.readNextInstruction()
-    registerTableView.reloadData()
-    
-    lastInstructionLabel.stringValue = instruction.description
-    
-    //println(lastInstructionLabel.stringValue)
-    
-    nextInstructionLabel.stringValue = nextInstruction.instruction.description
-    
-    displayView.refresh()
-    
-    jumpToMemoryLocation()
+    lastExecutedInstruction = instruction
   }
   
-  func jumpToMemoryLocation() {
+  func updateTables() {
+    registerTableView.reloadData()
+    
     memoryTableView.scrollRowToVisible(Int(engine.registers.PC +  3))
     memoryTableView.selectRowIndexes(NSIndexSet(index: Int(engine.registers.PC)), byExtendingSelection: false)
+    
+    
+    let nextInstruction = engine.readNextInstruction()
+    
+    lastInstructionLabel.stringValue = lastExecutedInstruction?.description ?? "{instruction}"
+    
+    nextInstructionLabel.stringValue = nextInstruction.instruction.description
   }
   
   @IBAction func runNextFrame(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeNextFrame()
+    
+    updateTables()
   }
   
   @IBAction func runToVSync(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeToVSync()
+    
+    updateTables()
   }
   @IBAction func executeNextInstruction(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeNextInstruction()
+    
+    updateTables()
   }
   @IBAction func runToRet(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeToRet()
+    
+    updateTables()
   }
   
   @IBAction func runToPC(sender: AnyObject) {
@@ -97,6 +109,7 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
       alert.messageText = "The entered address is not a valid HEX address"
     }
     
+    updateTables()
   }
 }
 

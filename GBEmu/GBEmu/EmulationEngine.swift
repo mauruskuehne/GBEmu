@@ -50,7 +50,6 @@ class EmulationEngine {
     
     //cycles = clock speed in Hz / required frames-per-second
     // => Anzahl Cycles die 60x pro Sekunde ausgeführt werden müssen
-    
     do {
       let executedInstruction = executeNextInstruction()
     } while executionContext.usedClockCyclesInCurrentFrame != 0
@@ -64,10 +63,12 @@ class EmulationEngine {
     
     let result = retVal.instruction.execute(executionContext)
     
-    executionContext.usedClockCyclesInCurrentFrame += UInt32(result.usedCycles)
+    if executionContext.addClockCyclesToFrame(result.usedCycles) {
+      //wurde ein neues Frame angefangen?
+      self.delegate?.frameCompleted(self)
+    }
     
     display.refresh()
-    
     
     if executionContext.interruptMasterEnable && memoryAccess[IORegister.IE.rawValue] > 0 {
       
