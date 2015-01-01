@@ -86,7 +86,17 @@ class DisplayView : NSView {
     let tileData = display.BG_Window_Tile_Data_Select_Range
     let tileMap = display.BG_Window_Tile_Map_Display_Select_Range
     var ctx = 0
-    let splitTileMap = split(tileMap, { (c:UInt8)->Bool in (ctx++ % 32) == 0 && ctx != 0 }, allowEmptySlices: true)
+    
+    var splitTileMap = [[UInt8]]()
+    
+    for i in 0..<32 {
+      let start = i * 32
+      let end = start + 32
+      let slice = tileMap[start..<end]
+      splitTileMap.append(Array(slice))
+    }
+    
+    //let splitTileMap = split(tileMap, { (c:UInt8)->Bool in (ctx++ % 33) == 0 && ctx != 0 }, allowEmptySlices: false)
     
     var rowIndex = 0
     for tileRow in splitTileMap {
@@ -99,7 +109,7 @@ class DisplayView : NSView {
         
         let singleTileData = tileData[tileStart..<(tileStart + 16)]
         //self.memory[Int(address)...Int(address + length)]
-        drawTileData(Array(singleTileData), tilePositionX: colIndex, tilePositionY: rowIndex)
+        drawTileData(Array(singleTileData), tilePositionX: colIndex, tilePositionY: 18 - rowIndex)
         
         colIndex++
       }
