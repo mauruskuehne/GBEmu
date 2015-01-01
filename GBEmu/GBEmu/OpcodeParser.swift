@@ -52,11 +52,11 @@ class OpcodeParser {
     [ 0 : RLC(opcode: opcode, prefix : prefix, register: location),
       1 : RRC(opcode: opcode, prefix : prefix, register: location),
       2 : RL(opcode: opcode, prefix : prefix, register: location),
-      3 : RR(opcode: opcode, prefix : prefix, register: location)//,
-    //  4 : SLA(opcode: opcode, prefix : prefix, register: location),
-    //  5 : SRA(opcode: opcode, prefix : prefix, register: location),
-    //  6 : SLL(opcode: opcode, prefix : prefix, register: location),
-    //  7 : SRL(opcode: opcode, prefix : prefix, register: location)
+      3 : RR(opcode: opcode, prefix : prefix, register: location),
+      4 : SLA(opcode: opcode, prefix : prefix, register: location),
+      5 : SRA(opcode: opcode, prefix : prefix, register: location),
+      6 : SCF(opcode: opcode, prefix : prefix),//6 : SLL(opcode: opcode, prefix : prefix, register: location),
+      7 : SRL(opcode: opcode, prefix : prefix, register: location)
     ]
     let val = rotInstructions[index]
     
