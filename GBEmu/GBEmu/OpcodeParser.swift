@@ -62,7 +62,12 @@ class OpcodeParser {
     case 5 :
       return SRA(opcode: opcode, prefix : prefix, register: location)
     case 6 :
-      return SCF(opcode: opcode, prefix : prefix)
+      if let x = prefix {
+        return SWAP(opcode: opcode, prefix: prefix, register: location)
+      } else {
+        return SCF(opcode: opcode, prefix : prefix)
+      }
+      
     case 7 :
       return SRL(opcode: opcode, prefix : prefix, register: location)
     default :

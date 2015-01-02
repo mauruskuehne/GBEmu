@@ -11,12 +11,18 @@ import Cocoa
 class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewDataSource {
   
   func numberOfRowsInTableView(aTableView: NSTableView) -> Int {
-    return 18
+    return 19
   }
   
   func tableView(aTableView: NSTableView, objectValueForTableColumn aTableColumn: NSTableColumn?, row rowIndex: Int) -> AnyObject? {
     
-    if rowIndex >= 14 {
+    if rowIndex >= 18 {
+      if aTableColumn?.identifier == "Register" {
+        return "LCDC"
+      } else {
+        return String(format: "0x%X", EmulationEngineContainer.sharedEngine.memoryAccess[IORegister.LCDC.rawValue])
+      }
+    } else if rowIndex >= 14 {
       var flag : Flags
       
       switch rowIndex {

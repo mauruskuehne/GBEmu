@@ -91,6 +91,11 @@ class Display {
   private func configureFromLCDC() {
     let lcdc = memory[IORegister.LCDC.rawValue]
     
+    if isDisplayOperating && !(lcdc & LCDC.LCD_Control_Operation.rawValue > 0) {
+      println("about to shut down display!")
+    } else if !isDisplayOperating && !(lcdc & LCDC.LCD_Control_Operation.rawValue == 0) {
+      println("about to power on display!")
+    }
     isDisplayOperating = lcdc & LCDC.LCD_Control_Operation.rawValue > 0
     
     if lcdc & LCDC.Window_Tile_Map_Display_Select.rawValue > 0 {

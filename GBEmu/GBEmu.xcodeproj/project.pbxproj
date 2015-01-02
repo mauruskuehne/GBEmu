@@ -137,6 +137,8 @@
 		72D1492E1A23BC3B00402393 /* OpcodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1492D1A23BC3B00402393 /* OpcodeParser.swift */; };
 		72D1492F1A23BC3B00402393 /* OpcodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1492D1A23BC3B00402393 /* OpcodeParser.swift */; };
 		72D149311A23BC6300402393 /* OpcodeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D149301A23BC6300402393 /* OpcodeParserTests.swift */; };
+		72D918B11A56B95800BDF929 /* SWAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D918B01A56B95800BDF929 /* SWAP.swift */; };
+		72D918B21A56B95800BDF929 /* SWAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D918B01A56B95800BDF929 /* SWAP.swift */; };
 		72E22AC61A30D6BC0055D4FF /* WeakContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E22AC51A30D6BC0055D4FF /* WeakContainer.swift */; };
 		72EEFE5C1A1FD2B0005A17FD /* SBCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EEFE5B1A1FD2B0005A17FD /* SBCTests.swift */; };
 		72EEFE5D1A1FE0EB005A17FD /* SBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AB4661A1D2BB900715CAF /* SBC.swift */; };
@@ -244,6 +246,7 @@
 		72C386971A55A62F0003E12D /* CPLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPLTests.swift; sourceTree = "<group>"; };
 		72D1492D1A23BC3B00402393 /* OpcodeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpcodeParser.swift; sourceTree = "<group>"; };
 		72D149301A23BC6300402393 /* OpcodeParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpcodeParserTests.swift; sourceTree = "<group>"; };
+		72D918B01A56B95800BDF929 /* SWAP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWAP.swift; sourceTree = "<group>"; };
 		72E22AC51A30D6BC0055D4FF /* WeakContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakContainer.swift; sourceTree = "<group>"; };
 		72EEFE5B1A1FD2B0005A17FD /* SBCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBCTests.swift; sourceTree = "<group>"; };
 		72EEFE5E1A1FE6D2005A17FD /* OR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OR.swift; sourceTree = "<group>"; };
@@ -316,6 +319,7 @@
 				722341021A4220310048CD74 /* RES.swift */,
 				72C386941A55A5780003E12D /* CPL.swift */,
 				722DAEE71A55F51C006DE1EF /* SCF.swift */,
+				72D918B01A56B95800BDF929 /* SWAP.swift */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -625,6 +629,7 @@
 				7245BDF91A18FE3C00AF205B /* NOP.swift in Sources */,
 				7245BDFF1A190E0B00AF205B /* MemoryDataLocation.swift in Sources */,
 				728AB4611A1D2B5D00715CAF /* SUB.swift in Sources */,
+				72D918B11A56B95800BDF929 /* SWAP.swift in Sources */,
 				723C105B1A44B68A003409A6 /* LDIncDec.swift in Sources */,
 				7200FA1F1A2B9CDF0009315A /* RST.swift in Sources */,
 				7220C6B91A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift in Sources */,
@@ -697,6 +702,7 @@
 				725D0ADD1A263F3C0041236E /* XORTests.swift in Sources */,
 				72C386981A55A62F0003E12D /* CPLTests.swift in Sources */,
 				7240979A1A17AB300034D1FB /* Instruction.swift in Sources */,
+				72D918B21A56B95800BDF929 /* SWAP.swift in Sources */,
 				7201DA441A2D0140006BEF0A /* RETTests.swift in Sources */,
 				7245BDFA1A18FE3C00AF205B /* NOP.swift in Sources */,
 				7220C6B41A3CAA3D00EABF7C /* RotateTests.swift in Sources */,
