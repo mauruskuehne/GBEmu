@@ -9,44 +9,42 @@
 import Foundation
 
 class OpcodeParser {
-  let registerIndexDict =
-  [0 : Register.B,
-    1 : Register.C,
-    2 : Register.D,
-    3 : Register.E,
-    4 : Register.H,
-    5 : Register.L,
-    6 : Register.HL,
-    7 : Register.A]
+  let registerDataLocations =
+   [0 :  RegisterDataLocation(register: Register.B),
+    1 : RegisterDataLocation(register: Register.C),
+    2 : RegisterDataLocation(register: Register.D),
+    3 : RegisterDataLocation(register: Register.E),
+    4 : RegisterDataLocation(register: Register.H),
+    5 : RegisterDataLocation(register: Register.L),
+    6 : RegisterDataLocation(register: Register.HL, dereferenceFirst: true),
+    7 : RegisterDataLocation(register: Register.A)]
   
-  let rp = [0 : Register.BC,
-    1 : Register.DE,
-    2 : Register.HL,
-    3 : Register.SP]
+  let dereferenced16BitRegisters =
+   [0 : RegisterDataLocation(register: Register.BC, dereferenceFirst: true),
+    1 : RegisterDataLocation(register: Register.DE, dereferenceFirst: true),
+    2 : RegisterDataLocation(register: Register.HL, dereferenceFirst: true),
+    3 : RegisterDataLocation(register: Register.SP, dereferenceFirst: true)]
   
-  let rp2 = [0 : Register.BC,
-    1 : Register.DE,
-    2 : Register.HL,
-    3 : Register.AF]
+  let rp =
+   [0 : RegisterDataLocation(register: Register.BC),
+    1 : RegisterDataLocation(register: Register.DE),
+    2 : RegisterDataLocation(register: Register.HL),
+    3 : RegisterDataLocation(register: Register.SP)]
+  
+  let rp2 =
+   [0 : RegisterDataLocation(register: Register.BC),
+    1 : RegisterDataLocation(register: Register.DE),
+    2 : RegisterDataLocation(register: Register.HL),
+    3 : RegisterDataLocation(register: Register.AF)]
   
   let cc = [0 : JumpCondition.NotZero,
     1 : JumpCondition.Zero,
     2 : JumpCondition.NotCarry,
     3 : JumpCondition.Carry]
   
-  func getDataLocationFor(idx : Int) -> ReadWriteDataLocation {
-    let register = registerIndexDict[idx]!
-    
-    if register == .HL {
-      return RegisterDataLocation(register: register, dereferenceFirst: true)
-    } else {
-      return RegisterDataLocation(register: register)
-    }
-  }
-  
   func getRotateInstructionForIndex(index : Int, withRegisterIndex: Int, opcode : UInt8, prefix : UInt8? = nil) -> Instruction {
     
-    let location = getDataLocationFor(withRegisterIndex)
+    let location = registerDataLocations[withRegisterIndex]!
     
     switch(index) {
     case 0 :
@@ -77,7 +75,7 @@ class OpcodeParser {
   
   func getAluInstructionForIndex(index : Int, withReadLocation: ReadableDataLocation, opcode : UInt8) -> Instruction {
     
-    let locationRegA = getDataLocationFor(7)
+    let locationRegA = registerDataLocations[7]!
     
     switch(index) {
     case 0 :
@@ -129,7 +127,7 @@ class OpcodeParser {
           parsedInstruction = NOP(opcode: opcode)
         case 1 :
           
-          let read = RegisterDataLocation(register: Register.SP, dereferenceFirst: false)
+          let read = rp[3]!
           let writeAddr = fetchUInt16()
           let write = MemoryDataLocation(address: writeAddr, size: .UInt16)
           
@@ -154,8 +152,7 @@ class OpcodeParser {
         }
       case 1 : //x = 0, z = 1
         if q == 0 {
-          let reg = rp[Int(p)]!
-          let writeAddr = RegisterDataLocation(register: reg)
+          let writeAddr = rp[Int(p)]!
           
           let valueToLoad = fetchUInt16()
           let constRead = ConstantDataLocation(value: valueToLoad)
@@ -163,8 +160,8 @@ class OpcodeParser {
         }
         else {
           
-          let writeReg = RegisterDataLocation(register: Register.HL, dereferenceFirst: false)
-          let readReg = RegisterDataLocation(register: rp[Int(p)]!, dereferenceFirst: false)
+          let writeReg = rp[2]!
+          let readReg = rp[Int(p)]!
           parsedInstruction = ADD(opcode: opcode, registerToStore: writeReg, registerToAdd: readReg)
         }
       case 2 : // z = 2
@@ -174,43 +171,43 @@ class OpcodeParser {
         
         if q == 0 {
           if p == 0 {
-            readAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            writeAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true)
+            readAddr = registerDataLocations[7]!
+            writeAddr = dereferenced16BitRegisters[0]!
             
           } else if p == 1 {
-            readAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            writeAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true)
+            readAddr = registerDataLocations[7]!
+            writeAddr = dereferenced16BitRegisters[1]!
             
           } else if p == 2 {
             // LD HL+, A
-            let read = RegisterDataLocation(register: Register.A)
-            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            let read = registerDataLocations[7]!
+            let write = dereferenced16BitRegisters[2]!
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Inc)
           } else if p == 3 {
-            let read = RegisterDataLocation(register: Register.A)
-            let write = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            let read = registerDataLocations[7]!
+            let write = dereferenced16BitRegisters[2]!
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Dec)
           }
         }
         else { //q == 1
           if p == 0 { //0x0a
-            writeAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            readAddr = RegisterDataLocation(register: Register.BC, dereferenceFirst: true)
+            writeAddr = registerDataLocations[7]!
+            readAddr = dereferenced16BitRegisters[0]!
             
           } else if p == 1 { //0x1a
-            writeAddr = RegisterDataLocation(register: registerIndexDict[7]!)
-            readAddr = RegisterDataLocation(register: Register.DE, dereferenceFirst: true)
+            writeAddr = registerDataLocations[7]!
+            readAddr = dereferenced16BitRegisters[1]!
             
           } else if p == 2 {
             // LD A,HL+
-            let write = RegisterDataLocation(register: Register.A)
-            let read = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            let write = registerDataLocations[7]!
+            let read = dereferenced16BitRegisters[2]!
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Inc)
             
           } else if p == 3 {
             // LD A,HL-
-            let write = RegisterDataLocation(register: Register.A)
-            let read = RegisterDataLocation(register: Register.HL, dereferenceFirst: true)
+            let write = registerDataLocations[7]!
+            let read = dereferenced16BitRegisters[2]!
             parsedInstruction = LDIncDec(opcode: firstOpcodeByte, prefix: nil, readLocation: read, writeLocation: write, operation: .Dec)
           }
         }
@@ -222,22 +219,22 @@ class OpcodeParser {
       case 3 :
         let reg = rp[Int(p)]!
         if q == 0 { // 16Bit INC
-          parsedInstruction = INC(opcode: opcode, register: reg)
+          parsedInstruction = INC(opcode: opcode, locToIncrease: reg)
           
         } else { // 16Bit DEC
-          parsedInstruction = DEC(opcode: opcode, register: reg)
+          parsedInstruction = DEC(opcode: opcode, locToDecrease: reg)
         }
         
       case 4 : // 8Bit INC
-        let reg = getDataLocationFor(Int(y))
+        let reg = registerDataLocations[Int(y)]!
         parsedInstruction = INC(opcode: opcode, locToIncrease: reg)
         
       case 5 :
-        let reg = getDataLocationFor(Int(y))
+        let reg = registerDataLocations[Int(y)]!
         parsedInstruction = DEC(opcode: opcode, locToDecrease: reg)
         
       case 6 : // LD r[y], n
-        let reg = getDataLocationFor(Int(y))
+        let reg = registerDataLocations[Int(y)]!
         let val = fetchNextBytePredicate()
         
         let writeAddr = reg
@@ -248,16 +245,16 @@ class OpcodeParser {
       case 7 :
         switch(y) {
         case 0 :
-          parsedInstruction = RLC(opcode: opcode, register: getDataLocationFor(7))
+          parsedInstruction = RLC(opcode: opcode, register: registerDataLocations[7]!)
           
         case 1 :
-          parsedInstruction = RRC(opcode: opcode, register: getDataLocationFor(7))
+          parsedInstruction = RRC(opcode: opcode, register: registerDataLocations[7]!)
           
         case 2 :
-          parsedInstruction = RL(opcode: opcode, register: getDataLocationFor(7))
+          parsedInstruction = RL(opcode: opcode, register: registerDataLocations[7]!)
           
         case 3 :
-          parsedInstruction = RR(opcode: opcode, register: getDataLocationFor(7))
+          parsedInstruction = RR(opcode: opcode, register: registerDataLocations[7]!)
           
         case 5 :
           parsedInstruction = CPL(opcode: opcode)
@@ -274,15 +271,15 @@ class OpcodeParser {
         parsedInstruction = HALT(opcode: opcode)
       }
       else {
-        let regRead = getDataLocationFor(Int(z))
-        let regWrite = getDataLocationFor(Int(y))
+        let regRead = registerDataLocations[Int(z)]!
+        let regWrite = registerDataLocations[Int(y)]!
         
         parsedInstruction = LD(opcode: opcode, readLocation: regRead, writeLocation: regWrite)
         
       }
     case 2 :
       
-      let secondRegister = getDataLocationFor(Int(z))
+      let secondRegister = registerDataLocations[Int(z)]!
       parsedInstruction = getAluInstructionForIndex(Int(y), withReadLocation: secondRegister, opcode: opcode)
       
     case 3 : // x = 3
@@ -292,7 +289,7 @@ class OpcodeParser {
         switch(y) {
           
         case 4 :
-          let regRead = RegisterDataLocation(register: Register.A)
+          let regRead = registerDataLocations[7]!
           let nextByte = fetchNextBytePredicate()
           let location = 0xFF00 + nextByte.getAsUInt16()
           let memLoc = MemoryDataLocation(address: location, size: DataSize.UInt16)
@@ -302,12 +299,12 @@ class OpcodeParser {
         case 5 :
           let value = Int8(fetchNextBytePredicate())
           let offset = ConstantDataLocation(value: value)
-          let writeLoc = RegisterDataLocation(register: Register.SP, dereferenceFirst: false)
+          let writeLoc = rp[3]!
           
           parsedInstruction = ADD(opcode: opcode, registerToStore: writeLoc, registerToAdd: offset)
           
         case 6 :
-          let reg = RegisterDataLocation(register: Register.A)
+          let reg = registerDataLocations[7]!
           let nextByte = fetchNextBytePredicate()
           let location = 0xFF00 + nextByte.getAsUInt16()
           //let readLoc = MemoryDataLocation(address: location, size: .UInt8)
@@ -315,7 +312,7 @@ class OpcodeParser {
           parsedInstruction = LD(opcode: opcode, readLocation: readLoc, writeLocation: reg)
           
         case 7 :
-          let writeReg = RegisterDataLocation(register: Register.HL)
+          let writeReg = rp[2]!
           let offset = fetchNextBytePredicate()
           let readReg = RegisterDataLocation(register: Register.SP, offset: Int32(offset))
           parsedInstruction = LD(opcode: opcode, readLocation: readReg, writeLocation: writeReg)
@@ -326,8 +323,7 @@ class OpcodeParser {
         }
       case 1 :
         if q == 0 {
-          let reg = rp2[Int(p)]!
-          let loc = RegisterDataLocation(register: reg)
+          let loc = rp2[Int(p)]!
           
           parsedInstruction = POP(opcode: opcode, locationToStore: loc)
           
@@ -338,19 +334,19 @@ class OpcodeParser {
           case 1 :
             parsedInstruction = RET(opcode: opcode, enableInterrupts: true)
           case 2 :
-            let val = RegisterDataLocation(register: Register.HL)
+            let val = rp[2]!
             parsedInstruction = JP(opcode: opcode, locationToRead: val)
           case 3 :
-            let writeReg = RegisterDataLocation(register: Register.SP)
-            let readReg = RegisterDataLocation(register: Register.HL)
+            let writeReg = rp[3]!
+            let readReg = rp[2]!
             parsedInstruction = LD(opcode: opcode, readLocation: readReg, writeLocation: writeReg)
           default :
             assertionFailure("not yet implemented")
           }
         }
       case 2 :
-        if r == 1 { // currently handles E2 and EA!!
-          let readReg = getDataLocationFor(7)
+        if r == 1 {
+          let readReg = registerDataLocations[7]!
           var writeLoc : WriteableDataLocation
           if q == 0 {
             writeLoc = RegisterDataLocation(register: Register.C, offset: 0xFF00, dereferenceFirst: true)
@@ -388,8 +384,7 @@ class OpcodeParser {
         parsedInstruction = CALL(opcode: opcode, addressToCall: loc, condition: condition)
       case 5 :
         if q == 0 {
-          let reg = rp2[Int(p)]!
-          let loc = RegisterDataLocation(register: reg)
+          let loc = rp2[Int(p)]!
           
           parsedInstruction = PUSH(opcode: opcode, locationToWrite: loc)
         } else {
@@ -440,15 +435,15 @@ class OpcodeParser {
       parsedInstruction = getRotateInstructionForIndex(Int(y), withRegisterIndex: Int(z), opcode: secondOpcodeByte, prefix: 0xCB)
       
     case 1 :
-      let reg = getDataLocationFor(Int(z))
+      let reg = registerDataLocations[Int(z)]!
       parsedInstruction = BIT(opcode: secondOpcodeByte, prefix: 0xCB, register: reg, bitPosition: y)
       
     case 2 :
-      let reg = getDataLocationFor(Int(z))
+      let reg = registerDataLocations[Int(z)]!
       parsedInstruction = RES(opcode: secondOpcodeByte, prefix: 0xCB, register: reg, bitPosition: y)
       
     case 3 :
-      let reg = getDataLocationFor(Int(z))
+      let reg = registerDataLocations[Int(z)]!
       parsedInstruction = SET(opcode: secondOpcodeByte, prefix: 0xCB, register: reg, bitPosition: y)
       
     default :

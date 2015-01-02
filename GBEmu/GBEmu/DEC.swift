@@ -25,10 +25,6 @@ class DEC : Instruction {
     super.init(opcode: opcode, prefix: prefix)
   }
   
-  convenience init(opcode : UInt8, prefix : UInt8? = nil, register : Register) {
-    self.init(opcode: opcode, prefix: prefix, locToDecrease: RegisterDataLocation(register: register, dereferenceFirst: false))
-  }
-  
   override func execute(context : ExecutionContext) -> InstructionResult {
     
     let oldVal = location.read(context)

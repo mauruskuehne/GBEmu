@@ -11,7 +11,6 @@ import Cocoa
 class RootViewController: NSViewController, EmulationEngineDelegate {
 
   private var isROMLoaded = false
-  private var lastExecutedInstruction : Instruction?
   
   private let engine = EmulationEngineContainer.sharedEngine
   
@@ -58,8 +57,6 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
       let alert = NSAlert()
       alert.messageText = "You have to load a ROM, before you can start running the rom!"
     }
-    
-    lastExecutedInstruction = instruction
   }
   
   func updateTables() {
@@ -68,10 +65,9 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     memoryTableView.scrollRowToVisible(Int(engine.registers.PC +  3))
     memoryTableView.selectRowIndexes(NSIndexSet(index: Int(engine.registers.PC)), byExtendingSelection: false)
     
-    
     let nextInstruction = engine.readNextInstruction()
     
-    lastInstructionLabel.stringValue = lastExecutedInstruction?.description ?? "{instruction}"
+    lastInstructionLabel.stringValue = nextInstructionLabel.stringValue
     
     nextInstructionLabel.stringValue = nextInstruction.instruction.description
   }
