@@ -17,7 +17,7 @@ class DI : Instruction {
   }
   
   override func execute(context : ExecutionContext) -> InstructionResult {
-    println("disable interrupts")
+    print("disable interrupts")
     
     context.interruptMasterEnable = false
     

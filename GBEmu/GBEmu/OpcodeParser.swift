@@ -61,7 +61,7 @@ class OpcodeParser {
       return SRA(opcode: opcode, prefix : prefix, register: location)
     case 6 :
       if let x = prefix {
-        return SWAP(opcode: opcode, prefix: prefix, register: location)
+        return SWAP(opcode: opcode, prefix: x, register: location)
       } else {
         return SCF(opcode: opcode, prefix : prefix)
       }
@@ -69,7 +69,7 @@ class OpcodeParser {
     case 7 :
       return SRL(opcode: opcode, prefix : prefix, register: location)
     default :
-      assertionFailure("invalid index")
+      fatalError("invalid index")
     }
   }
   
@@ -95,7 +95,7 @@ class OpcodeParser {
     case 7 :
       return CP(opcode: opcode, register: withReadLocation)
     default :
-      assertionFailure("invalid index")
+      fatalError("invalid index")
     }
   }
   
@@ -447,7 +447,7 @@ class OpcodeParser {
       parsedInstruction = SET(opcode: secondOpcodeByte, prefix: 0xCB, register: reg, bitPosition: y)
       
     default :
-      assertionFailure("not a valid CB opcode")
+      fatalError("not a valid CB opcode")
     }
     
     if parsedInstruction == nil {

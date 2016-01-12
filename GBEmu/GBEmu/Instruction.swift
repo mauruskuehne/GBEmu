@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Instruction : Printable{
+class Instruction : CustomStringConvertible{
   let opcode : UInt8
   let prefix : UInt8?
   

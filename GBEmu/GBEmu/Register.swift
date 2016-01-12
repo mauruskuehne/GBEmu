@@ -9,7 +9,7 @@
 import Foundation
 
 
-enum Register : Int, Printable {
+enum Register : Int, CustomStringConvertible {
   case A = 0,
   B = 1,
   C = 2,

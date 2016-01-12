@@ -18,7 +18,7 @@ class JPTests: XCTestCase {
     
     let regs = Registers()
     
-    var data = NSMutableData(length: 0xFFFF)
+    let data = NSMutableData(length: 0xFFFF)
     
     let memory = MemoryAccessor()
     memory.loadRom(NSData(data: data!))
@@ -58,7 +58,7 @@ class JPTests: XCTestCase {
     ctx.registers.HL = 0x200
     let loc = RegisterDataLocation(register: Register.HL)
     ctx.registers.Flags.resetFlag(Flags.Carry)
-    var instruction = JP(opcode: 0, locationToRead: loc, condition: JumpCondition.Carry)
+    let instruction = JP(opcode: 0, locationToRead: loc, condition: JumpCondition.Carry)
     instruction.execute(ctx)
     
     XCTAssertEqual(ctx.registers.PC, {0x100}(), "Condition has been ignored")

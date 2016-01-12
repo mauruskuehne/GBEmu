@@ -24,7 +24,7 @@ class SBC : Instruction {
     let bigRegisters = [ Register.BC, Register.DE, Register.HL, Register.SP ]
     
     var store : RegisterDataLocation
-    if contains(bigRegisters, registerToSubtract.register) {
+    if bigRegisters.contains(registerToSubtract.register) {
       store = RegisterDataLocation(register: Register.HL, dereferenceFirst: false)
     } else {
       store = RegisterDataLocation(register: Register.A, dereferenceFirst: false)

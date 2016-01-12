@@ -22,7 +22,7 @@ class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewData
       } else {
         return String(format: "0x%X", EmulationEngineContainer.sharedEngine.memoryAccess[IORegister.LCDC.rawValue])
       }
-    } else if rowIndex >= 14 {
+    } else if rowIndex >= 14 && rowIndex <= 17 {
       var flag : Flags
       
       switch rowIndex {
@@ -32,10 +32,8 @@ class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewData
         flag = .HalfCarry
       case 16:
         flag = .Subtract
-      case 17:
+      default : //17
         flag = .Zero
-      default :
-        assertionFailure("unknown flag!")
       }
       
       if aTableColumn?.identifier == "Register" {
@@ -79,7 +77,7 @@ class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewData
     // Retrieve to get the @"MyView" from the pool or,
     // if no version is available in the pool, load the Interface Builder version
     //NSTableCellView *result = [tableView makeViewWithIdentifier:@"MyView" owner:self];
-    let res : NSTableCellView! = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as NSTableCellView
+    let res : NSTableCellView! = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
     
     let val : AnyObject = self.tableView(tableView, objectValueForTableColumn: tableColumn, row: row)!
     

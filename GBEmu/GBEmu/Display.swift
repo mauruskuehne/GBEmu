@@ -92,9 +92,9 @@ class Display {
     let lcdc = memory[IORegister.LCDC.rawValue]
     
     if isDisplayOperating && !(lcdc & LCDC.LCD_Control_Operation.rawValue > 0) {
-      println("about to shut down display!")
+      print("about to shut down display!")
     } else if !isDisplayOperating && !(lcdc & LCDC.LCD_Control_Operation.rawValue == 0) {
-      println("about to power on display!")
+      print("about to power on display!")
     }
     isDisplayOperating = lcdc & LCDC.LCD_Control_Operation.rawValue > 0
     

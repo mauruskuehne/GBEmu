@@ -28,7 +28,7 @@ class MemoryTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewDataSo
     // Retrieve to get the @"MyView" from the pool or,
     // if no version is available in the pool, load the Interface Builder version
     //NSTableCellView *result = [tableView makeViewWithIdentifier:@"MyView" owner:self];
-    let res : NSTableCellView! = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as NSTableCellView
+    let res : NSTableCellView! = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
     
     let val : AnyObject = self.tableView(tableView, objectValueForTableColumn: tableColumn, row: row)!
     

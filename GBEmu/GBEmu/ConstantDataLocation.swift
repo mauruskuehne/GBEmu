@@ -26,11 +26,11 @@ class ConstantDataLocation : ReadableDataLocation {
       var str : String!
       
       if let val = constantValue as? UInt8 {
-        str = String(format: "0x%X", constantValue.getAsUInt8())
+        str = String(format: "0x%X", val)
       } else if let val = constantValue as? sint8 {
-        str = String(format: "%d[dec]", constantValue.getAsSInt8())
+        str = String(format: "%d[dec]", val)
       } else if let val = constantValue as? UInt16 {
-        str = String(format: "0x%X", constantValue.getAsUInt16())
+        str = String(format: "0x%X", val)
       } else {
         str = String(format: "0x%X", constantValue.getAsInt32())
       }

@@ -28,7 +28,7 @@ class RegisterDataLocation : ReadWriteDataLocation {
     
     //if(self.register)
     
-    if contains(BigRegisterContainer.bigRegisters, self.register) {
+    if BigRegisterContainer.bigRegisters.contains(self.register) {
       size = .UInt16
     } else {
       size = .UInt8

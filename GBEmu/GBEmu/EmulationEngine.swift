@@ -50,7 +50,7 @@ class EmulationEngine {
     
     //cycles = clock speed in Hz / required frames-per-second
     // => Anzahl Cycles die 60x pro Sekunde ausgeführt werden müssen
-    do {
+    repeat {
       let executedInstruction = executeNextInstruction()
     } while executionContext.usedClockCyclesInCurrentFrame != 0
     
@@ -81,27 +81,27 @@ class EmulationEngine {
       }
       
       if isInterruptRequested(.VBlank) {
-        println("VBlank Interrupt")
+        print("VBlank Interrupt")
         executionContext.registers.PC = 0x0040
         memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.VBlank.rawValue
         
       } else if isInterruptRequested(.LCDC) {
-        println("LCDC Interrupt")
+        print("LCDC Interrupt")
         executionContext.registers.PC = 0x0048
         memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.LCDC.rawValue
         
       } else if isInterruptRequested(.Timer_Overflow) {
-        println("Timer_Overflow Interrupt")
+        print("Timer_Overflow Interrupt")
         executionContext.registers.PC = 0x0050
         memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.Timer_Overflow.rawValue
         
       } else if isInterruptRequested(.Serial_Transfer_Complete) {
-        println("Serial_Transfer_Complete Interrupt")
+        print("Serial_Transfer_Complete Interrupt")
         executionContext.registers.PC = 0x0058
         memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.Serial_Transfer_Complete.rawValue
         
       } else if isInterruptRequested(.PIN_Hi_Lo_Change) {
-        println("PIN_Hi_Lo_Change Interrupt")
+        print("PIN_Hi_Lo_Change Interrupt")
         executionContext.registers.PC = 0x0060
         memoryAccess[IORegister.IF.rawValue] &= ~InterruptFlag.PIN_Hi_Lo_Change.rawValue
         
@@ -117,20 +117,20 @@ class EmulationEngine {
   }
   
   func executeToVSync() {
-    do {
+    repeat {
       executeNextInstruction()
     } while executionContext.memoryAccess.readUInt8(IORegister.LY.rawValue) != 144
   }
   
   func executeToRet() {
     var res : Instruction!
-    do {
+    repeat {
       res = executeNextInstruction().instruction
     } while !(res is RET)
   }
   
   func executeToAddress(address : UInt16) {
-    do {
+    repeat {
       executeNextInstruction()
     } while registers.PC != address
   }

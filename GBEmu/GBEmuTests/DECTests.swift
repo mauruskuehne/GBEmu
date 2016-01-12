@@ -18,7 +18,7 @@ class DECTests: XCTestCase {
     
     let regs = Registers()
     
-    var data = NSMutableData(length: 0xFFFF)
+    let data = NSMutableData(length: 0xFFFF)
     
     let memory = MemoryAccessor()
     memory.loadRom(NSData(data: data!))

@@ -40,10 +40,10 @@ class DisplayView : NSView {
       bitMask = 0b00000011
       shiftVal = 0
     default :
-      assertionFailure("no color data available ")
+      fatalError("no color data available ")
     }
     
-    var intensity = (display.BG_Window_Palette_Data & bitMask) >> shiftVal
+    let intensity = (display.BG_Window_Palette_Data & bitMask) >> shiftVal
     var col : NSColor
     switch(intensity) {
     case 0 :
@@ -55,7 +55,7 @@ class DisplayView : NSView {
     case 3 :
       col = LIGHT_COLOR
     default:
-      assertionFailure("this color is not supported")
+      fatalError("this color is not supported")
     }
     
     return col
@@ -63,7 +63,7 @@ class DisplayView : NSView {
   
   override func drawRect(dirtyRect: NSRect) {
     
-    let ctx = NSGraphicsContext.currentContext()!
+    let _ = NSGraphicsContext.currentContext()!
     
     NSColor.blackColor().set()
     NSRectFill(dirtyRect)
@@ -85,7 +85,6 @@ class DisplayView : NSView {
     
     let tileData = display.BG_Window_Tile_Data_Select_Range
     let tileMap = display.BG_Window_Tile_Map_Display_Select_Range
-    var ctx = 0
     
     var splitTileMap = [[UInt8]]()
     

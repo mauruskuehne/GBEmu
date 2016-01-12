@@ -18,7 +18,7 @@ protocol DataLocationSupported {
   var isSigned : Bool { get }
 }
 
-protocol DataLocationBase : Printable{
+protocol DataLocationBase : CustomStringConvertible{
 }
 
 protocol WriteableDataLocation : DataLocationBase {

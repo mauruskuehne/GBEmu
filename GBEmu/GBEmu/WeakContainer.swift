@@ -16,6 +16,6 @@ struct WeakContainer<T : AnyObject> {
   }
   
   func get() -> T? {
-    return _value as T?
+    return _value as! T?
   }
 }

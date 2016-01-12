@@ -41,17 +41,17 @@ class MemoryAccessor {
     
     if value is UInt16 {
       if let ioreg = IORegister(rawValue: value.getAsUInt16()) {
-        println("the address that is about to be written to is an IO Register")
+        print("the address that is about to be written to is an IO Register")
       }
     }
     
     if(value is UInt16) {
-      let bytes = (value as UInt16).toBytes()
+      let bytes = (value as! UInt16).toBytes()
       memory[Int(address)] = bytes.lower
       memory[Int(address) + 1] = bytes.upper
     }
     else {
-      memory[Int(address)] = value as UInt8
+      memory[Int(address)] = value as! UInt8
     }
   }
   

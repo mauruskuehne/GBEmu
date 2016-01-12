@@ -10,14 +10,14 @@ import Foundation
 
 extension UInt16 {
   
-  static func fromUpperByte(byte : Byte, lowerByte : Byte) -> UInt16 {
+  static func fromUpperByte(byte : UInt8, lowerByte : UInt8) -> UInt16 {
     return (UInt16(byte) << 8) + UInt16(lowerByte);
   }
   
-  func toBytes() -> (upper : Byte, lower : Byte) {
+  func toBytes() -> (upper : UInt8, lower : UInt8) {
     
-    let upper = Byte((self & 0xFF00) >> 8)
-    let lower = Byte(self & 0x00FF)
+    let upper = UInt8((self & 0xFF00) >> 8)
+    let lower = UInt8(self & 0x00FF)
     
     return (upper,lower)
   }

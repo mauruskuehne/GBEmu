@@ -18,7 +18,7 @@ class ADDTests: XCTestCase {
     
     let regs = Registers()
     
-    var data = NSMutableData(length: 0xFFFF)
+    let data = NSMutableData(length: 0xFFFF)
     
     let memory = MemoryAccessor()
     memory.loadRom(NSData(data: data!))
@@ -91,9 +91,9 @@ class ADDTests: XCTestCase {
     ctx.registers.Flags.setFlag(Flags.Subtract)
     
     let regToWrite = RegisterDataLocation(register: Register.SP)
-    var regToAdd = ConstantDataLocation(value: sint8(-10))
+    let regToAdd = ConstantDataLocation(value: sint8(-10))
     
-    var instruction = ADD(opcode: 0, registerToStore: regToWrite, registerToAdd: regToAdd)
+    let instruction = ADD(opcode: 0, registerToStore: regToWrite, registerToAdd: regToAdd)
     
     instruction.execute(ctx)
     

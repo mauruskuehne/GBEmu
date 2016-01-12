@@ -23,8 +23,8 @@ class IntegerExtensionsTests: XCTestCase {
   }
   
   func testBytesToUInt16() {
-    let byte1 : Byte = 0xFF;
-    let byte2 : Byte = 0x00;
+    let byte1 : UInt8 = 0xFF;
+    let byte2 : UInt8 = 0x00;
     
     let val255 = UInt16.fromUpperByte(byte2, lowerByte: byte1)
     
@@ -45,7 +45,7 @@ class IntegerExtensionsTests: XCTestCase {
   }
   
   func testFlags() {
-    var flags : Byte = 0
+    var flags : UInt8 = 0
     
     flags.setFlag(Flags.Zero)
     XCTAssert(flags.isFlagSet(Flags.Zero), "Could not set Flag Zero")
