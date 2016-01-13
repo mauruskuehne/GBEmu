@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OpcodeParser {
+class OpcodeParserLegacy {
   let registerDataLocations =
    [0 :  RegisterDataLocation(register: Register.B),
     1 : RegisterDataLocation(register: Register.C),

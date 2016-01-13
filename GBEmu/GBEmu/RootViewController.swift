@@ -13,6 +13,8 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   private var isROMLoaded = false
   
   private let engine = EmulationEngineContainer.sharedEngine
+  private var refreshTimer : NSTimer?
+  private var execTimer : NSTimer?
   
   @IBOutlet var registerTableViewDataSource: RegisterTableViewDelegate!
   
@@ -23,6 +25,7 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   @IBOutlet weak var lastInstructionLabel: NSTextField!
   @IBOutlet weak var nextInstructionLabel: NSTextField!
   @IBOutlet weak var txtPCBreakpoint: NSTextField!
+  @IBOutlet weak var topLoopsTableView: NSTableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,6 +33,8 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     // Do any additional setup after loading the view.
     
     EmulationEngineContainer.sharedEngine.delegate = self
+    
+    refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1/30, target: self, selector: "refreshUI", userInfo: nil, repeats: true)
   }
 
   override var representedObject: AnyObject? {
@@ -42,8 +47,6 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     isROMLoaded = true
     registerTableView.reloadData()
     memoryTableView.reloadData()
-    
-    updateTables()
   }
   
   func frameCompleted(engine: EmulationEngine) {
@@ -52,15 +55,27 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
   }
   
   func executedInstruction(engine: EmulationEngine, instruction: Instruction) {
+    var str = ""
+    if let prefix = instruction.prefix {
+      str += String(format:"%2X", prefix)
+    }
     
+    str += String(format:"%2X", instruction.opcode)
+    
+    
+    print(str + " -> \(instruction)")
     if !isROMLoaded {
       let alert = NSAlert()
       alert.messageText = "You have to load a ROM, before you can start running the rom!"
+      alert.runModal()
     }
   }
   
-  func updateTables() {
+  func refreshUI() {
+    print("refresh tables")
     registerTableView.reloadData()
+    
+    topLoopsTableView.reloadData()
     
     memoryTableView.scrollRowToVisible(Int(engine.registers.PC +  3))
     memoryTableView.selectRowIndexes(NSIndexSet(index: Int(engine.registers.PC)), byExtendingSelection: false)
@@ -70,28 +85,30 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
     lastInstructionLabel.stringValue = nextInstructionLabel.stringValue
     
     nextInstructionLabel.stringValue = nextInstruction.instruction.description
+    
+    displayView.refresh()
   }
   
   @IBAction func runNextFrame(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeNextFrame()
     
-    updateTables()
   }
   
   @IBAction func runToVSync(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeToVSync()
     
-    updateTables()
   }
   @IBAction func executeNextInstruction(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeNextInstruction()
     
-    updateTables()
   }
   @IBAction func runToRet(sender: AnyObject) {
     EmulationEngineContainer.sharedEngine.executeToRet()
-    
-    updateTables()
+  }
+  
+  @IBAction func runUntilLoop(sender: AnyObject) {
+    EmulationEngineContainer.sharedEngine.shouldBreakAtDetectedLoop = true
+    EmulationEngineContainer.sharedEngine.beginBackgroundRunning()
   }
   
   @IBAction func runToPC(sender: AnyObject) {
@@ -104,8 +121,6 @@ class RootViewController: NSViewController, EmulationEngineDelegate {
       let alert = NSAlert()
       alert.messageText = "The entered address is not a valid HEX address"
     }
-    
-    updateTables()
   }
 }
 

@@ -137,6 +137,7 @@
 		72D1492E1A23BC3B00402393 /* OpcodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1492D1A23BC3B00402393 /* OpcodeParser.swift */; };
 		72D1492F1A23BC3B00402393 /* OpcodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1492D1A23BC3B00402393 /* OpcodeParser.swift */; };
 		72D149311A23BC6300402393 /* OpcodeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D149301A23BC6300402393 /* OpcodeParserTests.swift */; };
+		72D6FE601C46E97E0095661B /* TopLoopsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D6FE5F1C46E97E0095661B /* TopLoopsTableViewDelegate.swift */; };
 		72D918B11A56B95800BDF929 /* SWAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D918B01A56B95800BDF929 /* SWAP.swift */; };
 		72D918B21A56B95800BDF929 /* SWAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D918B01A56B95800BDF929 /* SWAP.swift */; };
 		72E22AC61A30D6BC0055D4FF /* WeakContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E22AC51A30D6BC0055D4FF /* WeakContainer.swift */; };
@@ -246,6 +247,7 @@
 		72C386971A55A62F0003E12D /* CPLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPLTests.swift; sourceTree = "<group>"; };
 		72D1492D1A23BC3B00402393 /* OpcodeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpcodeParser.swift; sourceTree = "<group>"; };
 		72D149301A23BC6300402393 /* OpcodeParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpcodeParserTests.swift; sourceTree = "<group>"; };
+		72D6FE5F1C46E97E0095661B /* TopLoopsTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopLoopsTableViewDelegate.swift; sourceTree = "<group>"; };
 		72D918B01A56B95800BDF929 /* SWAP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWAP.swift; sourceTree = "<group>"; };
 		72E22AC51A30D6BC0055D4FF /* WeakContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakContainer.swift; sourceTree = "<group>"; };
 		72EEFE5B1A1FD2B0005A17FD /* SBCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBCTests.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				723E05A81A2E243900B2985D /* RegisterTableViewDelegate.swift */,
 				7220C6B81A3CF2CB00EABF7C /* MemoryTableViewDelegate.swift */,
 				72C181D61A3CF5800075D402 /* OpcodeTableViewDelegate.swift */,
+				72D6FE5F1C46E97E0095661B /* TopLoopsTableViewDelegate.swift */,
 				7264AF8B1A15316200472013 /* Supporting Files */,
 			);
 			path = GBEmu;
@@ -594,6 +597,7 @@
 				72C181D71A3CF5800075D402 /* OpcodeTableViewDelegate.swift in Sources */,
 				723E05A91A2E243900B2985D /* RegisterTableViewDelegate.swift in Sources */,
 				72A3D7911A40943D00C8043B /* InstructionResult.swift in Sources */,
+				72D6FE601C46E97E0095661B /* TopLoopsTableViewDelegate.swift in Sources */,
 				7282580F1A2CF664008C3119 /* CALL.swift in Sources */,
 				7223410C1A422CFA0048CD74 /* SLA.swift in Sources */,
 				721ED19A1A1A810600745D13 /* HALT.swift in Sources */,
@@ -834,6 +838,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = GBEmu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.kuehne.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -846,6 +851,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = GBEmu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.kuehne.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

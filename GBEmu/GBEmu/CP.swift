@@ -32,10 +32,9 @@ class CP : Instruction {
     let oldValueTyped = oldValue.getAsUInt16()
     let valToSubTyped = valToSub.getAsUInt16()
     
-    
     //Execute SUB
     let newValue = oldValueTyped &- valToSubTyped
-    
+
     //Calculate Flags
     
     // Subtract Flag

@@ -14,6 +14,8 @@ struct EmulationEngineContainer {
 
 class EmulationEngine {
   
+  private var dispatchQueue : dispatch_queue_t!
+  
   private let parser = OpcodeParser()
   private var romData : NSData!
   private var executionContext : ExecutionContext
@@ -21,6 +23,14 @@ class EmulationEngine {
   let registers = Registers()
   let memoryAccess = MemoryAccessor()
   var delegate : EmulationEngineDelegate?
+  
+  var positionCountDict = [UInt16 : (count : Int, flags : UInt8)]()
+  
+  var shouldBreakAtDetectedLoop : Bool = false {
+    didSet {
+      positionCountDict = [UInt16 : (count : Int, flags : UInt8)]()
+    }
+  }
   
   //Hardware
   let display : Display
@@ -46,6 +56,35 @@ class EmulationEngine {
     self.display.initialize()
   }
   
+  func beginBackgroundRunning() {
+    
+    if dispatchQueue == nil { dispatchQueue  =  dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0) }
+    
+    dispatch_async(dispatchQueue) { () -> Void in
+      
+      while true {
+        
+        //wird mit 30fps ausgeführt
+        //wir wollen einen clock cycle von (1000.0 * 1000.0 * 4.194304) MHz
+        var res : (instruction: Instruction, result: InstructionResult, shouldAbortExecution: Bool)
+        
+        var cycleCount = 0.0
+        repeat {
+          res = self.executeNextInstruction()
+          cycleCount += Double(res.result.usedCycles)
+          
+          if res.shouldAbortExecution {
+            break
+          }
+        } while cycleCount < (1000.0 * 1000.0 * 4.194304)
+        
+        if res.shouldAbortExecution {
+          break
+        }
+      }
+    }
+  }
+  
   func executeNextFrame() {
     
     //cycles = clock speed in Hz / required frames-per-second
@@ -56,7 +95,12 @@ class EmulationEngine {
     
   }
   
-  func executeNextInstruction() -> (instruction : Instruction, result: InstructionResult) {
+  func executeNextInstruction() -> (instruction: Instruction, result: InstructionResult, shouldAbortExecution: Bool) {
+    
+    
+    let oldPC = executionContext.registers.PC
+    let oldFlags = executionContext.registers.Flags
+    
     let retVal = readNextInstruction()
     
     self.registers.PC += retVal.opcodeSize
@@ -113,7 +157,28 @@ class EmulationEngine {
     
     delegate?.executedInstruction(self, instruction: retVal.instruction)
     
-    return (instruction: retVal.instruction, result: result)
+    var shouldAbortExecution = false
+    
+    if shouldBreakAtDetectedLoop {
+      if var data = positionCountDict[oldPC] {
+        if data.flags == oldFlags {
+          data.count += 1
+          print("hit position \(oldPC) \(data.count) times with the same flags" )
+        }
+      } else {
+        positionCountDict[oldPC] = (1, oldFlags)
+      }
+      
+      if !positionCountDict.filter({ (pos : UInt16, data : (count: Int, flags: UInt8)) -> Bool in
+        data.count == 1000
+      }).isEmpty {
+        // wir haben einen loop 1000x durchlaufen
+        shouldAbortExecution = true
+      }
+    }
+    
+    
+    return (instruction: retVal.instruction, result: result, shouldAbortExecution: shouldAbortExecution)
   }
   
   func executeToVSync() {
