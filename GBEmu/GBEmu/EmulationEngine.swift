@@ -51,7 +51,7 @@ class EmulationEngine {
     //cycles = clock speed in Hz / required frames-per-second
     // => Anzahl Cycles die 60x pro Sekunde ausgeführt werden müssen
     repeat {
-      let executedInstruction = executeNextInstruction()
+      executeNextInstruction()
     } while executionContext.usedClockCyclesInCurrentFrame != 0
     
   }

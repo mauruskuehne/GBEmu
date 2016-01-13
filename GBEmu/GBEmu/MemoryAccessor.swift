@@ -40,7 +40,7 @@ class MemoryAccessor {
   func write(address : UInt16, value : DataLocationSupported) {
     
     if value is UInt16 {
-      if let ioreg = IORegister(rawValue: value.getAsUInt16()) {
+      if let _ = IORegister(rawValue: value.getAsUInt16()) {
         print("the address that is about to be written to is an IO Register")
       }
     }

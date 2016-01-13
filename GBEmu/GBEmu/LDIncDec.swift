@@ -25,8 +25,8 @@ class LDIncDec : Instruction {
   override var description : String {
     get {
       var str : String
-      var writeStr = "\(writeLocation.description)"
-      var readStr = "\(readLocation.description)"
+      let writeStr = "\(writeLocation.description)"
+      let readStr = "\(readLocation.description)"
       if operation == .Inc {
         str = "LDI "
       } else {
