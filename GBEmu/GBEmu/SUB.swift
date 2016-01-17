@@ -8,10 +8,10 @@
 
 import Foundation
 
-class SUB : Instruction {
+class SUB<TRead : DataLocation, TWrite : WriteableDataLocation where TRead.DataSize == TWrite.DataSize, TRead.DataSize == UInt8> : Instruction {
   
-  let registerToStore : ReadWriteDataLocation
-  let registerToSubtract : ReadableDataLocation
+  let registerToStore : TWrite
+  let registerToSubtract : TRead
   
   override var description : String {
     get {
@@ -19,7 +19,7 @@ class SUB : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : ReadWriteDataLocation, registerToSubtract : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : TWrite, registerToSubtract : TRead) {
     self.registerToStore = registerToStore
     self.registerToSubtract = registerToSubtract
     
@@ -38,11 +38,11 @@ class SUB : Instruction {
     return InstructionResult(opcode: self.opcode)
   }
   
-  class func calculateResultForUnsignedSub(context : ExecutionContext, oldValue : DataLocationSupported, valToSub : DataLocationSupported) -> (result : DataLocationSupported, flags : UInt8){
+  class func calculateResultForUnsignedSub(context : ExecutionContext, oldValue : TWrite.DataSize, valToSub : TWrite.DataSize) -> (result : TRead.DataSize, flags : UInt8){
     var flags = context.registers.Flags
     
-    let oldValueTyped = oldValue.getAsUInt16()
-    let valToSubTyped = valToSub.getAsUInt16()
+    let oldValueTyped = oldValue
+    let valToSubTyped = valToSub
     
     //Execute SUB
     let newValue = oldValueTyped &- valToSubTyped
@@ -67,8 +67,8 @@ class SUB : Instruction {
     }
     
     //HalfCarry Flag
-    let halfCarryPosition : UInt16 = 0x10
-    let halfCarryMask : UInt16 = 0x0F
+    let halfCarryPosition : UInt8 = 0x10
+    let halfCarryMask : UInt8 = 0x0F
     
     if (oldValueTyped & halfCarryMask) < (valToSubTyped & halfCarryMask) {
       flags.setFlag(Flags.HalfCarry)

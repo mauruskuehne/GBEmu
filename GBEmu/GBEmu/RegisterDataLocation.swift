@@ -8,6 +8,45 @@
 
 import Foundation
 
+
+class SingleRegisterLocation : UInt8DataLocation {
+  let register : Register
+  
+  init(register : Register) {
+    self.register = register
+  }
+  
+  var description: String {
+    get {
+      return register.description
+    }
+  }
+  
+  func read(context : ExecutionContext) -> UInt8DataLocation.DataSize {
+    return context.registers[self.register]
+  }
+}
+
+class DoubleRegisterLocation : DataLocation {
+  typealias DataSize = UInt16
+  let register : DoubleRegister
+  
+  init(register : DoubleRegister) {
+    self.register = register
+  }
+  
+  var description: String {
+    get {
+      return register.description
+    }
+  }
+  
+  func read(context : ExecutionContext) -> DataSize {
+    return context.registers[self.register]
+  }
+}
+
+/*
 private struct BigRegisterContainer {
   static let bigRegisters = [ Register.HL, Register.AF, Register.BC, Register.DE, Register.PC, Register.SP ]
 }
@@ -92,3 +131,5 @@ class RegisterDataLocation : ReadWriteDataLocation {
     }
   }
 }
+
+*/

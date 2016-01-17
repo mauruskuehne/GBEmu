@@ -8,9 +8,9 @@
 
 import Foundation
 
-class SET : RotateInstruction {
+class SET<T : WriteableDataLocation where T.DataSize == UInt8> : Instruction {
   
-  let register : ReadWriteDataLocation
+  let register : T
   let bitPosition : UInt8
   
   override var description : String {
@@ -19,7 +19,7 @@ class SET : RotateInstruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadWriteDataLocation, bitPosition : UInt8) {
+  init(opcode : UInt8, prefix : UInt8? = nil, register : T, bitPosition : UInt8) {
     self.register = register
     self.bitPosition = bitPosition
     
@@ -29,7 +29,7 @@ class SET : RotateInstruction {
   override func execute(context : ExecutionContext) -> InstructionResult {
 
     let mask = 1 << bitPosition
-    let oldVal = register.read(context).getAsUInt8()
+    let oldVal = register.read(context)
     let newVal = oldVal | mask
     
     register.write(newVal, context: context)

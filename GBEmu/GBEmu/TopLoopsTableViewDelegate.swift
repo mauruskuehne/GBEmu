@@ -17,7 +17,7 @@ class TopLoopsTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewData
   func numberOfRowsInTableView(aTableView: NSTableView) -> Int {
     
     let filtered = engine.positionCountDict.filter { (elem) -> Bool in
-      elem.1.count > 2
+      elem.1.count > 1
     }
     
     let sorted = filtered.sort { (a, b) -> Bool in

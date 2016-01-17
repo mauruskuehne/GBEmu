@@ -8,6 +8,47 @@
 
 import Foundation
 
+class Fixed8BitMemoryDataLocation : DataLocation {
+  typealias DataSize = UInt8
+  
+  let memoryAddress : UInt16
+  
+  init(memoryAddress : UInt16) {
+    self.memoryAddress = memoryAddress
+  }
+  
+  func read(context : ExecutionContext) -> DataSize {
+    return context.memoryAccess.readUInt8(memoryAddress)
+  }
+  
+  var description : String {
+    get {
+      return String(format: "(0x%X)", memoryAddress)
+    }
+  }
+}
+
+class Fixed16BitMemoryDataLocation : DataLocation {
+  typealias DataSize = UInt16
+  
+  let memoryAddress : UInt16
+  
+  init(memoryAddress : UInt16) {
+    self.memoryAddress = memoryAddress
+  }
+  
+  func read(context : ExecutionContext) -> DataSize {
+    return context.memoryAccess.readUInt16(self.memoryAddress)
+  }
+  
+  var description : String {
+    get {
+      return String(format: "(0x%X)", memoryAddress)
+    }
+  }
+}
+
+/*
 enum DataSize {
   case UInt16, UInt8
 }
@@ -47,4 +88,4 @@ class MemoryDataLocation : ReadWriteDataLocation {
       return String(format: "(0x%X)", address)
     }
   }
-}
+}*/

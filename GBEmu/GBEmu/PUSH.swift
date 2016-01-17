@@ -8,9 +8,9 @@
 
 import Foundation
 
-class PUSH : Instruction {
+class PUSH<T : DataLocation where T.DataSize == UInt16> : Instruction {
   
-  let locToWrite : ReadableDataLocation
+  let locToWrite : T
   
   override var description : String {
     get {
@@ -18,7 +18,7 @@ class PUSH : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, locationToWrite : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, locationToWrite : T) {
     self.locToWrite = locationToWrite
     
     super.init(opcode: opcode, prefix: prefix)
@@ -26,7 +26,7 @@ class PUSH : Instruction {
   
   override func execute(context : ExecutionContext) -> InstructionResult {
     let value = locToWrite.read(context)
-    PUSH.pushToStack(context, value: value.getAsUInt16())
+    PUSH.pushToStack(context, value: value)
     return InstructionResult(opcode: self.opcode)
   }
   

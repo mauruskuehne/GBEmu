@@ -8,6 +8,21 @@
 
 import Foundation
 
+protocol DataLocationBase : CustomStringConvertible {
+}
+
+protocol DataLocation : DataLocationBase {
+  typealias DataSize
+  
+  func read(context : ExecutionContext) -> DataSize
+}
+
+protocol WriteableDataLocation : DataLocation {
+  func write(value : DataSize, context : ExecutionContext)
+}
+
+
+/*
 protocol DataLocationSupported {
   
   func getAsUInt8() -> UInt8
@@ -32,3 +47,5 @@ protocol ReadableDataLocation : DataLocationBase {
 protocol ReadWriteDataLocation : DataLocationBase, WriteableDataLocation, ReadableDataLocation {
   
 }
+
+*/

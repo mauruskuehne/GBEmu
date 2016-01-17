@@ -37,22 +37,19 @@ class MemoryAccessor {
     return UInt16.fromUpperByte(b2, lowerByte: b1)
   }
   
-  func write(address : UInt16, value : DataLocationSupported) {
-    
-    if value is UInt16 {
-      if let _ = IORegister(rawValue: value.getAsUInt16()) {
-        print("the address that is about to be written to is an IO Register")
-      }
+  func write(address : UInt16, value : UInt8) {
+    memory[Int(address)] = value
+  }
+  
+  func write(address : UInt16, value : UInt16) {
+    if let _ = IORegister(rawValue: value) {
+      print("the address that is about to be written to is an IO Register")
     }
     
-    if(value is UInt16) {
-      let bytes = (value as! UInt16).toBytes()
-      memory[Int(address)] = bytes.lower
-      memory[Int(address) + 1] = bytes.upper
-    }
-    else {
-      memory[Int(address)] = value as! UInt8
-    }
+    let bytes = value.toBytes()
+    memory[Int(address)] = bytes.lower
+    memory[Int(address) + 1] = bytes.upper
+    
   }
   
   func getRange(address : UInt16, length : UInt16) -> [UInt8] {

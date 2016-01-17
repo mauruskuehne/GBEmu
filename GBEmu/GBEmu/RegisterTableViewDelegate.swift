@@ -52,10 +52,10 @@ class RegisterTableViewDelegate : NSObject, NSTableViewDelegate, NSTableViewData
         var number : NSNumber = 0
         var format : String
         if rowIndex >= 8 {
-          number = NSNumber(unsignedShort: EmulationEngineContainer.sharedEngine.registers[reg].getAsUInt16())
+          number = NSNumber(unsignedShort: EmulationEngineContainer.sharedEngine.registers[reg] as! UInt16)
           format = "0x%X"
         } else {
-          number = NSNumber(unsignedChar: EmulationEngineContainer.sharedEngine.registers[reg].getAsUInt8())
+          number = NSNumber(unsignedChar: EmulationEngineContainer.sharedEngine.registers[reg] as! UInt8)
           format = "0x%X"
         }
         

@@ -8,9 +8,9 @@
 
 import Foundation
 
-class CP : Instruction {
+class CP<T : DataLocation where T.DataSize == UInt8> : Instruction {
   
-  let register : ReadableDataLocation
+  let register : T
   
   override var description : String {
     get {
@@ -18,7 +18,7 @@ class CP : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, register : T) {
     self.register = register
     
     super.init(opcode: opcode, prefix: prefix)
@@ -29,8 +29,8 @@ class CP : Instruction {
     let oldValue = context.registers[Register.A]
     let valToSub = register.read(context)
     
-    let oldValueTyped = oldValue.getAsUInt16()
-    let valToSubTyped = valToSub.getAsUInt16()
+    let oldValueTyped = UInt16(oldValue)
+    let valToSubTyped = UInt16(valToSub)
     
     //Execute SUB
     let newValue = oldValueTyped &- valToSubTyped

@@ -8,18 +8,19 @@
 
 import Foundation
 
-class LDIncDec : Instruction {
+enum Operation {
+  case Inc, Dec
+}
 
-  enum Operation {
-    case Inc, Dec
-  }
+enum ModifiedLocation {
+  case ReadLocation, WriteLocation
+}
+
+class LDIncDec<TRead : DataLocation, TWrite : WriteableDataLocation where TRead.DataSize == TWrite.DataSize> : Instruction {
+
   
-  enum ModifiedLocation {
-    case ReadLocation, WriteLocation
-  }
-  
-  let readLocation : ReadWriteDataLocation
-  let writeLocation : ReadWriteDataLocation
+  let readLocation : TRead
+  let writeLocation : TWrite
   let operation : Operation
   
   override var description : String {
@@ -37,7 +38,7 @@ class LDIncDec : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, readLocation : ReadWriteDataLocation, writeLocation : ReadWriteDataLocation, operation : Operation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, readLocation : TRead, writeLocation : TWrite, operation : Operation) {
       
       self.readLocation = readLocation
       self.writeLocation = writeLocation

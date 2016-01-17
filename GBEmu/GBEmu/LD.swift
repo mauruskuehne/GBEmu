@@ -8,10 +8,10 @@
 
 import Foundation
 
-class LD : Instruction {
+class LD<TRead : DataLocation, TWrite : WriteableDataLocation where TRead.DataSize == TWrite.DataSize> : Instruction {
   
-  let readLocation : ReadableDataLocation
-  let writeLocation : WriteableDataLocation
+  let readLocation : TRead
+  let writeLocation : TWrite
   
   override var description : String {
     get {
@@ -19,8 +19,8 @@ class LD : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, readLocation : ReadableDataLocation,
-    writeLocation : WriteableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, readLocation : TRead,
+    writeLocation : TWrite) {
       
       self.readLocation = readLocation
       self.writeLocation = writeLocation

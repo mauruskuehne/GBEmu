@@ -8,10 +8,10 @@
 
 import Foundation
 
-class SBC : Instruction {
+class SBC<TRead : DataLocation, TWrite : WriteableDataLocation where TRead.DataSize == TWrite.DataSize, TRead.DataSize == UInt8> : Instruction {
   
-  let registerToStore : ReadWriteDataLocation
-  let registerToSubtract : ReadableDataLocation
+  let registerToStore : TWrite
+  let registerToSubtract : TRead
   
   override var description : String {
     get {
@@ -19,21 +19,7 @@ class SBC : Instruction {
     }
   }
   
-  convenience init(opcode : UInt8, prefix : UInt8? = nil, registerToSubtract : RegisterDataLocation) {
-    
-    let bigRegisters = [ Register.BC, Register.DE, Register.HL, Register.SP ]
-    
-    var store : RegisterDataLocation
-    if bigRegisters.contains(registerToSubtract.register) {
-      store = RegisterDataLocation(register: Register.HL, dereferenceFirst: false)
-    } else {
-      store = RegisterDataLocation(register: Register.A, dereferenceFirst: false)
-    }
-    
-    self.init(opcode: opcode, prefix: prefix, registerToStore: store, registerToSubtract: registerToSubtract)
-  }
-  
-  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : ReadWriteDataLocation, registerToSubtract : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : TWrite, registerToSubtract : TRead) {
     self.registerToStore = registerToStore
     self.registerToSubtract = registerToSubtract
     
@@ -45,11 +31,9 @@ class SBC : Instruction {
     let oldValue = registerToStore.read(context)
     let valToSub = registerToSubtract.read(context)
     
-    let is8BitArithmetic = oldValue is UInt8
-    
-    let oldValueTyped = oldValue.getAsUInt16()
-    let valToSubTyped = valToSub.getAsUInt16()
-    let carryValue : UInt16 = context.registers.Flags.isFlagSet(Flags.Carry) ? 1 : 0
+    let oldValueTyped = oldValue
+    let valToSubTyped = valToSub
+    let carryValue : UInt8 = context.registers.Flags.isFlagSet(Flags.Carry) ? 1 : 0
     
     //Execute SUB
     let newValue = oldValueTyped &- valToSubTyped &- carryValue
@@ -75,8 +59,8 @@ class SBC : Instruction {
     }
     
     //HalfCarry Flag
-    let halfCarryPosition : UInt16 = is8BitArithmetic ? 0x10 : 0x1000
-    let halfCarryMask : UInt16 = is8BitArithmetic ? 0x0F : 0x0FFF
+    let halfCarryPosition : UInt8 = 0x10
+    let halfCarryMask : UInt8 = 0x0F
     
     if (oldValueTyped & halfCarryMask) < ((valToSubTyped & halfCarryMask) + (carryValue & halfCarryMask)){
       context.registers.Flags.setFlag(Flags.HalfCarry)

@@ -8,9 +8,9 @@
 
 import Foundation
 
-class ADC : Instruction {
-  let registerToStore : ReadWriteDataLocation
-  let registerToAdd : ReadableDataLocation
+class ADC<TRead : DataLocation, TWrite : WriteableDataLocation where TRead.DataSize == TWrite.DataSize, TRead.DataSize == UInt8> : Instruction {
+  let registerToStore : TWrite
+  let registerToAdd : TRead
   
   override var description : String {
     get {
@@ -18,21 +18,7 @@ class ADC : Instruction {
     }
   }
   
-  convenience init(opcode : UInt8, prefix : UInt8? = nil, registerToAdd : RegisterDataLocation) {
-    
-    let bigRegisters = [ Register.BC, Register.DE, Register.HL, Register.SP ]
-    
-    var store : RegisterDataLocation
-    if bigRegisters.contains(registerToAdd.register) {
-      store = RegisterDataLocation(register: Register.HL, dereferenceFirst: false)
-    } else {
-      store = RegisterDataLocation(register: Register.A, dereferenceFirst: false)
-    }
-    
-    self.init(opcode: opcode, prefix: prefix, registerToStore: store, registerToAdd: registerToAdd)
-  }
-  
-  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : ReadWriteDataLocation, registerToAdd : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : TWrite, registerToAdd : TRead) {
     self.registerToStore = registerToStore
     self.registerToAdd = registerToAdd
     
@@ -44,11 +30,9 @@ class ADC : Instruction {
     let oldValue = registerToStore.read(context)
     let valToAdd = registerToAdd.read(context)
     
-    let is8BitArithmetic = oldValue is UInt8
-    
-    let oldValueTyped = oldValue.getAsUInt16()
-    let valToAddTyped = valToAdd.getAsUInt16()
-    let carryValue : UInt16 = context.registers.Flags.isFlagSet(Flags.Carry) ? 1 : 0
+    let oldValueTyped = oldValue
+    let valToAddTyped = valToAdd
+    let carryValue : UInt8 = context.registers.Flags.isFlagSet(Flags.Carry) ? 1 : 0
     
     //Execute ADD
     let newValue = oldValueTyped &+ valToAddTyped &+ carryValue
@@ -57,12 +41,12 @@ class ADC : Instruction {
     
     //Calculate Flags
     
-    let carryThreshold = UInt32(is8BitArithmetic ? UInt16(UInt8.max) : UInt16.max)
-    let halfCarryMask = is8BitArithmetic ? UInt16(0x000F) : UInt16(0x0FFF)
-    let halfCarryPosition : UInt16 = is8BitArithmetic ? 0x10 : 0x1000
+    let carryThreshold = UInt16(UInt8.max)
+    let halfCarryMask = UInt8(0x000F)
+    let halfCarryPosition : UInt8 = 0x10
     
     // Carry Flag
-    if (UInt32(oldValueTyped) + UInt32(valToAddTyped) + UInt32(carryValue)) > carryThreshold {
+    if (UInt16(oldValueTyped) + UInt16(valToAddTyped) + UInt16(carryValue)) > carryThreshold {
       context.registers.Flags.setFlag(Flags.Carry)
     } else {
       context.registers.Flags.resetFlag(Flags.Carry)

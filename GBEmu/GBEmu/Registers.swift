@@ -92,7 +92,7 @@ public class Registers {
     PC = 0x100
   }
   
-  subscript(register : Register) -> DataLocationSupported {
+  subscript(register : Register) -> UInt8 {
     get {
       switch(register) {
       case .A:
@@ -111,6 +111,33 @@ public class Registers {
         return self.L
       case .Flags:
         return self.Flags
+      }
+    }
+    set(newValue) {
+      switch(register) {
+      case .A:
+        self.A = newValue
+      case .B:
+        self.B = newValue
+      case .C:
+        self.C = newValue
+      case .D:
+        self.D = newValue
+      case .E:
+        self.E = newValue
+      case .H:
+        self.H = newValue
+      case .L:
+        self.L = newValue
+      case .Flags:
+        self.Flags = newValue
+      }
+    }
+  }
+  
+  subscript(register : DoubleRegister) -> UInt16 {
+    get {
+      switch(register) {
       case .SP:
         return self.SP
       case .PC:
@@ -127,34 +154,18 @@ public class Registers {
     }
     set(newValue) {
       switch(register) {
-      case .A:
-        self.A = newValue.getAsUInt8()
-      case .B:
-        self.B = newValue.getAsUInt8()
-      case .C:
-        self.C = newValue.getAsUInt8()
-      case .D:
-        self.D = newValue.getAsUInt8()
-      case .E:
-        self.E = newValue.getAsUInt8()
-      case .H:
-        self.H = newValue.getAsUInt8()
-      case .L:
-        self.L = newValue.getAsUInt8()
-      case .Flags:
-        self.Flags = newValue.getAsUInt8()
       case .SP:
-        self.SP = newValue.getAsUInt16()
+        self.SP = newValue
       case .PC:
-        self.PC = newValue.getAsUInt16()
+        self.PC = newValue
       case .AF:
-        self.AF = newValue.getAsUInt16()
+        self.AF = newValue
       case .BC:
-        self.BC = newValue.getAsUInt16()
+        self.BC = newValue
       case .DE:
-        self.DE = newValue.getAsUInt16()
+        self.DE = newValue
       case .HL:
-        self.HL = newValue.getAsUInt16()
+        self.HL = newValue
       }
     }
   }

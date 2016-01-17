@@ -8,9 +8,9 @@
 
 import Foundation
 
-class AND : Instruction {
+class AND<TRead : DataLocation where TRead.DataSize == UInt8> : Instruction {
   
-  let register : ReadableDataLocation
+  let register : TRead
   
   override var description : String {
     get {
@@ -18,7 +18,7 @@ class AND : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, register : TRead) {
     self.register = register
     
     super.init(opcode: opcode, prefix: prefix)
@@ -26,7 +26,7 @@ class AND : Instruction {
   
   override func execute(context : ExecutionContext) -> InstructionResult {
     
-    context.registers.A = context.registers.A & register.read(context).getAsUInt8()
+    context.registers.A = context.registers.A & register.read(context)
     
     if context.registers.A == 0 {
       context.registers.Flags.setFlag(Flags.Zero)

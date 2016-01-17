@@ -8,8 +8,8 @@
 
 import Foundation
 
-class SWAP : Instruction {
-  let register : ReadWriteDataLocation
+class SWAP<T : WriteableDataLocation where T.DataSize == UInt8> : Instruction {
+  let register : T
   
   override var description : String {
     get {
@@ -17,7 +17,7 @@ class SWAP : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadWriteDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, register : T) {
     self.register = register
     
     super.init(opcode: opcode, prefix: prefix)
@@ -25,7 +25,7 @@ class SWAP : Instruction {
   
   override func execute(context : ExecutionContext) -> InstructionResult {
     
-    let val = register.read(context).getAsUInt8()
+    let val = register.read(context)
     
     let newVal = (val << 4) + (val >> 4)
     

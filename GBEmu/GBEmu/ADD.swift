@@ -8,10 +8,10 @@
 
 import Foundation
 
-class ADD : Instruction {
+class ADD<TRead : DataLocation, TWrite : WriteableDataLocation where TRead.DataSize == TWrite.DataSize> : Instruction {
   
-  let registerToStore : ReadWriteDataLocation
-  let registerToAdd : ReadableDataLocation
+  let registerToStore : TWrite
+  let registerToAdd : TRead
   
   override var description : String {
     get {
@@ -19,7 +19,7 @@ class ADD : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : ReadWriteDataLocation, registerToAdd : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, registerToStore : TWrite, registerToAdd : TRead) {
     self.registerToStore = registerToStore
     self.registerToAdd = registerToAdd
     
@@ -45,8 +45,8 @@ class ADD : Instruction {
     }
     else {
       //Signed ADD only exists for SP ADD, so we can safely assume the types of the values
-      let oldValueTyped = Int32(oldValue.getAsUInt16())
-      let valToAddTyped = Int32(valToAdd.getAsSInt8())
+      let oldValueTyped = Int32(oldValue)
+      let valToAddTyped = Int32(valToAdd)
       
       if (oldValueTyped + valToAddTyped) > Int32(carryThreshold) {
         context.registers.Flags.setFlag(Flags.Carry)

@@ -17,13 +17,7 @@ enum Register : Int, CustomStringConvertible {
   E = 4,
   H = 5,
   L = 6,
-  Flags = 7,
-  SP = 8,
-  PC = 9,
-  AF = 10,
-  BC = 11,
-  DE = 12,
-  HL = 13
+  Flags = 7
   
   var description: String {
     get {
@@ -44,6 +38,23 @@ enum Register : Int, CustomStringConvertible {
         return "L"
       case .Flags:
         return "F"
+      }
+    }
+  }
+  
+}
+
+enum DoubleRegister : Int, CustomStringConvertible {
+  case SP = 8,
+  PC = 9,
+  AF = 10,
+  BC = 11,
+  DE = 12,
+  HL = 13
+  
+  var description: String {
+    get {
+      switch(self) {
       case .SP:
         return "SP"
       case .PC:

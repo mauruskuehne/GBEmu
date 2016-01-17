@@ -8,9 +8,9 @@
 
 import Foundation
 
-class XOR : Instruction {
+class XOR<T : DataLocation where T.DataSize == UInt8> : Instruction {
   
-  let register : ReadableDataLocation
+  let register : T
   
   override var description : String {
     get {
@@ -18,7 +18,7 @@ class XOR : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, register : T) {
     self.register = register
     
     super.init(opcode: opcode, prefix: prefix)
@@ -26,7 +26,7 @@ class XOR : Instruction {
   
   override func execute(context : ExecutionContext) -> InstructionResult {
     
-    context.registers.A = context.registers.A ^ register.read(context).getAsUInt8()
+    context.registers.A = context.registers.A ^ register.read(context)
     
     if context.registers.A == 0 {
       context.registers.Flags.setFlag(Flags.Zero)

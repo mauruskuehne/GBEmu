@@ -116,8 +116,10 @@ class EmulationEngine {
     
     if executionContext.interruptMasterEnable && memoryAccess[IORegister.IE.rawValue] > 0 {
       
+      let op = PUSH(opcode: 0, locationToWrite: DoubleRegisterLocation(register: .PC))
+      
       //aktuellen PC in Stack pushen
-      PUSH.pushToStack(executionContext, value: registers.PC)
+      op.execute(executionContext)
       
       //PC auf korrekte Adresse setzen
       func isInterruptRequested(interrupt: InterruptFlag) -> Bool {

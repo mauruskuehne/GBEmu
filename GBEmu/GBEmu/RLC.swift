@@ -8,12 +8,9 @@
 
 import Foundation
 
-class RotateInstruction: Instruction {
-}
-
-class RLC : RotateInstruction {
+class RLC<T : WriteableDataLocation where T.DataSize == UInt8> : Instruction {
   
-  let register : ReadWriteDataLocation
+  let register : T
   
   override var description : String {
     get {
@@ -21,7 +18,7 @@ class RLC : RotateInstruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadWriteDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, register : T) {
     self.register = register
     
     super.init(opcode: opcode, prefix: prefix)
@@ -29,7 +26,7 @@ class RLC : RotateInstruction {
   
   override func execute(context : ExecutionContext) -> InstructionResult {
     var newVal : UInt8
-    let oldVal = register.read(context).getAsUInt8()
+    let oldVal = register.read(context)
     
     let shiftedVal = oldVal << 1;
     

@@ -8,9 +8,9 @@
 
 import Foundation
 
-class INC : Instruction {
+class INC<T : DataLocation> : Instruction {
   
-  let location : ReadWriteDataLocation
+  let location : T
   
   override var description : String {
     get {
@@ -18,7 +18,7 @@ class INC : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, locToIncrease : ReadWriteDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, locToIncrease : T) {
     self.location = locToIncrease
     super.init(opcode: opcode, prefix: prefix)
   }

@@ -30,7 +30,7 @@ class RST : Instruction {
     
     context.memoryAccess.write(context.registers.SP, value: context.registers.PC)
     
-    context.registers.PC = newPCValue.getAsUInt16()
+    context.registers.PC = UInt16(newPCValue)
     
     return InstructionResult(opcode: self.opcode)
   }

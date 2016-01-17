@@ -8,9 +8,9 @@
 
 import Foundation
 
-class CALL : Instruction {
+class CALL<T : DataLocation where T.DataSize == UInt16> : Instruction {
   
-  let addressToCall : ReadableDataLocation
+  let addressToCall : T
   let condition : JumpCondition?
   
   override var description : String {
@@ -19,7 +19,7 @@ class CALL : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, addressToCall : ReadableDataLocation, condition : JumpCondition? = nil ) {
+  init(opcode : UInt8, prefix : UInt8? = nil, addressToCall : T, condition : JumpCondition? = nil ) {
     self.addressToCall = addressToCall
     self.condition = condition
     
@@ -34,7 +34,7 @@ class CALL : Instruction {
       }
     }
     
-    let address = addressToCall.read(context).getAsUInt16()
+    let address = addressToCall.read(context)
     
     context.registers.SP -= 2
     

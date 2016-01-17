@@ -8,43 +8,49 @@
 
 import Foundation
 
+
+
 class OpcodeParser {
-  let registerDataLocations =
-   [0 :  RegisterDataLocation(register: Register.B),
-    1 : RegisterDataLocation(register: Register.C),
-    2 : RegisterDataLocation(register: Register.D),
-    3 : RegisterDataLocation(register: Register.E),
-    4 : RegisterDataLocation(register: Register.H),
-    5 : RegisterDataLocation(register: Register.L),
-    6 : RegisterDataLocation(register: Register.HL, dereferenceFirst: true),
-    7 : RegisterDataLocation(register: Register.A)]
+  let registerDataLocations : [Int : DataLocationBase] =
+   [0 : SingleRegisterLocation(register: .B),
+    1 : SingleRegisterLocation(register: .C),
+    2 : SingleRegisterLocation(register: .D),
+    3 : SingleRegisterLocation(register: .E),
+    4 : SingleRegisterLocation(register: .H),
+    5 : SingleRegisterLocation(register: .L),
+    6 : Indirect8BitAccessDataLocation(addressLocation: DoubleRegisterLocation(register: .HL)),
+    7 : SingleRegisterLocation(register: .A)]
   
   let dereferenced16BitRegisters =
-   [0 : RegisterDataLocation(register: Register.BC, dereferenceFirst: true),
-    1 : RegisterDataLocation(register: Register.DE, dereferenceFirst: true),
-    2 : RegisterDataLocation(register: Register.HL, dereferenceFirst: true),
-    3 : RegisterDataLocation(register: Register.SP, dereferenceFirst: true)]
+   [0 : Indirect8BitAccessDataLocation(addressLocation: DoubleRegisterLocation(register: .BC)),
+    1 : Indirect8BitAccessDataLocation(addressLocation: DoubleRegisterLocation(register: .DE)),
+    2 : Indirect8BitAccessDataLocation(addressLocation: DoubleRegisterLocation(register: .HL)),
+    3 : Indirect8BitAccessDataLocation(addressLocation: DoubleRegisterLocation(register: .SP))]
   
   let rp =
-   [0 : RegisterDataLocation(register: Register.BC),
-    1 : RegisterDataLocation(register: Register.DE),
-    2 : RegisterDataLocation(register: Register.HL),
-    3 : RegisterDataLocation(register: Register.SP)]
+   [0 : DoubleRegisterLocation(register: .BC),
+    1 : DoubleRegisterLocation(register: .DE),
+    2 : DoubleRegisterLocation(register: .HL),
+    3 : DoubleRegisterLocation(register: .SP)]
   
   let rp2 =
-   [0 : RegisterDataLocation(register: Register.BC),
-    1 : RegisterDataLocation(register: Register.DE),
-    2 : RegisterDataLocation(register: Register.HL),
-    3 : RegisterDataLocation(register: Register.AF)]
+   [0 : DoubleRegisterLocation(register: .BC),
+    1 : DoubleRegisterLocation(register: .DE),
+    2 : DoubleRegisterLocation(register: .HL),
+    3 : DoubleRegisterLocation(register: .AF)]
   
   let cc = [0 : JumpCondition.NotZero,
     1 : JumpCondition.Zero,
     2 : JumpCondition.NotCarry,
     3 : JumpCondition.Carry]
   
+  private func getRegisterDataLocation<T : DataLocation where T.DataSize == UInt8>(idx : Int) -> T {
+    return registerDataLocations[idx]! as! T
+  }
+  
   func getRotateInstructionForIndex(index : Int, withRegisterIndex: Int, opcode : UInt8, prefix : UInt8? = nil) -> Instruction {
     
-    let location = registerDataLocations[withRegisterIndex]!
+    let location = getRegisterDataLocation<(withRegisterIndex)
     
     switch(index) {
     case 0 :
@@ -65,7 +71,6 @@ class OpcodeParser {
       } else {
         return SCF(opcode: opcode, prefix : prefix)
       }
-      
     case 7 :
       return SRL(opcode: opcode, prefix : prefix, register: location)
     default :
@@ -73,7 +78,7 @@ class OpcodeParser {
     }
   }
   
-  func getAluInstructionForIndex(index : Int, withReadLocation: ReadableDataLocation, opcode : UInt8) -> Instruction {
+  func getAluInstructionForIndex<TRead: DataLocation where TRead.DataSize == UInt8>(index : Int, withReadLocation: TRead, opcode : UInt8) -> Instruction {
     
     let locationRegA = registerDataLocations[7]!
     
@@ -291,7 +296,7 @@ class OpcodeParser {
         case 4 :
           let regRead = registerDataLocations[7]!
           let nextByte = fetchNextBytePredicate()
-          let location = 0xFF00 + nextByte.getAsUInt16()
+          let location = 0xFF00 + nextByte
           let memLoc = MemoryDataLocation(address: location, size: DataSize.UInt16)
           
           parsedInstruction = LD(opcode: opcode, readLocation: regRead, writeLocation: memLoc)
@@ -306,7 +311,7 @@ class OpcodeParser {
         case 6 :
           let reg = registerDataLocations[7]!
           let nextByte = fetchNextBytePredicate()
-          let location = 0xFF00 + nextByte.getAsUInt16()
+          let location = 0xFF00 + nextByte
           //let readLoc = MemoryDataLocation(address: location, size: .UInt8)
           let readLoc = MemoryDataLocation(address: location, size: .UInt8)
           parsedInstruction = LD(opcode: opcode, readLocation: readLoc, writeLocation: reg)

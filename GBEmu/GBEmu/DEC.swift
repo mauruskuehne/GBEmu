@@ -8,9 +8,9 @@
 
 import Foundation
 
-class DEC : Instruction {
+class DEC<TLocation : DataLocation> : Instruction {
   
-  let location : ReadWriteDataLocation
+  let location : TLocation
   
   override var description : String {
     get {
@@ -19,7 +19,7 @@ class DEC : Instruction {
   }
   
   
-  init(opcode : UInt8, prefix : UInt8? = nil, locToDecrease : ReadWriteDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, locToDecrease : TLocation) {
     self.location = locToDecrease
     
     super.init(opcode: opcode, prefix: prefix)
@@ -29,7 +29,7 @@ class DEC : Instruction {
     
     let oldVal = location.read(context)
     
-    let res = SUB.calculateResultForUnsignedSub(context, oldValue: oldVal, valToSub: UInt8(1))
+    let res = SUB.calculateResultForUnsignedSub(context, oldValue: oldVal, valToSub: 1)
     
     location.write(res.result, context: context)
     

@@ -8,9 +8,9 @@
 
 import Foundation
 
-class POP : Instruction {
+class POP<T : WriteableDataLocation where T.DataSize == UInt16> : Instruction {
   
-  let locToStore : WriteableDataLocation
+  let locToStore : T
   
   override var description : String {
     get {
@@ -18,7 +18,7 @@ class POP : Instruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, locationToStore : WriteableDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, locationToStore : T) {
     self.locToStore = locationToStore
     
     super.init(opcode: opcode, prefix: prefix)

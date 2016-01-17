@@ -11,7 +11,7 @@ import Foundation
 class Instruction : CustomStringConvertible{
   let opcode : UInt8
   let prefix : UInt8?
-  
+
   var description: String {
     get {
       return "unknown instruction"

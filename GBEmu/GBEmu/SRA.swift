@@ -8,9 +8,10 @@
 
 import Foundation
 
-class SRA : RotateInstruction {
+class SRA<T : WriteableDataLocation where T.DataSize == UInt8> : Instruction {
   
-  let register : ReadWriteDataLocation
+  let register : T
+  let one : T.DataSize = 1
   
   override var description : String {
     get {
@@ -18,16 +19,16 @@ class SRA : RotateInstruction {
     }
   }
   
-  init(opcode : UInt8, prefix : UInt8? = nil, register : ReadWriteDataLocation) {
+  init(opcode : UInt8, prefix : UInt8? = nil, register : T) {
     self.register = register
     
     super.init(opcode: opcode, prefix: prefix)
   }
   
   override func execute(context : ExecutionContext) -> InstructionResult {
-    let oldVal = register.read(context).getAsUInt8()
+    let oldVal = register.read(context)
     
-    let shiftedVal = oldVal >> 1;
+    let shiftedVal = oldVal >> one;
     
     let firstBit = oldVal & 0b000_0001
     let lastBit = oldVal & 0b100_0000
